@@ -39,9 +39,10 @@ class DeformConv2d(nn.Module):
         self.conv = nn.Conv2d(inc, outc, kernel_size=kernel_size, stride=kernel_size, bias=bias)
 
         self.p_conv = nn.Conv2d(inc, 2*kernel_size*kernel_size, kernel_size=3, padding=1, stride=stride)
+        # print("offset convolution:", self.p_conv)
         nn.init.constant_(self.p_conv.weight, 0)
         self.p_conv.register_full_backward_hook(self._set_lr)
-
+        
         self.modulation = modulation
         if modulation:
             self.m_conv = nn.Conv2d(inc, kernel_size*kernel_size, kernel_size=3, padding=1, stride=stride)
@@ -67,11 +68,13 @@ class DeformConv2d(nn.Module):
 
         # (b, 2N, h, w)
         p = self._get_p(offset, dtype)
+       
 
         # (b, h, w, 2N)
         p = p.contiguous().permute(0, 2, 3, 1)
         q_lt = p.detach().floor()
         q_rb = q_lt + 1
+      
 
         q_lt = torch.cat([torch.clamp(q_lt[..., :N], 0, x.size(2)-1), torch.clamp(q_lt[..., N:], 0, x.size(3)-1)], dim=-1).long()
         q_rb = torch.cat([torch.clamp(q_rb[..., :N], 0, x.size(2)-1), torch.clamp(q_rb[..., N:], 0, x.size(3)-1)], dim=-1).long()
@@ -80,6 +83,7 @@ class DeformConv2d(nn.Module):
 
         # clip p
         p = torch.cat([torch.clamp(p[..., :N], 0, x.size(2)-1), torch.clamp(p[..., N:], 0, x.size(3)-1)], dim=-1)
+        # print("clip p:", p)
 
         # bilinear kernel (b, h, w, N)
         g_lt = (1 + (q_lt[..., :N].type_as(p) - p[..., :N])) * (1 + (q_lt[..., N:].type_as(p) - p[..., N:]))
@@ -92,6 +96,7 @@ class DeformConv2d(nn.Module):
         x_q_rb = self._get_x_q(x, q_rb, N)
         x_q_lb = self._get_x_q(x, q_lb, N)
         x_q_rt = self._get_x_q(x, q_rt, N)
+    
 
         # (b, c, h, w, N)
         x_offset = g_lt.unsqueeze(dim=1) * x_q_lt + \

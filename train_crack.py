@@ -6,6 +6,7 @@ from pathlib import Path
 from newloader import Crack_loader
 from model.TransMUNet import TransMUNet
 from torch.utils.data import DataLoader
+from torchvision.models import vgg16_bn, VGG16_BN_Weights
 from ptflops import get_model_complexity_info
 os.environ["CUDA_VISIBLE_DEVICES"] = "0"
 
@@ -47,8 +48,18 @@ message = 'flops:%s, params:%s' % (flops, params)
 Net = Net.to(device)
 # load pretrained model
 if int(config['pretrained']):
-    Net.load_state_dict(torch.load(config['saved_model'], map_location='cpu')['model_weights'])
-    best_val_loss = torch.load(config['saved_model'], map_location='cpu')['val_loss']
+    vgg16_bn_model = vgg16_bn(pretrained=True)
+    pretrained_dict = vgg16_bn_model.state_dict()
+    model_dict = Net.state_dict()
+
+    # Filter out unnecessary keys
+    pretrained_dict = {k: v for k, v in pretrained_dict.items() if k in model_dict}
+
+    # Update the current model dict with the pretrained dict
+    model_dict.update(pretrained_dict)
+    Net.load_state_dict(model_dict)
+    # Net.load_state_dict(torch.load(config['saved_model'], map_location='cpu')['model_weights'])
+    # best_val_loss = torch.load(config['saved_model'], map_location='cpu')['val_loss']
 
 optimizer = optim.Adam(Net.parameters(), lr= float(config['lr']))
 scheduler = optim.lr_scheduler.ReduceLROnPlateau(optimizer, 'min', factor = 0.5, patience = config['patience'])
@@ -82,7 +93,7 @@ for ep in range(int(config['epochs'])):
         optimizer.step()  
         if (itter+1)%int(float(config['progress_p']) * len(train_loader)) == 0:
             lr = optimizer.state_dict()['param_groups'][0]['lr']
-            print(f' Epoch>> {ep+1} and itteration {itter+1} loss>>{epoch_loss/(itter+1)}')
+            print(f' Epoch>> {ep+1} and iteration {itter+1} loss>>{epoch_loss/(itter+1)}')
         if (itter+1)*int(config['batch_size_tr']) == len(train_dataset):
             visualizer.print_current_losses(epoch=(ep+1), iters=(itter+1), loss=((epoch_loss/(itter+1))), lr=lr, isVal=False)
 

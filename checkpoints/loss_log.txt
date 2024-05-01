@@ -1,0 +1,22 @@
+================ Training loss (Wed Apr 24 14:52:54 2024) ================
+flops:38.9 GMac, params:22.88 M
+================ Training loss (Wed Apr 24 15:46:36 2024) ================
+flops:38.9 GMac, params:22.88 M
+================ Training loss (Wed Apr 24 15:47:06 2024) ================
+flops:38.9 GMac, params:22.88 M
+================ Training loss (Wed Apr 24 15:47:52 2024) ================
+flops:38.9 GMac, params:22.88 M
+(epoch: 1, iters: 150) mean_loss: 0.931826 lr: 0.000100
+val_mode:validation on epoch>> 1, mean tloss>> 0.867961 
+New best loss, saving...,best_val_loss=0.867961
+================ Training loss (Wed Apr 24 16:38:24 2024) ================
+flops:38.9 GMac, params:22.88 M
+(epoch: 1, iters: 150) mean_loss: 0.928491 lr: 0.000100
+val_mode:validation on epoch>> 1, mean tloss>> 0.871125 
+New best loss, saving...,best_val_loss=0.871125
+(epoch: 2, iters: 150) mean_loss: 0.904853 lr: 0.000100
+val_mode:validation on epoch>> 2, mean tloss>> 0.842867 
+New best loss, saving...,best_val_loss=0.842867
+(epoch: 3, iters: 150) mean_loss: 0.874696 lr: 0.000100
+val_mode:validation on epoch>> 3, mean tloss>> 0.806453 
+New best loss, saving...,best_val_loss=0.806453
