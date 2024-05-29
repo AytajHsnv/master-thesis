@@ -1,0 +1,38 @@
+// For format details, see https://aka.ms/devcontainer.json. For config options, see the
+// README at: https://github.com/devcontainers/templates/tree/main/src/docker-existing-dockerfile
+{
+	"name": "hasanova_crack_detection",
+	"build": {
+		// Sets the run context to one level up instead of the .devcontainer folder.
+		"context": "..",
+		// Update the 'dockerFile' property if you aren't using the standard 'Dockerfile' filename.
+		"dockerfile": "Dockerfile"
+	},
+	"customizations": {
+		"vscode": {
+			"extensions": [
+				"ms-python.python",
+				"ms-python.vscode-pylance",
+				"ms-python.black-formatter",
+				"ms-azuretools.vscode-docker",
+				"njpwerner.autodocstring",
+				"ms-toolsai.tensorboard",
+				"ms-toolsai.jupyter"
+			]
+		}
+	},
+	"runArgs": [
+		"--ipc=host",
+		"--user=vscode",
+		"--gpus", "device=2"
+		// "--gpus=all"
+	],
+	/*"containerEnv": {
+		"DISPLAY": "unix:0"
+	},*/
+	"mounts": [
+	//	"source=/tmp/.X11-unix,target=/tmp/.X11-unix,type=bind,consistency=cached",
+		"source=/mnt/ssd_0/hasanova/data,target=/data,type=bind"
+	],
+	"remoteUser": "vscode"
+}

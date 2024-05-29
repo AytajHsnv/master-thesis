@@ -22,13 +22,26 @@ def cal_prf_metrics(pred_list, gt_list, thresh_step=0.01):
     for thresh in np.arange(0.0, 1.0, thresh_step):
         # print(thresh)
         statistics = []
-        
+        statis = []
         for pred, gt in zip(pred_list, gt_list):
             gt_img   = (gt).astype('uint8')
             pred_img = (pred > thresh).astype('uint8')
             # calculate each image
             statistics.append(get_statistics(pred_img, gt_img))
+            # metrics for each image
+            tp, fp, fn = get_statistics(pred_img, gt_img)
+            p = 1.0 if tp==0 and fp==0 else tp/(tp+fp)
+            r = tp/(tp+fn)
+            if p+r==0:
+                f1=0
+            else:
+                f1 = 2*p*r/(p+r)
+            # calculation IoU
+            IoU = tp/(tp+fn+fp)
+            statis.append([p, r, f1, IoU])
+            
         
+        save_result_for_each_img(statis)
         # get tp, fp, fn
         tp = np.sum([v[0] for v in statistics])
         fp = np.sum([v[1] for v in statistics])
@@ -39,7 +52,13 @@ def cal_prf_metrics(pred_list, gt_list, thresh_step=0.01):
         # calculate recall
         r_acc = tp/(tp+fn)
         # calculate f-score
-        final_accuracy_all.append([thresh, p_acc, r_acc, 2*p_acc*r_acc/(p_acc+r_acc)])
+        if p_acc+r_acc==0:
+            f1_acc=0
+        else:
+            f1_acc=2*p_acc*r_acc/(p_acc+r_acc)
+        # calculation IoU
+        IoU = tp/(tp+fn+fp)
+        final_accuracy_all.append([thresh, p_acc, r_acc, f1_acc, IoU])
     return final_accuracy_all
 
 def get_statistics(pred, gt):
@@ -53,8 +72,16 @@ def get_statistics(pred, gt):
 
 def save_results(input_list, output_path):
     with codecs.open(output_path, 'w', encoding='utf-8') as fout:
+        fout.write("\t\t\tThreshold\tPrecision\tRecall\tF1\tIoU\n")
         for ll in input_list:
             line = '\t'.join(['%.4f'%v for v in ll])+'\n'
+            fout.write(line)
+
+def save_result_for_each_img(img_statistics):
+    with codecs.open("each_image_stat.txt", 'w', encoding='utf-8') as fout:
+        fout.write("\t\t\tPrecision\tRecall\tF1\tIoU\n")
+        for idx, img in enumerate(img_statistics):
+            line = f"Image {idx+1}:\t" + '\t'.join(['%.4f'%s for s in img])+'\n'
             fout.write(line)
 
 def save_sample(img_path, msk, msk_pred, name=''):
@@ -85,7 +112,8 @@ DIR_IMG  = os.path.join(data_path, 'images')
 DIR_MASK = os.path.join(data_path, 'masks')
 img_names  = [path.name for path in Path(DIR_IMG).glob('*.jpg')]
 mask_names = [path.name for path in Path(DIR_MASK).glob('*.png')]
-
+img_names.sort()
+mask_names.sort()
 test_dataset = Crack_loader(img_dir=DIR_IMG, img_fnames=img_names, mask_dir=DIR_MASK, mask_fnames=mask_names)
 test_loader  = DataLoader(test_dataset, batch_size = 1, shuffle= False)
 print(f'test_dataset:{len(test_dataset)}')

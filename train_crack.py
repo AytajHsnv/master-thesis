@@ -48,18 +48,18 @@ message = 'flops:%s, params:%s' % (flops, params)
 Net = Net.to(device)
 # load pretrained model
 if int(config['pretrained']):
-    vgg16_bn_model = vgg16_bn(pretrained=True)
-    pretrained_dict = vgg16_bn_model.state_dict()
-    model_dict = Net.state_dict()
+    # vgg16_bn_model = vgg16_bn(pretrained=True)
+    # pretrained_dict = vgg16_bn_model.state_dict()
+    # model_dict = Net.state_dict()
 
-    # Filter out unnecessary keys
-    pretrained_dict = {k: v for k, v in pretrained_dict.items() if k in model_dict}
+    # # Filter out unnecessary keys
+    # pretrained_dict = {k: v for k, v in pretrained_dict.items() if k in model_dict}
 
-    # Update the current model dict with the pretrained dict
-    model_dict.update(pretrained_dict)
-    Net.load_state_dict(model_dict)
-    # Net.load_state_dict(torch.load(config['saved_model'], map_location='cpu')['model_weights'])
-    # best_val_loss = torch.load(config['saved_model'], map_location='cpu')['val_loss']
+    # # Update the current model dict with the pretrained dict
+    # model_dict.update(pretrained_dict)
+    # Net.load_state_dict(model_dict)
+    Net.load_state_dict(torch.load(config['saved_model'], map_location='cpu')['model_weights'])
+    best_val_loss = torch.load(config['saved_model'], map_location='cpu')['val_loss']
 
 optimizer = optim.Adam(Net.parameters(), lr= float(config['lr']))
 scheduler = optim.lr_scheduler.ReduceLROnPlateau(optimizer, 'min', factor = 0.5, patience = config['patience'])
@@ -131,4 +131,4 @@ for ep in range(int(config['epochs'])):
         state = copy.deepcopy({'model_weights': Net.state_dict(), 'val_loss': best_val_loss})
         torch.save(state, config['saved_model_final'])
 
-print('Trainng phase finished')    
+print('Training phase finished')    
