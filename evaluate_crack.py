@@ -108,8 +108,8 @@ number_classes = int(config['number_classes'])
 device = 'cuda' if torch.cuda.is_available() else 'cpu'
 
 data_path = config['path_to_testdata']
-DIR_IMG  = os.path.join(data_path, 'images')
-DIR_MASK = os.path.join(data_path, 'masks')
+DIR_IMG  = os.path.join(data_path)
+DIR_MASK = os.path.join(data_path)
 img_names  = [path.name for path in Path(DIR_IMG).glob('*.jpg')]
 mask_names = [path.name for path in Path(DIR_MASK).glob('*.png')]
 img_names.sort()
@@ -135,6 +135,7 @@ with torch.no_grad():
     for itter, batch in enumerate(tqdm(test_loader)):
         img = batch['image'].numpy().squeeze(0)
         img_path = batch['img_path'][0]
+        print(img_path)
         msk = batch['mask']
         patch_totensor = ImgToTensor()
         preds = []

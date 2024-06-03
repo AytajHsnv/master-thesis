@@ -8,6 +8,7 @@ from model.TransMUNet import TransMUNet
 from torch.utils.data import DataLoader
 from torchvision.models import vgg16_bn, VGG16_BN_Weights
 from ptflops import get_model_complexity_info
+import matplotlib as plt
 os.environ["CUDA_VISIBLE_DEVICES"] = "0"
 
 
@@ -17,17 +18,21 @@ input_channels = 3
 best_val_loss  = np.inf
 device = 'cuda' if torch.cuda.is_available() else 'cpu'
 
+print(device)
+
 data_tra_path = config['path_to_tradata']
 data_val_path = config['path_to_valdata']
 
-DIR_IMG_tra  = os.path.join(data_tra_path, 'images')
-DIR_MASK_tra = os.path.join(data_tra_path, 'masks')
+DIR_IMG_tra  = os.path.join(data_tra_path)
+DIR_MASK_tra = os.path.join(data_tra_path)
+print(DIR_IMG_tra)
 
-DIR_IMG_val  = os.path.join(data_val_path, 'images')
-DIR_MASK_val = os.path.join(data_val_path, 'masks')
+DIR_IMG_val  = os.path.join(data_val_path)
+DIR_MASK_val = os.path.join(data_val_path)
 
 img_names_tra  = [path.name for path in Path(DIR_IMG_tra).glob('*.jpg')]
 mask_names_tra = [path.name for path in Path(DIR_MASK_tra).glob('*.png')]
+
 
 img_names_val  = [path.name for path in Path(DIR_IMG_val).glob('*.jpg')]
 mask_names_val = [path.name for path in Path(DIR_MASK_val).glob('*.png')]
@@ -71,7 +76,7 @@ log_name = os.path.join('./checkpoints', config['loss_filename'])
 with open(log_name, "a") as log_file:
             log_file.write('%s\n' % message)
 
-
+epoch_losses = []
 for ep in range(int(config['epochs'])):
     # train
     Net.train()
@@ -90,6 +95,7 @@ for ep in range(int(config['epochs'])):
         optimizer.zero_grad()
         tloss.backward()
         epoch_loss += tloss.item()
+        epoch_losses.append(epoch_loss)
         optimizer.step()  
         if (itter+1)%int(float(config['progress_p']) * len(train_loader)) == 0:
             lr = optimizer.state_dict()['param_groups'][0]['lr']
@@ -132,3 +138,4 @@ for ep in range(int(config['epochs'])):
         torch.save(state, config['saved_model_final'])
 
 print('Training phase finished')    
+plt.plot(int(config['epochs']), epoch_losses)
