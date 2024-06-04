@@ -1,6 +1,6 @@
 ## Config file
 lr:                     1e-3 # Initial learning rate
-epochs:                 50 # Number of epochs to train the model 
+epochs:                 70 # Number of epochs to train the model 
 number_classes:         1 # Number of classes in the target dataset
 batch_size_tr:          2 # Batch size for train
 batch_size_va:          1 # Batch size for validation 

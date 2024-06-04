@@ -8,7 +8,7 @@ from model.TransMUNet import TransMUNet
 from torch.utils.data import DataLoader
 from torchvision.models import vgg16_bn, VGG16_BN_Weights
 from ptflops import get_model_complexity_info
-import matplotlib as plt
+import matplotlib.pyplot as plt
 os.environ["CUDA_VISIBLE_DEVICES"] = "0"
 
 

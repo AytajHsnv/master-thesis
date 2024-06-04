@@ -72,7 +72,7 @@ def get_statistics(pred, gt):
 
 def save_results(input_list, output_path):
     with codecs.open(output_path, 'w', encoding='utf-8') as fout:
-        fout.write("\t\t\tThreshold\tPrecision\tRecall\tF1\tIoU\n")
+        fout.write("Threshold\tPrecision\tRecall\tF1\tIoU\n")
         for ll in input_list:
             line = '\t'.join(['%.4f'%v for v in ll])+'\n'
             fout.write(line)
