@@ -119,7 +119,7 @@ class SE_Block(nn.Module):
     
 
 class TransMUNet(nn.Module):
-    DEPTH = 4
+    DEPTH = 5
 
     def __init__(self, n_classes=1, dims = [144, 240, 320]):
         super().__init__()
@@ -129,11 +129,11 @@ class TransMUNet(nn.Module):
         down_blocks = []
         up_blocks = []
 
-        down_blocks.append(ResidualBlock(in_channels=3, out_channels=32))
+        down_blocks.append(ResidualBlock(in_channels=3, out_channels=16))
+        down_blocks.append(DownBlockwithVit(in_channels=16,  out_channels=32,  dim=dims[0], L=2)) 
         down_blocks.append(DownBlockwithVit(in_channels=32,  out_channels=64,  dim=dims[0], L=2)) 
         down_blocks.append(DownBlockwithVit(in_channels=64,  out_channels=128, dim=dims[1], L=4))
         down_blocks.append(DownBlockwithVit(in_channels=128, out_channels=256, dim=dims[2], L=3))
-
         self.down_blocks = nn.ModuleList(down_blocks)
 
         self.bridge = Bridge(256, 512)
@@ -142,16 +142,17 @@ class TransMUNet(nn.Module):
         up_blocks.append(UpBlock(in_channels=128*2, out_channels=128))
         up_blocks.append(UpBlock(in_channels=64*2,  out_channels=64 ))
         up_blocks.append(UpBlock(in_channels=32*2,  out_channels=32 ))
-        
+        up_blocks.append(UpBlock(in_channels=16*2,  out_channels=16 ))
+
         self.up_blocks = nn.ModuleList(up_blocks)
 
-        self.se  = SE_Block(c=32,r=4)
+        self.se  = SE_Block(c=16,r=4)
 
-        self.boundary = nn.Sequential(DeformConv2d(32, 32, modulation=True),
-                                      nn.BatchNorm2d(32), nn.ReLU(), 
-                                      nn.Conv2d(32, 1, kernel_size=1, stride=1, bias=False))
+        self.boundary = nn.Sequential(DeformConv2d(16, 16, modulation=True),
+                                      nn.BatchNorm2d(16), nn.ReLU(), 
+                                      nn.Conv2d(16, 1, kernel_size=1, stride=1, bias=False))
 
-        self.out = nn.Conv2d(32, n_classes, kernel_size=1, stride=1)
+        self.out = nn.Conv2d(16, n_classes, kernel_size=1, stride=1)
 
     def forward(self, x, istrain=False):
 

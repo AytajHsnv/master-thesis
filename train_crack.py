@@ -6,7 +6,8 @@ from pathlib import Path
 from newloader import Crack_loader
 from model.TransMUNet import TransMUNet
 from torch.utils.data import DataLoader
-from torchvision.models import vgg16_bn, VGG16_BN_Weights
+import torchvision.models as models
+from torchvision.models.segmentation import DeepLabV3_ResNet50_Weights
 from ptflops import get_model_complexity_info
 import matplotlib.pyplot as plt
 os.environ["CUDA_VISIBLE_DEVICES"] = "0"
@@ -53,20 +54,20 @@ message = 'flops:%s, params:%s' % (flops, params)
 Net = Net.to(device)
 # load pretrained model
 if int(config['pretrained']):
-    # vgg16_bn_model = vgg16_bn(pretrained=True)
-    # pretrained_dict = vgg16_bn_model.state_dict()
+    pretrained_model = models.segmentation.deeplabv3_resnet50(weights=DeepLabV3_ResNet50_Weights.DEFAULT)
+    pretrained_dict = pretrained_model.state_dict()
     # model_dict = Net.state_dict()
-
     # # Filter out unnecessary keys
-    # pretrained_dict = {k: v for k, v in pretrained_dict.items() if k in model_dict}
+    # pretrained_dict = {k: v for k, v in pretrained_dict.items() if k in model_dict and v.shape == model_dict[k].shape}
+    # print('Pretrained dict:', pretrained_dict)
+    # # Update your model's state_dict
+    # Net.load_state_dict(pretrained_dict)
+   
 
-    # # Update the current model dict with the pretrained dict
-    # model_dict.update(pretrained_dict)
-    # Net.load_state_dict(model_dict)
     Net.load_state_dict(torch.load(config['saved_model'], map_location='cpu')['model_weights'])
     best_val_loss = torch.load(config['saved_model'], map_location='cpu')['val_loss']
 
-optimizer = optim.Adam(Net.parameters(), lr= float(config['lr']))
+optimizer = optim.AdamW(Net.parameters(), lr= float(config['lr']))
 scheduler = optim.lr_scheduler.ReduceLROnPlateau(optimizer, 'min', factor = 0.5, patience = config['patience'])
 criteria  = DiceBCELoss()
 
