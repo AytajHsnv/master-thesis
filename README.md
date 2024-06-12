@@ -1,18 +1,3 @@
-# CT-CrackSeg
-
-[![stars](https://img.shields.io/github/stars/HqiTao/CT-crackseg?style=social)](https://github.com/HqiTao/CT-crackseg/stargazers)
-[![github](https://img.shields.io/badge/GitHub-HqiTao%2FCT--crackesg-blue?logo=Github)](https://github.com/HqiTao/CT-crackseg)
-[![arXiv](https://img.shields.io/badge/arXiv-2302.11728-b31b1b.svg)](https://arxiv.org/abs/2302.11728)
-[![IEEE Xplore ICIP 2023](https://img.shields.io/badge/-IEEE%20Xplore%20ICIP%202023-blue)](https://ieeexplore.ieee.org/document/10222276)
-
-This is the official pyTorch implementation of the paper [A Convolutional-Transformer Network for Crack Segmentation with Boundary Awareness](https://arxiv.org/abs/2302.11728).
-
-## Network Architecture
-
- <img src="./figures/model.png" width = 90%  alt="Diagram of the proposed method" align=center />
-
-### Visualization of the proposed  Dilated Residual Block.
- <img src="./figures/drb.png" width = 90% alt="Diagram of the proposed moudle" align=center />
 
 
 ## Datasets
@@ -77,15 +62,6 @@ python evaluate_crack.py --output <path_to_dir>
 It will represent performance measures and will saves related results in `results` folder.
 
 
-## Results
-Visual comparison of the segmentation results:
-
- <img src="./figures/results1.png" width = 90% alt="Visual comparison of the segmentation results." align=center />
-
-Evaluation metrics of competing methods:
-
- <img src="./figures/table.png" width = 90% alt="Evaluation metrics of competing methods on Crack500 and DeepCrack." align=center />
-
 ## Model weights
 You can download the learned weights for each dataset in the following table.
 
@@ -99,16 +75,4 @@ CT-CrackSeg is based on following repos. We thanks for their great works:<br/>
 - [TMUnet](https://github.com/rezazad68/TMUnet)<br/>
 - [DeepSegmentor](https://github.com/yhlleo/DeepSegmentor)<br/>
 
-## Citation
-If you find our code or paper useful, please consider citing:
-
-```
-@inproceedings{CTCrackSeg,
-    title={A Convolutional-Transformer Network for Crack Segmentation with Boundary Awareness},
-    author={Tao, Huaqi and Liu, Bingxi and Cui, Jinqiang and Zhang, Hong},
-    booktitle={2023 IEEE International Conference on Image Processing (ICIP)},
-    pages={86-90},
-    year={2023},
-    organization={IEEE}
-}
 ```

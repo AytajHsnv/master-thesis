@@ -65,8 +65,9 @@ def get_img_patches(img):
     assert np.all(normalization_map >= 1)
 
     patches.append(cv2.resize(img, (input_height, input_width), interpolation=cv2.INTER_CUBIC))
+    resized_patches = [cv2.resize(patch, (input_height, input_width), interpolation=cv2.INTER_CUBIC) for patch in patches]
 
-    patches = np.array(patches)
+    patches = np.array(resized_patches)
     
     return patches, patch_locs
 
