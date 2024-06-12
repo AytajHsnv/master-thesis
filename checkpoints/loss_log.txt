@@ -2930,3 +2930,6 @@ val_mode:validation on epoch>> 97, mean tloss>> 0.963149
 val_mode:validation on epoch>> 98, mean tloss>> 0.963064 
 val_mode:validation on epoch>> 99, mean tloss>> 0.963352 
 val_mode:validation on epoch>> 100, mean tloss>> 0.963406 
+val_mode:validation on epoch>> 38, mean tloss>> 0.963109 
+val_mode:validation on epoch>> 39, mean tloss>> 0.963025 
+New best loss, saving...,best_val_loss=0.963025
