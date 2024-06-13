@@ -3,6 +3,7 @@ import copy
 import torch.optim as optim
 from utils.utils import *
 from pathlib import Path
+from datetime import datetime
 from newloader import Crack_loader
 from model.TransMUNet import TransMUNet
 from torch.utils.data import DataLoader
@@ -174,4 +175,5 @@ for ep in range(int(config['epochs'])):
 print('Training phase finished')    
 plt.plot(range(int(config['epochs'])), epoch_losses)
 plt.show()
-plt.savefig()
+current_datetime_losses = datetime.now().strftime("%Y-%m-%d")
+plt.savefig(current_datetime_losses)
