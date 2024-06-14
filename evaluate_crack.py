@@ -120,7 +120,7 @@ print(f'test_dataset:{len(test_dataset)}')
 
 Net = TransMUNet(n_classes = number_classes)
 Net = Net.to(device)
-Net.load_state_dict(torch.load(config['saved_model_final'], map_location='cpu')['model_weights'])
+Net.load_state_dict(torch.load(config['saved_model'], map_location='cpu')['model_weights'])
 
 pred_list = []
 gt_list = []

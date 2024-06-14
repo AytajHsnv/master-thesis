@@ -45,7 +45,7 @@ DIR_MASK_val = os.path.join(data_val_path)
 
 img_names_tra  = [path.name for path in Path(DIR_IMG_tra).glob('*.jpg')]
 mask_names_tra = [path.name for path in Path(DIR_MASK_tra).glob('*.png')]
-
+print(img_names_tra)
 
 img_names_val  = [path.name for path in Path(DIR_IMG_val).glob('*.jpg')]
 mask_names_val = [path.name for path in Path(DIR_MASK_val).glob('*.png')]
@@ -86,10 +86,11 @@ if int(config['pretrained']):
     Net.load_state_dict(torch.load(config['saved_model'], map_location='cpu')['model_weights'])
     best_val_loss  = np.inf
     # best_val_loss = torch.load(config['saved_model'], map_location='cpu')['val_loss']
-
+print(config['lr'])
 optimizer = optim.AdamW(Net.parameters(), lr= float(config['lr']))
 scheduler = optim.lr_scheduler.ReduceLROnPlateau(optimizer, 'min', factor = 0.5, patience = config['patience'])
 criteria  = DiceBCELoss()
+
 
 # visual
 visualizer = Visualizer(isTrain=True)
@@ -125,14 +126,14 @@ for ep in range(int(config['epochs'])):
         optimizer.zero_grad()
         tloss.backward()
         epoch_loss += tloss.item()
-        epoch_losses.append(epoch_loss)
+        
         optimizer.step()  
         if (itter+1)%int(float(config['progress_p']) * len(train_loader)) == 0:
             lr = optimizer.state_dict()['param_groups'][0]['lr']
             print(f' Epoch>> {ep+1} and iteration {itter+1} loss>>{epoch_loss/(itter+1)}')
         if (itter+1)*int(config['batch_size_tr']) == len(train_dataset):
             visualizer.print_current_losses(epoch=(ep+1), iters=(itter+1), loss=((epoch_loss/(itter+1))), lr=lr, isVal=False)
-
+    epoch_losses.append(epoch_loss)
 
     # eval        
     with torch.no_grad():
