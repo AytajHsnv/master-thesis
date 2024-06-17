@@ -84,9 +84,7 @@ if int(config['pretrained']):
    
 
     Net.load_state_dict(torch.load(config['saved_model'], map_location='cpu')['model_weights'])
-    best_val_loss  = np.inf
-    # best_val_loss = torch.load(config['saved_model'], map_location='cpu')['val_loss']
-print(config['lr'])
+    best_val_loss = torch.load(config['saved_model'], map_location='cpu')['val_loss']
 optimizer = optim.AdamW(Net.parameters(), lr= float(config['lr']))
 scheduler = optim.lr_scheduler.ReduceLROnPlateau(optimizer, 'min', factor = 0.5, patience = config['patience'])
 criteria  = DiceBCELoss()
