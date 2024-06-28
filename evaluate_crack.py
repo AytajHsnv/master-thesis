@@ -9,6 +9,7 @@ from matplotlib import pyplot as plt
 from torch.utils.data import DataLoader
 from model.TransMUNet import TransMUNet
 from utils.utils import get_img_patches, merge_pred_patches
+from natsort import natsorted
 
 
 parser = argparse.ArgumentParser()
@@ -112,8 +113,8 @@ DIR_IMG  = os.path.join(data_path, 'images')
 DIR_MASK = os.path.join(data_path, 'masks')
 img_names  = [path.name for path in Path(DIR_IMG).glob('*.jpg')]
 mask_names = [path.name for path in Path(DIR_MASK).glob('*.png')]
-img_names.sort()
-mask_names.sort()
+img_names= natsorted(img_names)
+mask_names=natsorted(mask_names)
 test_dataset = Crack_loader(img_dir=DIR_IMG, img_fnames=img_names, mask_dir=DIR_MASK, mask_fnames=mask_names)
 test_loader  = DataLoader(test_dataset, batch_size = 1, shuffle= False)
 print(f'test_dataset:{len(test_dataset)}')

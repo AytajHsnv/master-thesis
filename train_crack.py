@@ -13,6 +13,7 @@ from torchvision.datasets import Cityscapes
 from torchvision.models.segmentation import DeepLabV3_ResNet50_Weights
 from ptflops import get_model_complexity_info
 import matplotlib.pyplot as plt
+from natsort import natsorted
 os.environ["CUDA_VISIBLE_DEVICES"] = "0"
 
 
@@ -38,18 +39,21 @@ data_val_path = config['path_to_valdata']
 
 DIR_IMG_tra  = os.path.join(data_tra_path, "images")
 DIR_MASK_tra = os.path.join(data_tra_path, "masks")
-print(DIR_IMG_tra)
+
 
 DIR_IMG_val  = os.path.join(data_val_path, "images")
 DIR_MASK_val = os.path.join(data_val_path, "masks")
 
 img_names_tra  = [path.name for path in Path(DIR_IMG_tra).glob('*.jpg')]
+img_names_tra = natsorted(img_names_tra)
 mask_names_tra = [path.name for path in Path(DIR_MASK_tra).glob('*.png')]
-print(img_names_tra)
+mask_names_tra = natsorted(mask_names_tra)
+
 
 img_names_val  = [path.name for path in Path(DIR_IMG_val).glob('*.jpg')]
+img_names_val = natsorted(img_names_val)
 mask_names_val = [path.name for path in Path(DIR_MASK_val).glob('*.png')]
-
+mask_names_val = natsorted(mask_names_val)
 
 train_dataset = Crack_loader(img_dir=DIR_IMG_tra, img_fnames=img_names_tra, mask_dir=DIR_MASK_tra, mask_fnames=mask_names_tra, isTrain=True)
 valid_dataset = Crack_loader(img_dir=DIR_IMG_val, img_fnames=img_names_val, mask_dir=DIR_MASK_val, mask_fnames=mask_names_val, resize=True)
