@@ -118,11 +118,7 @@ for ep in range(int(config['epochs'])):
         msk = msk.to(device=device, dtype=mask_type)
         boundary = boundary.to(device=device, dtype=mask_type)
         msk_pred, B = Net(img,istrain=True)
-        if(msk.shape != msk_pred.shape):
-             msk = msk[:,:,:,:,0]
         loss = criteria(msk_pred, msk)
-        if B.shape != boundary.shape:
-            boundary=boundary[:,:,:,:,0]
         loss_boundary = criteria(B, boundary)
         tloss    = (0.8*(loss)) + (0.2*loss_boundary) 
         optimizer.zero_grad()
@@ -135,8 +131,9 @@ for ep in range(int(config['epochs'])):
             print(f' Epoch>> {ep+1} and iteration {itter+1} loss>>{epoch_loss/(itter+1)}')
         if (itter+1)*int(config['batch_size_tr']) == len(train_dataset):
             visualizer.print_current_losses(epoch=(ep+1), iters=(itter+1), loss=((epoch_loss/(itter+1))), lr=lr, isVal=False)
-    epoch_losses.append(epoch_loss)
+    epoch_losses.append(epoch_loss/(itter+1))
 
+    val_epoch_losses = []
     # eval        
     with torch.no_grad():
         print('val_mode')
@@ -151,12 +148,11 @@ for ep in range(int(config['epochs'])):
             mask_type = torch.float32 if Net.n_classes == 1 else torch.long
             msk = msk.to(device=device, dtype=mask_type)
             msk_pred = Net(img)
-            if msk.shape != msk_pred.shape:
-                msk = msk[:,:,:,:,0]
             loss = criteria(msk_pred, msk)
             val_loss += loss.item()
         visualizer.print_current_losses(epoch=ep+1, loss=(abs(val_loss/(itter+1))), isVal=True)   
         mean_val_loss = (val_loss/(itter+1))
+        val_epoch_losses.append(mean_val_loss)
         # Check the performance and save the model
         if mean_val_loss < best_val_loss:
             best = ep + 1
@@ -177,6 +173,13 @@ for ep in range(int(config['epochs'])):
 
 print('Training phase finished')    
 plt.plot(range(int(config['epochs'])), epoch_losses)
+plt.xlabel('epochs')
+plt.ylabel('Training loss')
 plt.show()
 current_datetime_losses = datetime.now().strftime("%Y-%m-%d")
-plt.savefig(current_datetime_losses)
+plt.savefig(current_datetime_losses+'training')
+plt.plot(range(int(config['epochs'])), val_epoch_losses)
+plt.xlabel('epochs')
+plt.ylabel('Validation loss')
+plt.show()
+plt.savefig(current_datetime_losses+'validation')
