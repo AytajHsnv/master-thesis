@@ -101,6 +101,7 @@ with open(log_name, "a") as log_file:
             log_file.write('%s\n' % message)
 
 epoch_losses = []
+val_epoch_losses = []
 for ep in range(int(config['epochs'])):
     # train
     Net.train()
@@ -133,7 +134,7 @@ for ep in range(int(config['epochs'])):
             visualizer.print_current_losses(epoch=(ep+1), iters=(itter+1), loss=((epoch_loss/(itter+1))), lr=lr, isVal=False)
     epoch_losses.append(epoch_loss/(itter+1))
 
-    val_epoch_losses = []
+    
     # eval        
     with torch.no_grad():
         print('val_mode')
@@ -171,15 +172,17 @@ for ep in range(int(config['epochs'])):
         state = copy.deepcopy({'model_weights': Net.state_dict(), 'val_loss': best_val_loss})
         torch.save(state, config['saved_model_final'])
 
-print('Training phase finished')    
+print('Training phase finished')  
+fig1 = plt.figure(1)  
 plt.plot(range(int(config['epochs'])), epoch_losses)
 plt.xlabel('epochs')
 plt.ylabel('Training loss')
 plt.show()
 current_datetime_losses = datetime.now().strftime("%Y-%m-%d")
-plt.savefig(current_datetime_losses+'training')
+fig1.savefig(current_datetime_losses+'training')
+fig2 = plt.figure(1) 
 plt.plot(range(int(config['epochs'])), val_epoch_losses)
 plt.xlabel('epochs')
 plt.ylabel('Validation loss')
 plt.show()
-plt.savefig(current_datetime_losses+'validation')
+fig2.savefig(current_datetime_losses+'validation')
