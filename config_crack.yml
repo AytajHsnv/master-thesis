@@ -1,6 +1,6 @@
 ## Config file
-lr:                     1e-5 # Initial learning rate 
-epochs:                 200 # Number of epochs to train the model 
+lr:                     1e-6 # Initial learning rate 
+epochs:                 250 # Number of epochs to train the model 
 number_classes:         1 # Number of classes in the target dataset
 batch_size_tr:          2 # Batch size for train
 batch_size_va:          1 # Batch size for validation 
@@ -9,7 +9,7 @@ saved_model:            './checkpoints/weights_DeepCrack_depth_fiveUP.model'
 saved_model_final:      './checkpoints/weights_DeepCrack_depth_fiveUp.model'
 path_to_tradata:         '/data/DeepCrack/train' #path to dataset (./Crack500/train)
 path_to_valdata:         '/data/DeepCrack/test'  #path to dataset (./Crack500/test)
-path_to_testdata:       '/data/DeepCrack/test'  #path to dataset (./Crack500/val)
+path_to_testdata:       '/data/Crack500/test'  #path to dataset (./Crack500/val)
 patience:               6 # number of epochs without improvement to do before finishing training early.reduce the lr
 progress_p:             0.5 # value between 0-1 shows the number of time we need to report training progress in each epoch
 pretrained:             1 # load the previously trained weight or no value should either 1 or 0
