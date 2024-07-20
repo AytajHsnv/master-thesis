@@ -107,6 +107,7 @@ def save_sample(img_path, msk, msk_pred, name=''):
 config         = yaml.load(open('./config_crack.yml'), Loader=yaml.FullLoader)
 number_classes = int(config['number_classes'])
 device = 'cuda' if torch.cuda.is_available() else 'cpu'
+print(device)
 
 data_path = config['path_to_testdata']
 DIR_IMG  = os.path.join(data_path)
