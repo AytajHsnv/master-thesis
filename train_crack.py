@@ -37,12 +37,12 @@ data_val_path = config['path_to_valdata']
 # DIR_MASK_val = os.path.join(root_path, 'val', 'label')
 # print(DIR_IMG_val)
 
-DIR_IMG_tra  = os.path.join(data_tra_path, "images")
-DIR_MASK_tra = os.path.join(data_tra_path, "masks")
+DIR_IMG_tra  = os.path.join(data_tra_path)
+DIR_MASK_tra = os.path.join(data_tra_path)
 
 
-DIR_IMG_val  = os.path.join(data_val_path, "images")
-DIR_MASK_val = os.path.join(data_val_path, "masks")
+DIR_IMG_val  = os.path.join(data_val_path)
+DIR_MASK_val = os.path.join(data_val_path)
 
 img_names_tra  = [path.name for path in Path(DIR_IMG_tra).glob('*.jpg')]
 img_names_tra = natsorted(img_names_tra)
