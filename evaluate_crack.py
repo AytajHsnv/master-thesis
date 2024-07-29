@@ -110,8 +110,8 @@ device = 'cuda' if torch.cuda.is_available() else 'cpu'
 print(device)
 
 data_path = config['path_to_testdata']
-DIR_IMG  = os.path.join(data_path)
-DIR_MASK = os.path.join(data_path)
+DIR_IMG  = os.path.join(data_path, "images")
+DIR_MASK = os.path.join(data_path, "masks")
 img_names  = [path.name for path in Path(DIR_IMG).glob('*.jpg')]
 mask_names = [path.name for path in Path(DIR_MASK).glob('*.png')]
 img_names= natsorted(img_names)
