@@ -81,7 +81,7 @@ def merge_pred_patches(img, preds, patch_locs):
     probability_map = np.zeros((img_height, img_width), dtype=float)
     num1 = np.zeros((img_height, img_width), dtype=np.int16)
     
-    for i, response in enumerate(preds):
+    for i, response in enumerate(preds):  
         if i < len(preds)-1:
             coords = patch_locs[i]
             probability_map[coords[1]:coords[1] + input_height, coords[0]:coords[0] + input_width] += response

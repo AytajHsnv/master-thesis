@@ -110,8 +110,8 @@ device = 'cuda' if torch.cuda.is_available() else 'cpu'
 print(device)
 
 data_path = config['path_to_testdata']
-DIR_IMG  = os.path.join(data_path, "images")
-DIR_MASK = os.path.join(data_path, "masks")
+DIR_IMG  = os.path.join(data_path)
+DIR_MASK = os.path.join(data_path)
 img_names  = [path.name for path in Path(DIR_IMG).glob('*.jpg')]
 mask_names = [path.name for path in Path(DIR_MASK).glob('*.png')]
 img_names= natsorted(img_names)
@@ -160,9 +160,10 @@ with torch.no_grad():
                     [0, 0, 1, 0, 0],
                 ], dtype=np.uint8)
         mskp = cv2.morphologyEx(mskp, cv2.MORPH_CLOSE, kernel,iterations=1).astype(float)
+        print('pred:', mskp.shape)
         end = time.time()
         times += (end - start)
-        if itter < 237 and save_samples:
+        if itter < 238 and save_samples or itter == 1124:
             save_sample(img_path, msk.numpy()[0, 0], mskp, name=str(itter+1))
 
         gt_list.append(msk.numpy()[0, 0])
