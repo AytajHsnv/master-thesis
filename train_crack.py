@@ -37,12 +37,11 @@ data_val_path = config['path_to_valdata']
 # DIR_MASK_val = os.path.join(root_path, 'val', 'label')
 # print(DIR_IMG_val)
 
-DIR_IMG_tra  = os.path.join(data_tra_path, "images")
-DIR_MASK_tra = os.path.join(data_tra_path, "masks")
+DIR_IMG_tra  = os.path.join(data_tra_path)
+DIR_MASK_tra  = os.path.join(data_tra_path)
 
-
-DIR_IMG_val  = os.path.join(data_val_path, "images")
-DIR_MASK_val = os.path.join(data_val_path, "masks")
+DIR_IMG_val  = os.path.join(data_val_path)
+DIR_MASK_val = os.path.join(data_val_path)
 
 img_names_tra  = [path.name for path in Path(DIR_IMG_tra).glob('*.jpg')]
 img_names_tra = natsorted(img_names_tra)
@@ -174,15 +173,17 @@ for ep in range(int(config['epochs'])):
 
 print('Training phase finished')  
 fig1 = plt.figure(1)  
-plt.plot(range(int(config['epochs'])), epoch_losses)
+plt.plot(range(int(config['epochs'])), epoch_losses, label='Training loss')
 plt.xlabel('epochs')
 plt.ylabel('Training loss')
+plt.legend()
 plt.show()
 current_datetime_losses = datetime.now().strftime("%Y-%m-%d")
 fig1.savefig(current_datetime_losses+'training')
 fig2 = plt.figure(1) 
-plt.plot(range(int(config['epochs'])), val_epoch_losses)
+plt.plot(range(int(config['epochs'])), val_epoch_losses, label='Validation loss')
 plt.xlabel('epochs')
 plt.ylabel('Validation loss')
+plt.legend()
 plt.show()
 fig2.savefig(current_datetime_losses+'validation')

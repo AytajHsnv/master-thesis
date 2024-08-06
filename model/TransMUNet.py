@@ -120,7 +120,7 @@ class SE_Block(nn.Module):
     
 
 class TransMUNet(nn.Module):
-    DEPTH = 4
+    DEPTH = 5
 
     def __init__(self, n_classes=1, dims = [144, 240, 320, 400]):
         super().__init__()
@@ -135,12 +135,12 @@ class TransMUNet(nn.Module):
         down_blocks.append(DownBlockwithVit(in_channels=32,  out_channels=64,  dim=dims[0], L=2)) 
         down_blocks.append(DownBlockwithVit(in_channels=64,  out_channels=128, dim=dims[1], L=4))
         down_blocks.append(DownBlockwithVit(in_channels=128, out_channels=256, dim=dims[2], L=3))
-        # down_blocks.append(DownBlockwithVit(in_channels=256, out_channels=512, dim=dims[3], L=5))
+        down_blocks.append(DownBlockwithVit(in_channels=256, out_channels=512, dim=dims[3], L=5))
         self.down_blocks = nn.ModuleList(down_blocks)
 
-        self.bridge = Bridge(256, 512)
+        self.bridge = Bridge(512, 1024)
 
-        # up_blocks.append(UpBlock(in_channels=512*2, out_channels=512))
+        up_blocks.append(UpBlock(in_channels=512*2, out_channels=512))
         up_blocks.append(UpBlock(in_channels=256*2, out_channels=256))
         up_blocks.append(UpBlock(in_channels=128*2,  out_channels=128 ))
         up_blocks.append(UpBlock(in_channels=64*2,  out_channels=64))
