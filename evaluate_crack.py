@@ -1,8 +1,10 @@
+from datetime import datetime
 import time
 import argparse
 import codecs
 import yaml
 from tqdm import tqdm
+from model import deepLab
 from newloader import *
 from pathlib import Path
 from matplotlib import pyplot as plt
@@ -53,13 +55,47 @@ def cal_prf_metrics(pred_list, gt_list, thresh_step=0.01):
         # calculate recall
         r_acc = tp/(tp+fn)
         # calculate f-score
-        if p_acc+r_acc==0:
-            f1_acc=0
-        else:
-            f1_acc=2*p_acc*r_acc/(p_acc+r_acc)
+        # if p_acc+r_acc==0:
+        #     f1_acc=0
+        # else:
+        f1_acc=2*p_acc*r_acc/(p_acc+r_acc)
         # calculation IoU
         IoU = tp/(tp+fn+fp)
         final_accuracy_all.append([thresh, p_acc, r_acc, f1_acc, IoU])
+
+    # Convert results to a NumPy array for easier plotting
+    final_accuracy_all = np.array(final_accuracy_all)
+    thresh_values = final_accuracy_all[:, 0]
+    p_acc_values = final_accuracy_all[:, 1]
+    r_acc_values = final_accuracy_all[:, 2]
+    f1_acc_values = final_accuracy_all[:, 3]
+    IoU_values = final_accuracy_all[:, 4]
+
+    # Plot the metrics
+    fig, axs = plt.subplots(4, 1, figsize=(10, 12))
+
+    axs[0].plot(thresh_values, p_acc_values, marker='o')
+    axs[0].set_ylabel('Precision')
+    axs[0].grid(True)
+
+    axs[1].plot(thresh_values, r_acc_values, marker='o', color='r')
+    axs[1].set_ylabel('Recall')
+    axs[1].grid(True)
+
+    axs[2].plot(thresh_values, f1_acc_values, marker='o', color='g')
+    axs[2].set_ylabel('F1 Score')
+    axs[2].grid(True)
+
+    axs[3].plot(thresh_values, IoU_values, marker='o', color='b')
+    axs[3].set_xlabel('Threshold')
+    axs[3].set_ylabel('IoU')
+    axs[3].grid(True)
+
+    # Save the figure
+    current_datetime = datetime.now().strftime("%Y-%m-%d")
+    plt.show()   
+    fig.savefig(f"{current_datetime}_metrics.png")
+
     return final_accuracy_all
 
 def get_statistics(pred, gt):
@@ -110,8 +146,8 @@ device = 'cuda' if torch.cuda.is_available() else 'cpu'
 print(device)
 
 data_path = config['path_to_testdata']
-DIR_IMG  = os.path.join(data_path)
-DIR_MASK = os.path.join(data_path)
+DIR_IMG  = os.path.join(data_path, 'images')
+DIR_MASK = os.path.join(data_path, 'masks')
 img_names  = [path.name for path in Path(DIR_IMG).glob('*.jpg')]
 mask_names = [path.name for path in Path(DIR_MASK).glob('*.png')]
 img_names= natsorted(img_names)
@@ -120,7 +156,8 @@ test_dataset = Crack_loader(img_dir=DIR_IMG, img_fnames=img_names, mask_dir=DIR_
 test_loader  = DataLoader(test_dataset, batch_size = 1, shuffle= False)
 print(f'test_dataset:{len(test_dataset)}')
 
-Net = TransMUNet(n_classes = number_classes)
+# Net = TransMUNet(n_classes = number_classes)
+Net = deepLab.deeplabv3plus_mobilenet(num_classes=number_classes, output_stride=16)
 Net = Net.to(device)
 Net.load_state_dict(torch.load(config['saved_model'], map_location='cpu')['model_weights'])
 

@@ -6,6 +6,7 @@ from pathlib import Path
 from datetime import datetime
 from newloader import Crack_loader
 from model.TransMUNet import TransMUNet
+from model import deepLab
 from torch.utils.data import DataLoader
 import torchvision.models as models
 import torchvision.transforms as transforms
@@ -36,12 +37,16 @@ data_val_path = config['path_to_valdata']
 # DIR_IMG_val  = os.path.join(root_path, 'val', 'img')
 # DIR_MASK_val = os.path.join(root_path, 'val', 'label')
 # print(DIR_IMG_val)
+available_models = sorted(name for name in deepLab.__dict__ if name.islower() and \
+                              not (name.startswith("__") or name.startswith('_')) and callable(
+                              deepLab.__dict__[name])
+                              )
+print('available models: ', available_models)
+DIR_IMG_tra  = os.path.join(data_tra_path, 'images')
+DIR_MASK_tra  = os.path.join(data_tra_path, 'masks')
 
-DIR_IMG_tra  = os.path.join(data_tra_path)
-DIR_MASK_tra  = os.path.join(data_tra_path)
-
-DIR_IMG_val  = os.path.join(data_val_path)
-DIR_MASK_val = os.path.join(data_val_path)
+DIR_IMG_val  = os.path.join(data_val_path, 'images')
+DIR_MASK_val = os.path.join(data_val_path, 'masks')
 
 img_names_tra  = [path.name for path in Path(DIR_IMG_tra).glob('*.jpg')]
 img_names_tra = natsorted(img_names_tra)
@@ -68,7 +73,9 @@ val_loader    = DataLoader(valid_dataset, batch_size = int(config['batch_size_va
 # train_loader  = DataLoader(train_dataset, batch_size = 4, shuffle= True,  drop_last=True)
 # print(train_loader)
 # val_loader    = DataLoader(valid_dataset, batch_size = 1, shuffle= False, drop_last=True)
-Net = TransMUNet(n_classes = number_classes)
+model_name = 'deeplabv3plus_mobilenet' 
+Net = deepLab.deeplabv3plus_mobilenet(num_classes=number_classes, output_stride=16)
+#Net = TransMUNet(n_classes = number_classes)
 flops, params = get_model_complexity_info(Net, (3, 256, 256), as_strings=True, print_per_layer_stat=False)
 print('flops: ', flops, 'params: ', params)
 message = 'flops:%s, params:%s' % (flops, params)
@@ -118,8 +125,12 @@ for ep in range(int(config['epochs'])):
         msk = msk.to(device=device, dtype=mask_type)
         boundary = boundary.to(device=device, dtype=mask_type)
         msk_pred, B = Net(img,istrain=True)
+        # Resize B if necessary
+        if B.shape[2:] != boundary.shape[2:]:
+            B = F.interpolate(B, size=boundary.shape[2:], mode='bilinear', align_corners=False)
         loss = criteria(msk_pred, msk)
         loss_boundary = criteria(B, boundary)
+        # tloss = loss
         tloss    = (0.8*(loss)) + (0.2*loss_boundary) 
         optimizer.zero_grad()
         tloss.backward()
@@ -176,14 +187,16 @@ fig1 = plt.figure(1)
 plt.plot(range(int(config['epochs'])), epoch_losses, label='Training loss')
 plt.xlabel('epochs')
 plt.ylabel('Training loss')
+plt.title(f'Training loss - {model_name}')
 plt.legend()
 plt.show()
-current_datetime_losses = datetime.now().strftime("%Y-%m-%d")
+current_datetime_losses = datetime.now().strftime("%Y-%m-%d-%H")
 fig1.savefig(current_datetime_losses+'training')
 fig2 = plt.figure(1) 
 plt.plot(range(int(config['epochs'])), val_epoch_losses, label='Validation loss')
 plt.xlabel('epochs')
 plt.ylabel('Validation loss')
+plt.title(f'Training/Validation loss - {model_name}')
 plt.legend()
 plt.show()
 fig2.savefig(current_datetime_losses+'validation')
