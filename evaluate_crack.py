@@ -200,7 +200,7 @@ with torch.no_grad():
         print('pred:', mskp.shape)
         end = time.time()
         times += (end - start)
-        if itter < 238 and save_samples or itter == 1124:
+        if itter < 238 and save_samples:
             save_sample(img_path, msk.numpy()[0, 0], mskp, name=str(itter+1))
 
         gt_list.append(msk.numpy()[0, 0])

@@ -15,6 +15,7 @@ from torchvision.models.segmentation import DeepLabV3_ResNet50_Weights
 from ptflops import get_model_complexity_info
 import matplotlib.pyplot as plt
 from natsort import natsorted
+import time
 os.environ["CUDA_VISIBLE_DEVICES"] = "0"
 
 
@@ -108,6 +109,7 @@ with open(log_name, "a") as log_file:
 
 epoch_losses = []
 val_epoch_losses = []
+t0 = time.time()
 for ep in range(int(config['epochs'])):
     # train
     Net.train()
@@ -181,7 +183,9 @@ for ep in range(int(config['epochs'])):
         visualizer.print_end(best, best_val_loss)
         state = copy.deepcopy({'model_weights': Net.state_dict(), 'val_loss': best_val_loss})
         torch.save(state, config['saved_model_final'])
-
+with open('training_time.txt', 'w') as file:
+     file.write(f'{datetime.now().strftime("%Y-%m-%d-%H")} training time: {time.time()-t0}\n')
+     
 print('Training phase finished')  
 fig1 = plt.figure(1)  
 plt.plot(range(int(config['epochs'])), epoch_losses, label='Training loss')
