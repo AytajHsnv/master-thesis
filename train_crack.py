@@ -183,7 +183,7 @@ for ep in range(int(config['epochs'])):
         visualizer.print_end(best, best_val_loss)
         state = copy.deepcopy({'model_weights': Net.state_dict(), 'val_loss': best_val_loss})
         torch.save(state, config['saved_model_final'])
-with open('training_time.txt', 'w') as file:
+with open('training_time_4batch.txt', 'w') as file:
      file.write(f'{datetime.now().strftime("%Y-%m-%d-%H")} training time: {time.time()-t0}\n')
      
 print('Training phase finished')  
