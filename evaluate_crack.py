@@ -157,7 +157,7 @@ test_loader  = DataLoader(test_dataset, batch_size = 1, shuffle= False)
 print(f'test_dataset:{len(test_dataset)}')
 
 # Net = TransMUNet(n_classes = number_classes)
-Net = deepLab.deeplabv3plus_resnet101(num_classes=number_classes, output_stride=16)
+Net = deepLab.deeplabv3plus_mobilenet(num_classes=number_classes, output_stride=8)
 Net = Net.to(device)
 Net.load_state_dict(torch.load(config['saved_model'], map_location='cpu')['model_weights'])
 

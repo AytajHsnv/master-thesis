@@ -79,9 +79,11 @@ class Crack_loader(Dataset):
         mpath = os.path.join(self.mask_dir, mname)
         mask = cv2.imread(mpath, cv2.COLOR_BGR2GRAY)                                 # H,W, np.uint8
         
-        if mask.ndim==3:
-            mask = cv2.cvtColor(mask, cv2.COLOR_RGB2GRAY)
-            mask[mask==1]=255
+        if mask.ndim==3:  
+             mask = cv2.cvtColor(mask, cv2.COLOR_BGR2GRAY)  # Convert to grayscale
+             mask[mask == 1] = 255  # Set the desired pixels to white in the BGR image
+             #mask[mask > 0] = 255
+            
         if self.isTrain:
             img  = cv2.resize(img, (256, 256), interpolation=cv2.INTER_CUBIC)         # (256,256,3) np.uint8
             mask = cv2.resize(mask, (256, 256), interpolation=cv2.INTER_CUBIC)        # (256,256) np.uint8
