@@ -1,11 +1,12 @@
 einops==0.4.1
+--extra-index-url https://download.pytorch.org/whl/cu118
+torch==2.2.1+cu118
+torchvision==0.17.1+cu118
 numpy==1.21.5
 tqdm==4.63.0
 ptflops==0.6.9
 pillow==9.1.1
 opencv_python==4.6.0.66
 albumentations==1.2.1
---extra-index-url https://download.pytorch.org/whl/cu118
-torch==2.2.1+cu118
-torchvision==0.17.1+cu118
 matplotlib==3.3.0
+

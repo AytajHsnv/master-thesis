@@ -67,6 +67,7 @@ class Crack_loader(Dataset):
         self.img_totensor  = ImgToTensor()
 
         self.mask_totensor = MaskToTensor()
+        print(len(self.mask_fnames))
                 
     def __getitem__(self, i):
         # read a image given a random integer index
@@ -74,15 +75,16 @@ class Crack_loader(Dataset):
         fpath = os.path.join(self.img_dir, fname)
         img = cv2.imread(fpath) 
         img = cv2.cvtColor(img, cv2.COLOR_BGR2RGB)                                    # H,W,3 np.uint8
-
-        mname = self.mask_fnames[i]
-        mpath = os.path.join(self.mask_dir, mname)
+        mname = self.mask_fnames
+        print(self.mask_dir, mname)
+        if len(self.mask_fnames) == 1:
+            mpath = os.path.join(self.mask_dir, mname[0])
+        else:
+             mpath = os.path.join(self.mask_dir, mname)
         mask = cv2.imread(mpath, cv2.COLOR_BGR2GRAY)                                 # H,W, np.uint8
-        
+        mask[mask == 1] = 255
         if mask.ndim==3:  
-             mask = cv2.cvtColor(mask, cv2.COLOR_BGR2GRAY)  # Convert to grayscale
-             mask[mask == 1] = 255  # Set the desired pixels to white in the BGR image
-             #mask[mask > 0] = 255
+            mask = cv2.cvtColor(mask, cv2.COLOR_BGR2GRAY)  # Convert to grayscale
             
         if self.isTrain:
             img  = cv2.resize(img, (256, 256), interpolation=cv2.INTER_CUBIC)         # (256,256,3) np.uint8

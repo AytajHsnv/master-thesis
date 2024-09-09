@@ -32,8 +32,7 @@
 	},*/
 	"mounts": [
 	//	"source=/tmp/.X11-unix,target=/tmp/.X11-unix,type=bind,consistency=cached",
-		"source=/mnt/ssd_0/hasanova/data,target=/data,type=bind",
-		"source=/mnt/ssd_0/hasanova/weights,target=/weights,type=bind"
+		"source=/mnt/ssd_0/hasanova/data,target=/data,type=bind"
 	],
 	"remoteUser": "vscode"
 }

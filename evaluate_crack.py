@@ -55,10 +55,10 @@ def cal_prf_metrics(pred_list, gt_list, thresh_step=0.01):
         # calculate recall
         r_acc = tp/(tp+fn)
         # calculate f-score
-        # if p_acc+r_acc==0:
-        #     f1_acc=0
-        # else:
-        f1_acc=2*p_acc*r_acc/(p_acc+r_acc)
+        if p_acc+r_acc==0:
+            f1_acc=0
+        else:
+            f1_acc=2*p_acc*r_acc/(p_acc+r_acc)
         # calculation IoU
         IoU = tp/(tp+fn+fp)
         final_accuracy_all.append([thresh, p_acc, r_acc, f1_acc, IoU])
@@ -137,7 +137,6 @@ def save_sample(img_path, msk, msk_pred, name=''):
 
     axs[2].axis('off')
     axs[2].imshow(mskp*255, cmap= 'gray')
-
     plt.savefig(config['save_result'] + name + '.png')
 
 config         = yaml.load(open('./config_crack.yml'), Loader=yaml.FullLoader)
@@ -147,7 +146,7 @@ print(device)
 
 data_path = config['path_to_testdata']
 DIR_IMG  = os.path.join(data_path, 'images')
-DIR_MASK = os.path.join(data_path, 'masks')
+DIR_MASK = os.path.join(data_path)
 img_names  = [path.name for path in Path(DIR_IMG).glob('*.jpg')]
 mask_names = [path.name for path in Path(DIR_MASK).glob('*.png')]
 img_names= natsorted(img_names)
@@ -156,11 +155,12 @@ test_dataset = Crack_loader(img_dir=DIR_IMG, img_fnames=img_names, mask_dir=DIR_
 test_loader  = DataLoader(test_dataset, batch_size = 1, shuffle= False)
 print(f'test_dataset:{len(test_dataset)}')
 
-# Net = TransMUNet(n_classes = number_classes)
-Net = deepLab.deeplabv3plus_mobilenet(num_classes=number_classes, output_stride=8)
+Net = TransMUNet(n_classes = number_classes)
+#Net = deepLab.deeplabv3plus_mobilenet(num_classes=number_classes, output_stride=8)
 Net = Net.to(device)
 Net.load_state_dict(torch.load(config['saved_model'], map_location='cpu')['model_weights'])
 
+single_gt = cv2.imread(str(Path(DIR_MASK, 'image_500_90_resized.png')), cv2.IMREAD_GRAYSCALE)
 pred_list = []
 gt_list = []
 save_samples = True # if save_samples=False, no samples will be saved.
@@ -175,7 +175,10 @@ with torch.no_grad():
         img = batch['image'].numpy().squeeze(0)
         img_path = batch['img_path'][0]
         print(img_path)
-        msk = batch['mask']
+        if(len(batch['mask']) == 1):
+            msk = cv2.imread(str(Path(DIR_MASK, 'image_500_90_resized.png')), cv2.IMREAD_GRAYSCALE)
+        else:
+            msk = batch['mask']
         patch_totensor = ImgToTensor()
         preds = []
             
@@ -200,10 +203,13 @@ with torch.no_grad():
         print('pred:', mskp.shape)
         end = time.time()
         times += (end - start)
+        # print('print:', msk.numpy()[0,0])
         if itter < 238 and save_samples:
-            save_sample(img_path, msk.numpy()[0, 0], mskp, name=str(itter+1))
+            #save_sample(img_path, msk.numpy()[0, 0], mskp, name=str(itter+1))
+            save_sample(img_path, msk, mskp, name=str(itter+1))
 
-        gt_list.append(msk.numpy()[0, 0])
+        # gt_list.append(msk.numpy()[0, 0])
+        gt_list.append(single_gt)
         pred_list.append(mskp)
     print('Running time of each images: %ss' % (times/len(pred_list)))
 
