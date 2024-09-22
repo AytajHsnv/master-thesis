@@ -67,7 +67,6 @@ class Crack_loader(Dataset):
         self.img_totensor  = ImgToTensor()
 
         self.mask_totensor = MaskToTensor()
-        print(len(self.mask_fnames))
                 
     def __getitem__(self, i):
         # read a image given a random integer index
@@ -76,7 +75,6 @@ class Crack_loader(Dataset):
         img = cv2.imread(fpath) 
         img = cv2.cvtColor(img, cv2.COLOR_BGR2RGB)                                    # H,W,3 np.uint8
         mname = self.mask_fnames
-        print(self.mask_dir, mname)
         if len(self.mask_fnames) == 1:
             mpath = os.path.join(self.mask_dir, mname[0])
         else:
