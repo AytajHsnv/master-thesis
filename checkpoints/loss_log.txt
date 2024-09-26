@@ -20778,3 +20778,1018 @@ val_mode:validation on epoch>> 98, mean tloss>> 0.369238
 val_mode:validation on epoch>> 99, mean tloss>> 0.359337 
 (epoch: 100, iters: 948) mean_loss: 0.420689 lr: 0.000000
 val_mode:validation on epoch>> 100, mean tloss>> 0.369874 
+================ Training loss (Sun Sep 22 09:08:46 2024) ================
+flops:65.46 GMac, params:59.4 M
+================ Training loss (Sun Sep 22 09:13:02 2024) ================
+flops:65.46 GMac, params:59.4 M
+(epoch: 1, iters: 474) mean_loss: 0.754754 lr: 0.000010
+val_mode:validation on epoch>> 1, mean tloss>> 0.595433 
+New best loss, saving...,best_val_loss=0.595433
+(epoch: 2, iters: 474) mean_loss: 0.589484 lr: 0.000010
+val_mode:validation on epoch>> 2, mean tloss>> 0.466840 
+New best loss, saving...,best_val_loss=0.466840
+(epoch: 3, iters: 474) mean_loss: 0.557447 lr: 0.000010
+val_mode:validation on epoch>> 3, mean tloss>> 0.416464 
+New best loss, saving...,best_val_loss=0.416464
+(epoch: 4, iters: 474) mean_loss: 0.534533 lr: 0.000010
+val_mode:validation on epoch>> 4, mean tloss>> 0.388946 
+New best loss, saving...,best_val_loss=0.388946
+(epoch: 5, iters: 474) mean_loss: 0.508781 lr: 0.000010
+val_mode:validation on epoch>> 5, mean tloss>> 0.380031 
+New best loss, saving...,best_val_loss=0.380031
+(epoch: 6, iters: 474) mean_loss: 0.500803 lr: 0.000010
+val_mode:validation on epoch>> 6, mean tloss>> 0.362353 
+New best loss, saving...,best_val_loss=0.362353
+(epoch: 7, iters: 474) mean_loss: 0.486793 lr: 0.000010
+val_mode:validation on epoch>> 7, mean tloss>> 0.363664 
+(epoch: 8, iters: 474) mean_loss: 0.479580 lr: 0.000010
+val_mode:validation on epoch>> 8, mean tloss>> 0.347332 
+New best loss, saving...,best_val_loss=0.347332
+(epoch: 9, iters: 474) mean_loss: 0.476714 lr: 0.000010
+val_mode:validation on epoch>> 9, mean tloss>> 0.345251 
+New best loss, saving...,best_val_loss=0.345251
+(epoch: 10, iters: 474) mean_loss: 0.465038 lr: 0.000010
+val_mode:validation on epoch>> 10, mean tloss>> 0.333734 
+New best loss, saving...,best_val_loss=0.333734
+(epoch: 11, iters: 474) mean_loss: 0.462303 lr: 0.000010
+val_mode:validation on epoch>> 11, mean tloss>> 0.332148 
+New best loss, saving...,best_val_loss=0.332148
+(epoch: 12, iters: 474) mean_loss: 0.458463 lr: 0.000010
+val_mode:validation on epoch>> 12, mean tloss>> 0.329976 
+New best loss, saving...,best_val_loss=0.329976
+(epoch: 13, iters: 474) mean_loss: 0.449356 lr: 0.000010
+val_mode:validation on epoch>> 13, mean tloss>> 0.320143 
+New best loss, saving...,best_val_loss=0.320143
+(epoch: 14, iters: 474) mean_loss: 0.449271 lr: 0.000010
+val_mode:validation on epoch>> 14, mean tloss>> 0.325544 
+(epoch: 15, iters: 474) mean_loss: 0.442974 lr: 0.000010
+val_mode:validation on epoch>> 15, mean tloss>> 0.318792 
+New best loss, saving...,best_val_loss=0.318792
+(epoch: 16, iters: 474) mean_loss: 0.440675 lr: 0.000010
+val_mode:validation on epoch>> 16, mean tloss>> 0.321259 
+(epoch: 17, iters: 474) mean_loss: 0.434955 lr: 0.000010
+val_mode:validation on epoch>> 17, mean tloss>> 0.318631 
+New best loss, saving...,best_val_loss=0.318631
+(epoch: 18, iters: 474) mean_loss: 0.432150 lr: 0.000010
+val_mode:validation on epoch>> 18, mean tloss>> 0.310143 
+New best loss, saving...,best_val_loss=0.310143
+(epoch: 19, iters: 474) mean_loss: 0.429473 lr: 0.000010
+val_mode:validation on epoch>> 19, mean tloss>> 0.321934 
+(epoch: 20, iters: 474) mean_loss: 0.429910 lr: 0.000010
+val_mode:validation on epoch>> 20, mean tloss>> 0.314726 
+(epoch: 21, iters: 474) mean_loss: 0.434744 lr: 0.000010
+val_mode:validation on epoch>> 21, mean tloss>> 0.314663 
+(epoch: 22, iters: 474) mean_loss: 0.424704 lr: 0.000010
+val_mode:validation on epoch>> 22, mean tloss>> 0.311406 
+(epoch: 23, iters: 474) mean_loss: 0.424257 lr: 0.000010
+val_mode:validation on epoch>> 23, mean tloss>> 0.302004 
+New best loss, saving...,best_val_loss=0.302004
+(epoch: 24, iters: 474) mean_loss: 0.418309 lr: 0.000010
+val_mode:validation on epoch>> 24, mean tloss>> 0.304397 
+(epoch: 25, iters: 474) mean_loss: 0.412418 lr: 0.000010
+val_mode:validation on epoch>> 25, mean tloss>> 0.313028 
+(epoch: 26, iters: 474) mean_loss: 0.424821 lr: 0.000010
+val_mode:validation on epoch>> 26, mean tloss>> 0.303162 
+(epoch: 27, iters: 474) mean_loss: 0.417686 lr: 0.000010
+val_mode:validation on epoch>> 27, mean tloss>> 0.302405 
+(epoch: 28, iters: 474) mean_loss: 0.411922 lr: 0.000010
+val_mode:validation on epoch>> 28, mean tloss>> 0.302314 
+(epoch: 29, iters: 474) mean_loss: 0.403644 lr: 0.000010
+val_mode:validation on epoch>> 29, mean tloss>> 0.298167 
+New best loss, saving...,best_val_loss=0.298167
+(epoch: 30, iters: 474) mean_loss: 0.406048 lr: 0.000010
+val_mode:validation on epoch>> 30, mean tloss>> 0.303244 
+(epoch: 31, iters: 474) mean_loss: 0.407718 lr: 0.000010
+val_mode:validation on epoch>> 31, mean tloss>> 0.300259 
+(epoch: 32, iters: 474) mean_loss: 0.413229 lr: 0.000010
+val_mode:validation on epoch>> 32, mean tloss>> 0.300158 
+(epoch: 33, iters: 474) mean_loss: 0.406885 lr: 0.000010
+val_mode:validation on epoch>> 33, mean tloss>> 0.300516 
+(epoch: 34, iters: 474) mean_loss: 0.403224 lr: 0.000010
+val_mode:validation on epoch>> 34, mean tloss>> 0.312054 
+(epoch: 35, iters: 474) mean_loss: 0.397063 lr: 0.000010
+val_mode:validation on epoch>> 35, mean tloss>> 0.301484 
+(epoch: 36, iters: 474) mean_loss: 0.403659 lr: 0.000010
+val_mode:validation on epoch>> 36, mean tloss>> 0.299472 
+(epoch: 37, iters: 474) mean_loss: 0.399617 lr: 0.000001
+val_mode:validation on epoch>> 37, mean tloss>> 0.299682 
+(epoch: 38, iters: 474) mean_loss: 0.395212 lr: 0.000001
+val_mode:validation on epoch>> 38, mean tloss>> 0.300453 
+(epoch: 39, iters: 474) mean_loss: 0.395128 lr: 0.000001
+val_mode:validation on epoch>> 39, mean tloss>> 0.296785 
+New best loss, saving...,best_val_loss=0.296785
+(epoch: 40, iters: 474) mean_loss: 0.394162 lr: 0.000001
+val_mode:validation on epoch>> 40, mean tloss>> 0.299901 
+(epoch: 41, iters: 474) mean_loss: 0.394737 lr: 0.000001
+val_mode:validation on epoch>> 41, mean tloss>> 0.297508 
+(epoch: 42, iters: 474) mean_loss: 0.397766 lr: 0.000001
+val_mode:validation on epoch>> 42, mean tloss>> 0.305614 
+(epoch: 43, iters: 474) mean_loss: 0.393839 lr: 0.000001
+val_mode:validation on epoch>> 43, mean tloss>> 0.298446 
+(epoch: 44, iters: 474) mean_loss: 0.390409 lr: 0.000001
+val_mode:validation on epoch>> 44, mean tloss>> 0.297238 
+(epoch: 45, iters: 474) mean_loss: 0.391393 lr: 0.000001
+val_mode:validation on epoch>> 45, mean tloss>> 0.296187 
+New best loss, saving...,best_val_loss=0.296187
+(epoch: 46, iters: 474) mean_loss: 0.392970 lr: 0.000001
+val_mode:validation on epoch>> 46, mean tloss>> 0.293914 
+New best loss, saving...,best_val_loss=0.293914
+(epoch: 47, iters: 474) mean_loss: 0.392073 lr: 0.000001
+val_mode:validation on epoch>> 47, mean tloss>> 0.294772 
+(epoch: 48, iters: 474) mean_loss: 0.394580 lr: 0.000001
+val_mode:validation on epoch>> 48, mean tloss>> 0.294352 
+(epoch: 49, iters: 474) mean_loss: 0.388405 lr: 0.000001
+val_mode:validation on epoch>> 49, mean tloss>> 0.293628 
+New best loss, saving...,best_val_loss=0.293628
+(epoch: 50, iters: 474) mean_loss: 0.388789 lr: 0.000001
+val_mode:validation on epoch>> 50, mean tloss>> 0.292477 
+New best loss, saving...,best_val_loss=0.292477
+(epoch: 51, iters: 474) mean_loss: 0.394841 lr: 0.000001
+val_mode:validation on epoch>> 51, mean tloss>> 0.293639 
+(epoch: 52, iters: 474) mean_loss: 0.390695 lr: 0.000001
+val_mode:validation on epoch>> 52, mean tloss>> 0.293842 
+(epoch: 53, iters: 474) mean_loss: 0.389826 lr: 0.000001
+val_mode:validation on epoch>> 53, mean tloss>> 0.295944 
+(epoch: 54, iters: 474) mean_loss: 0.385207 lr: 0.000001
+val_mode:validation on epoch>> 54, mean tloss>> 0.295121 
+(epoch: 55, iters: 474) mean_loss: 0.386497 lr: 0.000001
+val_mode:validation on epoch>> 55, mean tloss>> 0.291694 
+New best loss, saving...,best_val_loss=0.291694
+(epoch: 56, iters: 474) mean_loss: 0.390093 lr: 0.000001
+val_mode:validation on epoch>> 56, mean tloss>> 0.294091 
+(epoch: 57, iters: 474) mean_loss: 0.390229 lr: 0.000001
+val_mode:validation on epoch>> 57, mean tloss>> 0.292826 
+(epoch: 58, iters: 474) mean_loss: 0.383406 lr: 0.000001
+val_mode:validation on epoch>> 58, mean tloss>> 0.295443 
+(epoch: 59, iters: 474) mean_loss: 0.389388 lr: 0.000001
+val_mode:validation on epoch>> 59, mean tloss>> 0.296771 
+(epoch: 60, iters: 474) mean_loss: 0.392725 lr: 0.000001
+val_mode:validation on epoch>> 60, mean tloss>> 0.294591 
+(epoch: 61, iters: 474) mean_loss: 0.384945 lr: 0.000001
+val_mode:validation on epoch>> 61, mean tloss>> 0.301691 
+(epoch: 62, iters: 474) mean_loss: 0.387596 lr: 0.000001
+val_mode:validation on epoch>> 62, mean tloss>> 0.293023 
+(epoch: 63, iters: 474) mean_loss: 0.387352 lr: 0.000000
+val_mode:validation on epoch>> 63, mean tloss>> 0.296140 
+(epoch: 64, iters: 474) mean_loss: 0.385854 lr: 0.000000
+val_mode:validation on epoch>> 64, mean tloss>> 0.296065 
+(epoch: 65, iters: 474) mean_loss: 0.388612 lr: 0.000000
+val_mode:validation on epoch>> 65, mean tloss>> 0.293486 
+(epoch: 66, iters: 474) mean_loss: 0.390476 lr: 0.000000
+val_mode:validation on epoch>> 66, mean tloss>> 0.295471 
+(epoch: 67, iters: 474) mean_loss: 0.391072 lr: 0.000000
+val_mode:validation on epoch>> 67, mean tloss>> 0.292467 
+(epoch: 68, iters: 474) mean_loss: 0.386694 lr: 0.000000
+val_mode:validation on epoch>> 68, mean tloss>> 0.293080 
+(epoch: 69, iters: 474) mean_loss: 0.389522 lr: 0.000000
+val_mode:validation on epoch>> 69, mean tloss>> 0.295988 
+(epoch: 70, iters: 474) mean_loss: 0.387833 lr: 0.000000
+val_mode:validation on epoch>> 70, mean tloss>> 0.292945 
+(epoch: 71, iters: 474) mean_loss: 0.387436 lr: 0.000000
+val_mode:validation on epoch>> 71, mean tloss>> 0.297167 
+(epoch: 72, iters: 474) mean_loss: 0.385471 lr: 0.000000
+val_mode:validation on epoch>> 72, mean tloss>> 0.298336 
+(epoch: 73, iters: 474) mean_loss: 0.391705 lr: 0.000000
+val_mode:validation on epoch>> 73, mean tloss>> 0.293607 
+(epoch: 74, iters: 474) mean_loss: 0.389353 lr: 0.000000
+val_mode:validation on epoch>> 74, mean tloss>> 0.293372 
+(epoch: 75, iters: 474) mean_loss: 0.387444 lr: 0.000000
+val_mode:validation on epoch>> 75, mean tloss>> 0.293793 
+(epoch: 76, iters: 474) mean_loss: 0.389724 lr: 0.000000
+val_mode:validation on epoch>> 76, mean tloss>> 0.294789 
+(epoch: 77, iters: 474) mean_loss: 0.388183 lr: 0.000000
+val_mode:validation on epoch>> 77, mean tloss>> 0.292472 
+(epoch: 78, iters: 474) mean_loss: 0.389911 lr: 0.000000
+val_mode:validation on epoch>> 78, mean tloss>> 0.295712 
+(epoch: 79, iters: 474) mean_loss: 0.390467 lr: 0.000000
+val_mode:validation on epoch>> 79, mean tloss>> 0.293680 
+(epoch: 80, iters: 474) mean_loss: 0.387758 lr: 0.000000
+val_mode:validation on epoch>> 80, mean tloss>> 0.293247 
+(epoch: 81, iters: 474) mean_loss: 0.394727 lr: 0.000000
+val_mode:validation on epoch>> 81, mean tloss>> 0.291469 
+New best loss, saving...,best_val_loss=0.291469
+(epoch: 82, iters: 474) mean_loss: 0.382547 lr: 0.000000
+val_mode:validation on epoch>> 82, mean tloss>> 0.295566 
+(epoch: 83, iters: 474) mean_loss: 0.391896 lr: 0.000000
+val_mode:validation on epoch>> 83, mean tloss>> 0.296104 
+(epoch: 84, iters: 474) mean_loss: 0.385465 lr: 0.000000
+val_mode:validation on epoch>> 84, mean tloss>> 0.297566 
+(epoch: 85, iters: 474) mean_loss: 0.386625 lr: 0.000000
+val_mode:validation on epoch>> 85, mean tloss>> 0.296731 
+(epoch: 86, iters: 474) mean_loss: 0.390969 lr: 0.000000
+val_mode:validation on epoch>> 86, mean tloss>> 0.297922 
+(epoch: 87, iters: 474) mean_loss: 0.392162 lr: 0.000000
+val_mode:validation on epoch>> 87, mean tloss>> 0.298208 
+================ Training loss (Sun Sep 22 14:32:30 2024) ================
+flops:65.46 GMac, params:59.4 M
+(epoch: 1, iters: 474) mean_loss: 0.391050 lr: 0.000010
+val_mode:validation on epoch>> 1, mean tloss>> 0.297933 
+(epoch: 2, iters: 474) mean_loss: 0.387736 lr: 0.000010
+val_mode:validation on epoch>> 2, mean tloss>> 0.297559 
+(epoch: 3, iters: 474) mean_loss: 0.395327 lr: 0.000010
+val_mode:validation on epoch>> 3, mean tloss>> 0.297028 
+(epoch: 4, iters: 474) mean_loss: 0.388174 lr: 0.000010
+val_mode:validation on epoch>> 4, mean tloss>> 0.296108 
+(epoch: 5, iters: 474) mean_loss: 0.387021 lr: 0.000010
+val_mode:validation on epoch>> 5, mean tloss>> 0.298531 
+(epoch: 6, iters: 474) mean_loss: 0.388053 lr: 0.000010
+val_mode:validation on epoch>> 6, mean tloss>> 0.296631 
+(epoch: 7, iters: 474) mean_loss: 0.384006 lr: 0.000010
+val_mode:validation on epoch>> 7, mean tloss>> 0.306721 
+(epoch: 8, iters: 474) mean_loss: 0.382019 lr: 0.000010
+val_mode:validation on epoch>> 8, mean tloss>> 0.295019 
+(epoch: 9, iters: 474) mean_loss: 0.387014 lr: 0.000010
+val_mode:validation on epoch>> 9, mean tloss>> 0.312346 
+(epoch: 10, iters: 474) mean_loss: 0.379161 lr: 0.000010
+val_mode:validation on epoch>> 10, mean tloss>> 0.293355 
+(epoch: 11, iters: 474) mean_loss: 0.382695 lr: 0.000010
+val_mode:validation on epoch>> 11, mean tloss>> 0.295304 
+(epoch: 12, iters: 474) mean_loss: 0.381967 lr: 0.000010
+val_mode:validation on epoch>> 12, mean tloss>> 0.297527 
+(epoch: 13, iters: 474) mean_loss: 0.377028 lr: 0.000010
+val_mode:validation on epoch>> 13, mean tloss>> 0.297352 
+(epoch: 14, iters: 474) mean_loss: 0.379298 lr: 0.000010
+val_mode:validation on epoch>> 14, mean tloss>> 0.312654 
+(epoch: 15, iters: 474) mean_loss: 0.374107 lr: 0.000010
+val_mode:validation on epoch>> 15, mean tloss>> 0.294050 
+(epoch: 16, iters: 474) mean_loss: 0.379056 lr: 0.000010
+val_mode:validation on epoch>> 16, mean tloss>> 0.299984 
+(epoch: 17, iters: 474) mean_loss: 0.374397 lr: 0.000010
+val_mode:validation on epoch>> 17, mean tloss>> 0.298527 
+(epoch: 18, iters: 474) mean_loss: 0.370710 lr: 0.000001
+val_mode:validation on epoch>> 18, mean tloss>> 0.291346 
+New best loss, saving...,best_val_loss=0.291346
+(epoch: 19, iters: 474) mean_loss: 0.370626 lr: 0.000001
+val_mode:validation on epoch>> 19, mean tloss>> 0.292799 
+(epoch: 20, iters: 474) mean_loss: 0.370627 lr: 0.000001
+val_mode:validation on epoch>> 20, mean tloss>> 0.296935 
+(epoch: 21, iters: 474) mean_loss: 0.373018 lr: 0.000001
+val_mode:validation on epoch>> 21, mean tloss>> 0.292366 
+(epoch: 22, iters: 474) mean_loss: 0.366291 lr: 0.000001
+val_mode:validation on epoch>> 22, mean tloss>> 0.292822 
+(epoch: 23, iters: 474) mean_loss: 0.369697 lr: 0.000001
+val_mode:validation on epoch>> 23, mean tloss>> 0.295735 
+(epoch: 24, iters: 474) mean_loss: 0.366940 lr: 0.000001
+val_mode:validation on epoch>> 24, mean tloss>> 0.295061 
+(epoch: 25, iters: 474) mean_loss: 0.363013 lr: 0.000001
+val_mode:validation on epoch>> 25, mean tloss>> 0.296208 
+(epoch: 26, iters: 474) mean_loss: 0.372787 lr: 0.000000
+val_mode:validation on epoch>> 26, mean tloss>> 0.295516 
+(epoch: 27, iters: 474) mean_loss: 0.369728 lr: 0.000000
+val_mode:validation on epoch>> 27, mean tloss>> 0.292189 
+(epoch: 28, iters: 474) mean_loss: 0.366545 lr: 0.000000
+val_mode:validation on epoch>> 28, mean tloss>> 0.291133 
+New best loss, saving...,best_val_loss=0.291133
+(epoch: 29, iters: 474) mean_loss: 0.360621 lr: 0.000000
+val_mode:validation on epoch>> 29, mean tloss>> 0.294039 
+(epoch: 30, iters: 474) mean_loss: 0.365077 lr: 0.000000
+val_mode:validation on epoch>> 30, mean tloss>> 0.293807 
+(epoch: 31, iters: 474) mean_loss: 0.365152 lr: 0.000000
+val_mode:validation on epoch>> 31, mean tloss>> 0.293296 
+(epoch: 32, iters: 474) mean_loss: 0.369647 lr: 0.000000
+val_mode:validation on epoch>> 32, mean tloss>> 0.293316 
+(epoch: 33, iters: 474) mean_loss: 0.363579 lr: 0.000000
+val_mode:validation on epoch>> 33, mean tloss>> 0.291418 
+(epoch: 34, iters: 474) mean_loss: 0.363170 lr: 0.000000
+val_mode:validation on epoch>> 34, mean tloss>> 0.293959 
+(epoch: 35, iters: 474) mean_loss: 0.361686 lr: 0.000000
+val_mode:validation on epoch>> 35, mean tloss>> 0.294418 
+(epoch: 36, iters: 474) mean_loss: 0.365482 lr: 0.000000
+val_mode:validation on epoch>> 36, mean tloss>> 0.291421 
+(epoch: 37, iters: 474) mean_loss: 0.376229 lr: 0.000000
+val_mode:validation on epoch>> 37, mean tloss>> 0.294271 
+(epoch: 38, iters: 474) mean_loss: 0.375439 lr: 0.000000
+val_mode:validation on epoch>> 38, mean tloss>> 0.296453 
+(epoch: 39, iters: 474) mean_loss: 0.376132 lr: 0.000000
+val_mode:validation on epoch>> 39, mean tloss>> 0.291724 
+(epoch: 40, iters: 474) mean_loss: 0.374202 lr: 0.000000
+val_mode:validation on epoch>> 40, mean tloss>> 0.295493 
+(epoch: 41, iters: 474) mean_loss: 0.375100 lr: 0.000000
+val_mode:validation on epoch>> 41, mean tloss>> 0.293128 
+(epoch: 42, iters: 474) mean_loss: 0.378718 lr: 0.000000
+val_mode:validation on epoch>> 42, mean tloss>> 0.301606 
+(epoch: 43, iters: 474) mean_loss: 0.376262 lr: 0.000000
+val_mode:validation on epoch>> 43, mean tloss>> 0.294956 
+(epoch: 44, iters: 474) mean_loss: 0.371812 lr: 0.000000
+val_mode:validation on epoch>> 44, mean tloss>> 0.294794 
+(epoch: 45, iters: 474) mean_loss: 0.373679 lr: 0.000000
+val_mode:validation on epoch>> 45, mean tloss>> 0.294855 
+(epoch: 46, iters: 474) mean_loss: 0.375466 lr: 0.000000
+val_mode:validation on epoch>> 46, mean tloss>> 0.294154 
+(epoch: 47, iters: 474) mean_loss: 0.375131 lr: 0.000000
+val_mode:validation on epoch>> 47, mean tloss>> 0.292213 
+(epoch: 48, iters: 474) mean_loss: 0.376073 lr: 0.000000
+val_mode:validation on epoch>> 48, mean tloss>> 0.293711 
+(epoch: 49, iters: 474) mean_loss: 0.371789 lr: 0.000000
+val_mode:validation on epoch>> 49, mean tloss>> 0.293777 
+(epoch: 50, iters: 474) mean_loss: 0.371593 lr: 0.000000
+val_mode:validation on epoch>> 50, mean tloss>> 0.290249 
+New best loss, saving...,best_val_loss=0.290249
+(epoch: 51, iters: 474) mean_loss: 0.377972 lr: 0.000000
+val_mode:validation on epoch>> 51, mean tloss>> 0.292140 
+(epoch: 52, iters: 474) mean_loss: 0.372747 lr: 0.000000
+val_mode:validation on epoch>> 52, mean tloss>> 0.291942 
+(epoch: 53, iters: 474) mean_loss: 0.373316 lr: 0.000000
+val_mode:validation on epoch>> 53, mean tloss>> 0.292303 
+(epoch: 54, iters: 474) mean_loss: 0.368966 lr: 0.000000
+val_mode:validation on epoch>> 54, mean tloss>> 0.294738 
+(epoch: 55, iters: 474) mean_loss: 0.370202 lr: 0.000000
+val_mode:validation on epoch>> 55, mean tloss>> 0.290295 
+(epoch: 56, iters: 474) mean_loss: 0.372582 lr: 0.000000
+val_mode:validation on epoch>> 56, mean tloss>> 0.294121 
+(epoch: 57, iters: 474) mean_loss: 0.373467 lr: 0.000000
+val_mode:validation on epoch>> 57, mean tloss>> 0.290960 
+(epoch: 58, iters: 474) mean_loss: 0.368530 lr: 0.000000
+val_mode:validation on epoch>> 58, mean tloss>> 0.296418 
+(epoch: 59, iters: 474) mean_loss: 0.374981 lr: 0.000000
+val_mode:validation on epoch>> 59, mean tloss>> 0.295404 
+(epoch: 60, iters: 474) mean_loss: 0.377334 lr: 0.000000
+val_mode:validation on epoch>> 60, mean tloss>> 0.294705 
+(epoch: 61, iters: 474) mean_loss: 0.369233 lr: 0.000000
+val_mode:validation on epoch>> 61, mean tloss>> 0.299278 
+(epoch: 62, iters: 474) mean_loss: 0.371389 lr: 0.000000
+val_mode:validation on epoch>> 62, mean tloss>> 0.292289 
+(epoch: 63, iters: 474) mean_loss: 0.374275 lr: 0.000000
+val_mode:validation on epoch>> 63, mean tloss>> 0.294821 
+(epoch: 64, iters: 474) mean_loss: 0.373476 lr: 0.000000
+val_mode:validation on epoch>> 64, mean tloss>> 0.294458 
+(epoch: 65, iters: 474) mean_loss: 0.377148 lr: 0.000000
+val_mode:validation on epoch>> 65, mean tloss>> 0.292195 
+(epoch: 66, iters: 474) mean_loss: 0.378536 lr: 0.000000
+val_mode:validation on epoch>> 66, mean tloss>> 0.295300 
+(epoch: 67, iters: 474) mean_loss: 0.377739 lr: 0.000000
+val_mode:validation on epoch>> 67, mean tloss>> 0.290684 
+(epoch: 68, iters: 474) mean_loss: 0.374885 lr: 0.000000
+val_mode:validation on epoch>> 68, mean tloss>> 0.293527 
+(epoch: 69, iters: 474) mean_loss: 0.377962 lr: 0.000000
+val_mode:validation on epoch>> 69, mean tloss>> 0.294073 
+(epoch: 70, iters: 474) mean_loss: 0.376294 lr: 0.000000
+val_mode:validation on epoch>> 70, mean tloss>> 0.292223 
+(epoch: 71, iters: 474) mean_loss: 0.376047 lr: 0.000000
+val_mode:validation on epoch>> 71, mean tloss>> 0.294105 
+(epoch: 72, iters: 474) mean_loss: 0.374074 lr: 0.000000
+val_mode:validation on epoch>> 72, mean tloss>> 0.296737 
+(epoch: 73, iters: 474) mean_loss: 0.381066 lr: 0.000000
+val_mode:validation on epoch>> 73, mean tloss>> 0.293285 
+(epoch: 74, iters: 474) mean_loss: 0.377405 lr: 0.000000
+val_mode:validation on epoch>> 74, mean tloss>> 0.292004 
+(epoch: 75, iters: 474) mean_loss: 0.375051 lr: 0.000000
+val_mode:validation on epoch>> 75, mean tloss>> 0.292574 
+(epoch: 76, iters: 474) mean_loss: 0.376992 lr: 0.000000
+val_mode:validation on epoch>> 76, mean tloss>> 0.294184 
+(epoch: 77, iters: 474) mean_loss: 0.377204 lr: 0.000000
+val_mode:validation on epoch>> 77, mean tloss>> 0.291734 
+(epoch: 78, iters: 474) mean_loss: 0.378436 lr: 0.000000
+val_mode:validation on epoch>> 78, mean tloss>> 0.294636 
+(epoch: 79, iters: 474) mean_loss: 0.380077 lr: 0.000000
+val_mode:validation on epoch>> 79, mean tloss>> 0.293180 
+(epoch: 80, iters: 474) mean_loss: 0.377232 lr: 0.000000
+val_mode:validation on epoch>> 80, mean tloss>> 0.293673 
+(epoch: 81, iters: 474) mean_loss: 0.381861 lr: 0.000000
+val_mode:validation on epoch>> 81, mean tloss>> 0.289690 
+New best loss, saving...,best_val_loss=0.289690
+(epoch: 82, iters: 474) mean_loss: 0.372280 lr: 0.000000
+val_mode:validation on epoch>> 82, mean tloss>> 0.295232 
+(epoch: 83, iters: 474) mean_loss: 0.380377 lr: 0.000000
+val_mode:validation on epoch>> 83, mean tloss>> 0.293771 
+(epoch: 84, iters: 474) mean_loss: 0.372752 lr: 0.000000
+val_mode:validation on epoch>> 84, mean tloss>> 0.296645 
+(epoch: 85, iters: 474) mean_loss: 0.375266 lr: 0.000000
+val_mode:validation on epoch>> 85, mean tloss>> 0.294378 
+(epoch: 86, iters: 474) mean_loss: 0.378696 lr: 0.000000
+val_mode:validation on epoch>> 86, mean tloss>> 0.295106 
+(epoch: 87, iters: 474) mean_loss: 0.380251 lr: 0.000000
+val_mode:validation on epoch>> 87, mean tloss>> 0.297043 
+(epoch: 88, iters: 474) mean_loss: 0.377302 lr: 0.000000
+val_mode:validation on epoch>> 88, mean tloss>> 0.294689 
+(epoch: 89, iters: 474) mean_loss: 0.378982 lr: 0.000000
+val_mode:validation on epoch>> 89, mean tloss>> 0.294493 
+(epoch: 90, iters: 474) mean_loss: 0.381427 lr: 0.000000
+val_mode:validation on epoch>> 90, mean tloss>> 0.290497 
+(epoch: 91, iters: 474) mean_loss: 0.375526 lr: 0.000000
+val_mode:validation on epoch>> 91, mean tloss>> 0.295622 
+(epoch: 92, iters: 474) mean_loss: 0.373093 lr: 0.000000
+val_mode:validation on epoch>> 92, mean tloss>> 0.295577 
+(epoch: 93, iters: 474) mean_loss: 0.373845 lr: 0.000000
+val_mode:validation on epoch>> 93, mean tloss>> 0.293078 
+(epoch: 94, iters: 474) mean_loss: 0.377044 lr: 0.000000
+val_mode:validation on epoch>> 94, mean tloss>> 0.294343 
+(epoch: 95, iters: 474) mean_loss: 0.382656 lr: 0.000000
+val_mode:validation on epoch>> 95, mean tloss>> 0.292095 
+(epoch: 96, iters: 474) mean_loss: 0.373118 lr: 0.000000
+val_mode:validation on epoch>> 96, mean tloss>> 0.292180 
+(epoch: 97, iters: 474) mean_loss: 0.378532 lr: 0.000000
+val_mode:validation on epoch>> 97, mean tloss>> 0.289509 
+New best loss, saving...,best_val_loss=0.289509
+(epoch: 98, iters: 474) mean_loss: 0.372266 lr: 0.000000
+val_mode:validation on epoch>> 98, mean tloss>> 0.294796 
+(epoch: 99, iters: 474) mean_loss: 0.375740 lr: 0.000000
+val_mode:validation on epoch>> 99, mean tloss>> 0.296464 
+(epoch: 100, iters: 474) mean_loss: 0.374990 lr: 0.000000
+val_mode:validation on epoch>> 100, mean tloss>> 0.292369 
+(epoch: 101, iters: 474) mean_loss: 0.375063 lr: 0.000000
+val_mode:validation on epoch>> 101, mean tloss>> 0.292453 
+(epoch: 102, iters: 474) mean_loss: 0.375797 lr: 0.000000
+val_mode:validation on epoch>> 102, mean tloss>> 0.293905 
+(epoch: 103, iters: 474) mean_loss: 0.376113 lr: 0.000000
+val_mode:validation on epoch>> 103, mean tloss>> 0.292768 
+(epoch: 104, iters: 474) mean_loss: 0.377383 lr: 0.000000
+val_mode:validation on epoch>> 104, mean tloss>> 0.291389 
+(epoch: 105, iters: 474) mean_loss: 0.371180 lr: 0.000000
+val_mode:validation on epoch>> 105, mean tloss>> 0.290171 
+(epoch: 106, iters: 474) mean_loss: 0.376735 lr: 0.000000
+val_mode:validation on epoch>> 106, mean tloss>> 0.292958 
+(epoch: 107, iters: 474) mean_loss: 0.378858 lr: 0.000000
+val_mode:validation on epoch>> 107, mean tloss>> 0.290845 
+(epoch: 108, iters: 474) mean_loss: 0.376866 lr: 0.000000
+val_mode:validation on epoch>> 108, mean tloss>> 0.293777 
+(epoch: 109, iters: 474) mean_loss: 0.379150 lr: 0.000000
+val_mode:validation on epoch>> 109, mean tloss>> 0.292839 
+(epoch: 110, iters: 474) mean_loss: 0.377346 lr: 0.000000
+val_mode:validation on epoch>> 110, mean tloss>> 0.295151 
+(epoch: 111, iters: 474) mean_loss: 0.372982 lr: 0.000000
+val_mode:validation on epoch>> 111, mean tloss>> 0.291620 
+(epoch: 112, iters: 474) mean_loss: 0.372763 lr: 0.000000
+val_mode:validation on epoch>> 112, mean tloss>> 0.295572 
+(epoch: 113, iters: 474) mean_loss: 0.378052 lr: 0.000000
+val_mode:validation on epoch>> 113, mean tloss>> 0.291482 
+(epoch: 114, iters: 474) mean_loss: 0.369302 lr: 0.000000
+val_mode:validation on epoch>> 114, mean tloss>> 0.295052 
+(epoch: 115, iters: 474) mean_loss: 0.369448 lr: 0.000000
+val_mode:validation on epoch>> 115, mean tloss>> 0.293204 
+(epoch: 116, iters: 474) mean_loss: 0.378704 lr: 0.000000
+val_mode:validation on epoch>> 116, mean tloss>> 0.291314 
+(epoch: 117, iters: 474) mean_loss: 0.377665 lr: 0.000000
+val_mode:validation on epoch>> 117, mean tloss>> 0.294404 
+(epoch: 118, iters: 474) mean_loss: 0.370861 lr: 0.000000
+val_mode:validation on epoch>> 118, mean tloss>> 0.290733 
+(epoch: 119, iters: 474) mean_loss: 0.377924 lr: 0.000000
+val_mode:validation on epoch>> 119, mean tloss>> 0.291079 
+(epoch: 120, iters: 474) mean_loss: 0.370579 lr: 0.000000
+val_mode:validation on epoch>> 120, mean tloss>> 0.293446 
+(epoch: 121, iters: 474) mean_loss: 0.368595 lr: 0.000000
+val_mode:validation on epoch>> 121, mean tloss>> 0.292280 
+(epoch: 122, iters: 474) mean_loss: 0.378515 lr: 0.000000
+val_mode:validation on epoch>> 122, mean tloss>> 0.292718 
+(epoch: 123, iters: 474) mean_loss: 0.381141 lr: 0.000000
+val_mode:validation on epoch>> 123, mean tloss>> 0.295609 
+(epoch: 124, iters: 474) mean_loss: 0.376137 lr: 0.000000
+val_mode:validation on epoch>> 124, mean tloss>> 0.293939 
+(epoch: 125, iters: 474) mean_loss: 0.382735 lr: 0.000000
+val_mode:validation on epoch>> 125, mean tloss>> 0.290783 
+(epoch: 126, iters: 474) mean_loss: 0.377358 lr: 0.000000
+val_mode:validation on epoch>> 126, mean tloss>> 0.292537 
+(epoch: 127, iters: 474) mean_loss: 0.378338 lr: 0.000000
+val_mode:validation on epoch>> 127, mean tloss>> 0.292500 
+(epoch: 128, iters: 474) mean_loss: 0.379334 lr: 0.000000
+val_mode:validation on epoch>> 128, mean tloss>> 0.293543 
+(epoch: 129, iters: 474) mean_loss: 0.376474 lr: 0.000000
+val_mode:validation on epoch>> 129, mean tloss>> 0.293381 
+(epoch: 130, iters: 474) mean_loss: 0.378600 lr: 0.000000
+val_mode:validation on epoch>> 130, mean tloss>> 0.290920 
+(epoch: 131, iters: 474) mean_loss: 0.376253 lr: 0.000000
+val_mode:validation on epoch>> 131, mean tloss>> 0.292658 
+(epoch: 132, iters: 474) mean_loss: 0.373297 lr: 0.000000
+val_mode:validation on epoch>> 132, mean tloss>> 0.294234 
+(epoch: 133, iters: 474) mean_loss: 0.383686 lr: 0.000000
+val_mode:validation on epoch>> 133, mean tloss>> 0.293621 
+(epoch: 134, iters: 474) mean_loss: 0.374872 lr: 0.000000
+val_mode:validation on epoch>> 134, mean tloss>> 0.292903 
+(epoch: 135, iters: 474) mean_loss: 0.374579 lr: 0.000000
+val_mode:validation on epoch>> 135, mean tloss>> 0.293895 
+(epoch: 136, iters: 474) mean_loss: 0.381967 lr: 0.000000
+val_mode:validation on epoch>> 136, mean tloss>> 0.289897 
+(epoch: 137, iters: 474) mean_loss: 0.374640 lr: 0.000000
+val_mode:validation on epoch>> 137, mean tloss>> 0.292305 
+(epoch: 138, iters: 474) mean_loss: 0.376844 lr: 0.000000
+val_mode:validation on epoch>> 138, mean tloss>> 0.294389 
+(epoch: 139, iters: 474) mean_loss: 0.376344 lr: 0.000000
+val_mode:validation on epoch>> 139, mean tloss>> 0.293524 
+(epoch: 140, iters: 474) mean_loss: 0.376822 lr: 0.000000
+val_mode:validation on epoch>> 140, mean tloss>> 0.295045 
+(epoch: 141, iters: 474) mean_loss: 0.376939 lr: 0.000000
+val_mode:validation on epoch>> 141, mean tloss>> 0.292463 
+(epoch: 142, iters: 474) mean_loss: 0.374247 lr: 0.000000
+val_mode:validation on epoch>> 142, mean tloss>> 0.291006 
+(epoch: 143, iters: 474) mean_loss: 0.377059 lr: 0.000000
+val_mode:validation on epoch>> 143, mean tloss>> 0.292810 
+(epoch: 144, iters: 474) mean_loss: 0.373475 lr: 0.000000
+val_mode:validation on epoch>> 144, mean tloss>> 0.293200 
+(epoch: 145, iters: 474) mean_loss: 0.375235 lr: 0.000000
+val_mode:validation on epoch>> 145, mean tloss>> 0.292505 
+(epoch: 146, iters: 474) mean_loss: 0.376088 lr: 0.000000
+val_mode:validation on epoch>> 146, mean tloss>> 0.293914 
+(epoch: 147, iters: 474) mean_loss: 0.373993 lr: 0.000000
+val_mode:validation on epoch>> 147, mean tloss>> 0.294296 
+(epoch: 148, iters: 474) mean_loss: 0.374278 lr: 0.000000
+val_mode:validation on epoch>> 148, mean tloss>> 0.292752 
+(epoch: 149, iters: 474) mean_loss: 0.370663 lr: 0.000000
+val_mode:validation on epoch>> 149, mean tloss>> 0.291863 
+(epoch: 150, iters: 474) mean_loss: 0.376740 lr: 0.000000
+val_mode:validation on epoch>> 150, mean tloss>> 0.295566 
+best model appear in epoch97 and best val_loss is 0.289509
+================ Training End (Sun Sep 22 23:36:51 2024) ================
+================ Training loss (Mon Sep 23 09:19:27 2024) ================
+flops:65.46 GMac, params:59.4 M
+(epoch: 1, iters: 474) mean_loss: 0.450169 lr: 0.000100
+val_mode:validation on epoch>> 1, mean tloss>> 0.358170 
+(epoch: 2, iters: 474) mean_loss: 0.441651 lr: 0.000100
+val_mode:validation on epoch>> 2, mean tloss>> 0.334035 
+(epoch: 3, iters: 474) mean_loss: 0.439992 lr: 0.000100
+val_mode:validation on epoch>> 3, mean tloss>> 0.334646 
+(epoch: 4, iters: 474) mean_loss: 0.431401 lr: 0.000100
+val_mode:validation on epoch>> 4, mean tloss>> 0.326445 
+(epoch: 5, iters: 474) mean_loss: 0.424559 lr: 0.000100
+val_mode:validation on epoch>> 5, mean tloss>> 0.345433 
+(epoch: 6, iters: 474) mean_loss: 0.435315 lr: 0.000100
+val_mode:validation on epoch>> 6, mean tloss>> 0.331329 
+(epoch: 7, iters: 474) mean_loss: 0.420345 lr: 0.000100
+val_mode:validation on epoch>> 7, mean tloss>> 0.324040 
+(epoch: 8, iters: 474) mean_loss: 0.422176 lr: 0.000100
+val_mode:validation on epoch>> 8, mean tloss>> 0.368553 
+(epoch: 9, iters: 474) mean_loss: 0.433074 lr: 0.000100
+val_mode:validation on epoch>> 9, mean tloss>> 0.323218 
+(epoch: 10, iters: 474) mean_loss: 0.414436 lr: 0.000100
+val_mode:validation on epoch>> 10, mean tloss>> 0.332009 
+(epoch: 11, iters: 474) mean_loss: 0.420749 lr: 0.000100
+val_mode:validation on epoch>> 11, mean tloss>> 0.326462 
+(epoch: 12, iters: 474) mean_loss: 0.419819 lr: 0.000100
+val_mode:validation on epoch>> 12, mean tloss>> 0.327123 
+(epoch: 13, iters: 474) mean_loss: 0.414693 lr: 0.000100
+val_mode:validation on epoch>> 13, mean tloss>> 0.312945 
+(epoch: 14, iters: 474) mean_loss: 0.411362 lr: 0.000100
+val_mode:validation on epoch>> 14, mean tloss>> 0.394606 
+(epoch: 15, iters: 474) mean_loss: 0.415053 lr: 0.000100
+val_mode:validation on epoch>> 15, mean tloss>> 0.309145 
+(epoch: 16, iters: 474) mean_loss: 0.411070 lr: 0.000100
+val_mode:validation on epoch>> 16, mean tloss>> 0.322684 
+(epoch: 17, iters: 474) mean_loss: 0.414880 lr: 0.000100
+val_mode:validation on epoch>> 17, mean tloss>> 0.327548 
+(epoch: 18, iters: 474) mean_loss: 0.407836 lr: 0.000100
+val_mode:validation on epoch>> 18, mean tloss>> 0.310028 
+(epoch: 19, iters: 474) mean_loss: 0.402912 lr: 0.000100
+val_mode:validation on epoch>> 19, mean tloss>> 0.305186 
+(epoch: 20, iters: 474) mean_loss: 0.411583 lr: 0.000100
+val_mode:validation on epoch>> 20, mean tloss>> 0.324462 
+(epoch: 21, iters: 474) mean_loss: 0.417446 lr: 0.000100
+val_mode:validation on epoch>> 21, mean tloss>> 0.356413 
+(epoch: 22, iters: 474) mean_loss: 0.403202 lr: 0.000100
+val_mode:validation on epoch>> 22, mean tloss>> 0.336027 
+(epoch: 23, iters: 474) mean_loss: 0.400634 lr: 0.000100
+val_mode:validation on epoch>> 23, mean tloss>> 0.305339 
+(epoch: 24, iters: 474) mean_loss: 0.400278 lr: 0.000100
+val_mode:validation on epoch>> 24, mean tloss>> 0.311054 
+(epoch: 25, iters: 474) mean_loss: 0.400316 lr: 0.000100
+val_mode:validation on epoch>> 25, mean tloss>> 0.322250 
+(epoch: 26, iters: 474) mean_loss: 0.414731 lr: 0.000100
+val_mode:validation on epoch>> 26, mean tloss>> 0.304187 
+(epoch: 27, iters: 474) mean_loss: 0.397969 lr: 0.000100
+val_mode:validation on epoch>> 27, mean tloss>> 0.324843 
+(epoch: 28, iters: 474) mean_loss: 0.397226 lr: 0.000100
+val_mode:validation on epoch>> 28, mean tloss>> 0.348740 
+(epoch: 29, iters: 474) mean_loss: 0.392455 lr: 0.000100
+val_mode:validation on epoch>> 29, mean tloss>> 0.308875 
+(epoch: 30, iters: 474) mean_loss: 0.397445 lr: 0.000100
+val_mode:validation on epoch>> 30, mean tloss>> 0.323276 
+(epoch: 31, iters: 474) mean_loss: 0.395087 lr: 0.000100
+val_mode:validation on epoch>> 31, mean tloss>> 0.295446 
+(epoch: 32, iters: 474) mean_loss: 0.406653 lr: 0.000100
+val_mode:validation on epoch>> 32, mean tloss>> 0.300339 
+(epoch: 33, iters: 474) mean_loss: 0.393893 lr: 0.000100
+val_mode:validation on epoch>> 33, mean tloss>> 0.303776 
+(epoch: 34, iters: 474) mean_loss: 0.389857 lr: 0.000100
+val_mode:validation on epoch>> 34, mean tloss>> 0.319740 
+(epoch: 35, iters: 474) mean_loss: 0.389523 lr: 0.000100
+val_mode:validation on epoch>> 35, mean tloss>> 0.312842 
+(epoch: 36, iters: 474) mean_loss: 0.406533 lr: 0.000100
+val_mode:validation on epoch>> 36, mean tloss>> 0.309465 
+(epoch: 37, iters: 474) mean_loss: 0.400130 lr: 0.000100
+val_mode:validation on epoch>> 37, mean tloss>> 0.352876 
+(epoch: 38, iters: 474) mean_loss: 0.388254 lr: 0.000100
+val_mode:validation on epoch>> 38, mean tloss>> 0.325405 
+(epoch: 39, iters: 474) mean_loss: 0.385491 lr: 0.000010
+val_mode:validation on epoch>> 39, mean tloss>> 0.338776 
+(epoch: 40, iters: 474) mean_loss: 0.379249 lr: 0.000010
+val_mode:validation on epoch>> 40, mean tloss>> 0.309562 
+(epoch: 41, iters: 474) mean_loss: 0.377371 lr: 0.000010
+val_mode:validation on epoch>> 41, mean tloss>> 0.364248 
+(epoch: 42, iters: 474) mean_loss: 0.378684 lr: 0.000010
+val_mode:validation on epoch>> 42, mean tloss>> 0.407558 
+(epoch: 43, iters: 474) mean_loss: 0.376022 lr: 0.000010
+val_mode:validation on epoch>> 43, mean tloss>> 0.387383 
+(epoch: 44, iters: 474) mean_loss: 0.373245 lr: 0.000010
+val_mode:validation on epoch>> 44, mean tloss>> 0.310122 
+(epoch: 45, iters: 474) mean_loss: 0.372034 lr: 0.000010
+val_mode:validation on epoch>> 45, mean tloss>> 0.327436 
+(epoch: 46, iters: 474) mean_loss: 0.373057 lr: 0.000001
+val_mode:validation on epoch>> 46, mean tloss>> 0.346661 
+(epoch: 47, iters: 474) mean_loss: 0.374411 lr: 0.000001
+val_mode:validation on epoch>> 47, mean tloss>> 0.316497 
+(epoch: 48, iters: 474) mean_loss: 0.376201 lr: 0.000001
+val_mode:validation on epoch>> 48, mean tloss>> 0.458614 
+(epoch: 49, iters: 474) mean_loss: 0.370098 lr: 0.000001
+val_mode:validation on epoch>> 49, mean tloss>> 0.337838 
+(epoch: 50, iters: 474) mean_loss: 0.371015 lr: 0.000001
+val_mode:validation on epoch>> 50, mean tloss>> 0.302693 
+(epoch: 51, iters: 474) mean_loss: 0.377427 lr: 0.000001
+val_mode:validation on epoch>> 51, mean tloss>> 0.398419 
+(epoch: 52, iters: 474) mean_loss: 0.372595 lr: 0.000001
+val_mode:validation on epoch>> 52, mean tloss>> 0.361545 
+(epoch: 53, iters: 474) mean_loss: 0.372139 lr: 0.000000
+val_mode:validation on epoch>> 53, mean tloss>> 0.415022 
+(epoch: 54, iters: 474) mean_loss: 0.367098 lr: 0.000000
+val_mode:validation on epoch>> 54, mean tloss>> 0.544730 
+(epoch: 55, iters: 474) mean_loss: 0.370057 lr: 0.000000
+val_mode:validation on epoch>> 55, mean tloss>> 0.344153 
+(epoch: 56, iters: 474) mean_loss: 0.371253 lr: 0.000000
+val_mode:validation on epoch>> 56, mean tloss>> 0.314379 
+(epoch: 57, iters: 474) mean_loss: 0.374829 lr: 0.000000
+val_mode:validation on epoch>> 57, mean tloss>> 0.328395 
+(epoch: 58, iters: 474) mean_loss: 0.367942 lr: 0.000000
+val_mode:validation on epoch>> 58, mean tloss>> 0.357086 
+(epoch: 59, iters: 474) mean_loss: 0.373150 lr: 0.000000
+val_mode:validation on epoch>> 59, mean tloss>> 0.406489 
+(epoch: 60, iters: 474) mean_loss: 0.376969 lr: 0.000000
+val_mode:validation on epoch>> 60, mean tloss>> 0.381243 
+(epoch: 61, iters: 474) mean_loss: 0.366479 lr: 0.000000
+val_mode:validation on epoch>> 61, mean tloss>> 0.358853 
+(epoch: 62, iters: 474) mean_loss: 0.368726 lr: 0.000000
+val_mode:validation on epoch>> 62, mean tloss>> 0.392568 
+(epoch: 63, iters: 474) mean_loss: 0.373467 lr: 0.000000
+val_mode:validation on epoch>> 63, mean tloss>> 0.346509 
+(epoch: 64, iters: 474) mean_loss: 0.370554 lr: 0.000000
+val_mode:validation on epoch>> 64, mean tloss>> 0.355726 
+(epoch: 65, iters: 474) mean_loss: 0.373204 lr: 0.000000
+val_mode:validation on epoch>> 65, mean tloss>> 0.324003 
+(epoch: 66, iters: 474) mean_loss: 0.372577 lr: 0.000000
+val_mode:validation on epoch>> 66, mean tloss>> 0.336891 
+(epoch: 67, iters: 474) mean_loss: 0.373914 lr: 0.000000
+val_mode:validation on epoch>> 67, mean tloss>> 0.338203 
+(epoch: 68, iters: 474) mean_loss: 0.368909 lr: 0.000000
+val_mode:validation on epoch>> 68, mean tloss>> 0.385659 
+(epoch: 69, iters: 474) mean_loss: 0.374348 lr: 0.000000
+val_mode:validation on epoch>> 69, mean tloss>> 0.322658 
+(epoch: 70, iters: 474) mean_loss: 0.371866 lr: 0.000000
+val_mode:validation on epoch>> 70, mean tloss>> 0.369970 
+(epoch: 71, iters: 474) mean_loss: 0.371701 lr: 0.000000
+val_mode:validation on epoch>> 71, mean tloss>> 0.324088 
+(epoch: 72, iters: 474) mean_loss: 0.371208 lr: 0.000000
+val_mode:validation on epoch>> 72, mean tloss>> 0.392606 
+(epoch: 73, iters: 474) mean_loss: 0.376280 lr: 0.000000
+val_mode:validation on epoch>> 73, mean tloss>> 0.462237 
+(epoch: 74, iters: 474) mean_loss: 0.372580 lr: 0.000000
+val_mode:validation on epoch>> 74, mean tloss>> 0.317762 
+(epoch: 75, iters: 474) mean_loss: 0.371826 lr: 0.000000
+val_mode:validation on epoch>> 75, mean tloss>> 0.408786 
+(epoch: 76, iters: 474) mean_loss: 0.373197 lr: 0.000000
+val_mode:validation on epoch>> 76, mean tloss>> 0.513462 
+(epoch: 77, iters: 474) mean_loss: 0.375680 lr: 0.000000
+val_mode:validation on epoch>> 77, mean tloss>> 0.393343 
+(epoch: 78, iters: 474) mean_loss: 0.375083 lr: 0.000000
+val_mode:validation on epoch>> 78, mean tloss>> 0.358734 
+(epoch: 79, iters: 474) mean_loss: 0.375200 lr: 0.000000
+val_mode:validation on epoch>> 79, mean tloss>> 0.393975 
+(epoch: 80, iters: 474) mean_loss: 0.372691 lr: 0.000000
+val_mode:validation on epoch>> 80, mean tloss>> 0.341440 
+(epoch: 81, iters: 474) mean_loss: 0.376706 lr: 0.000000
+val_mode:validation on epoch>> 81, mean tloss>> 0.321807 
+(epoch: 82, iters: 474) mean_loss: 0.366146 lr: 0.000000
+val_mode:validation on epoch>> 82, mean tloss>> 0.332753 
+(epoch: 83, iters: 474) mean_loss: 0.375507 lr: 0.000000
+val_mode:validation on epoch>> 83, mean tloss>> 0.435921 
+(epoch: 84, iters: 474) mean_loss: 0.369398 lr: 0.000000
+val_mode:validation on epoch>> 84, mean tloss>> 0.385669 
+(epoch: 85, iters: 474) mean_loss: 0.371944 lr: 0.000000
+val_mode:validation on epoch>> 85, mean tloss>> 0.312469 
+(epoch: 86, iters: 474) mean_loss: 0.374883 lr: 0.000000
+val_mode:validation on epoch>> 86, mean tloss>> 0.325905 
+(epoch: 87, iters: 474) mean_loss: 0.377402 lr: 0.000000
+val_mode:validation on epoch>> 87, mean tloss>> 0.388667 
+(epoch: 88, iters: 474) mean_loss: 0.375047 lr: 0.000000
+val_mode:validation on epoch>> 88, mean tloss>> 0.378066 
+(epoch: 89, iters: 474) mean_loss: 0.374966 lr: 0.000000
+val_mode:validation on epoch>> 89, mean tloss>> 0.406563 
+(epoch: 90, iters: 474) mean_loss: 0.380457 lr: 0.000000
+val_mode:validation on epoch>> 90, mean tloss>> 0.429073 
+(epoch: 91, iters: 474) mean_loss: 0.370591 lr: 0.000000
+val_mode:validation on epoch>> 91, mean tloss>> 0.652135 
+(epoch: 92, iters: 474) mean_loss: 0.368923 lr: 0.000000
+val_mode:validation on epoch>> 92, mean tloss>> 0.310967 
+(epoch: 93, iters: 474) mean_loss: 0.372403 lr: 0.000000
+val_mode:validation on epoch>> 93, mean tloss>> 0.362344 
+(epoch: 94, iters: 474) mean_loss: 0.371965 lr: 0.000000
+val_mode:validation on epoch>> 94, mean tloss>> 0.405027 
+(epoch: 95, iters: 474) mean_loss: 0.378046 lr: 0.000000
+val_mode:validation on epoch>> 95, mean tloss>> 0.368146 
+(epoch: 96, iters: 474) mean_loss: 0.371675 lr: 0.000000
+val_mode:validation on epoch>> 96, mean tloss>> 0.541364 
+(epoch: 97, iters: 474) mean_loss: 0.373872 lr: 0.000000
+val_mode:validation on epoch>> 97, mean tloss>> 0.390008 
+(epoch: 98, iters: 474) mean_loss: 0.369505 lr: 0.000000
+val_mode:validation on epoch>> 98, mean tloss>> 0.381918 
+(epoch: 99, iters: 474) mean_loss: 0.372024 lr: 0.000000
+val_mode:validation on epoch>> 99, mean tloss>> 0.329431 
+(epoch: 100, iters: 474) mean_loss: 0.369272 lr: 0.000000
+val_mode:validation on epoch>> 100, mean tloss>> 0.309998 
+================ Training loss (Wed Sep 25 09:52:52 2024) ================
+flops:65.46 GMac, params:59.4 M
+(epoch: 1, iters: 474) mean_loss: 0.361221 lr: 0.000010
+val_mode:validation on epoch>> 1, mean tloss>> 0.305991 
+(epoch: 2, iters: 474) mean_loss: 0.358735 lr: 0.000010
+val_mode:validation on epoch>> 2, mean tloss>> 0.299140 
+(epoch: 3, iters: 474) mean_loss: 0.363916 lr: 0.000010
+val_mode:validation on epoch>> 3, mean tloss>> 0.298048 
+(epoch: 4, iters: 474) mean_loss: 0.359819 lr: 0.000010
+val_mode:validation on epoch>> 4, mean tloss>> 0.296704 
+(epoch: 5, iters: 474) mean_loss: 0.360511 lr: 0.000010
+val_mode:validation on epoch>> 5, mean tloss>> 0.303310 
+(epoch: 6, iters: 474) mean_loss: 0.359442 lr: 0.000010
+val_mode:validation on epoch>> 6, mean tloss>> 0.296248 
+(epoch: 7, iters: 474) mean_loss: 0.357030 lr: 0.000010
+val_mode:validation on epoch>> 7, mean tloss>> 0.300345 
+(epoch: 8, iters: 474) mean_loss: 0.355111 lr: 0.000010
+val_mode:validation on epoch>> 8, mean tloss>> 0.298970 
+(epoch: 9, iters: 474) mean_loss: 0.360308 lr: 0.000010
+val_mode:validation on epoch>> 9, mean tloss>> 0.311792 
+(epoch: 10, iters: 474) mean_loss: 0.353863 lr: 0.000010
+val_mode:validation on epoch>> 10, mean tloss>> 0.294212 
+(epoch: 11, iters: 474) mean_loss: 0.356783 lr: 0.000010
+val_mode:validation on epoch>> 11, mean tloss>> 0.291981 
+(epoch: 12, iters: 474) mean_loss: 0.355783 lr: 0.000010
+val_mode:validation on epoch>> 12, mean tloss>> 0.296993 
+(epoch: 13, iters: 474) mean_loss: 0.353355 lr: 0.000010
+val_mode:validation on epoch>> 13, mean tloss>> 0.305889 
+(epoch: 14, iters: 474) mean_loss: 0.354748 lr: 0.000010
+val_mode:validation on epoch>> 14, mean tloss>> 0.316545 
+(epoch: 15, iters: 474) mean_loss: 0.350048 lr: 0.000010
+val_mode:validation on epoch>> 15, mean tloss>> 0.305189 
+(epoch: 16, iters: 474) mean_loss: 0.352689 lr: 0.000010
+val_mode:validation on epoch>> 16, mean tloss>> 0.295438 
+(epoch: 17, iters: 474) mean_loss: 0.351125 lr: 0.000010
+val_mode:validation on epoch>> 17, mean tloss>> 0.298171 
+(epoch: 18, iters: 474) mean_loss: 0.363911 lr: 0.000010
+val_mode:validation on epoch>> 18, mean tloss>> 0.293694 
+(epoch: 19, iters: 474) mean_loss: 0.363309 lr: 0.000001
+val_mode:validation on epoch>> 19, mean tloss>> 0.293512 
+(epoch: 20, iters: 474) mean_loss: 0.362352 lr: 0.000001
+val_mode:validation on epoch>> 20, mean tloss>> 0.294720 
+(epoch: 21, iters: 474) mean_loss: 0.362572 lr: 0.000001
+val_mode:validation on epoch>> 21, mean tloss>> 0.292055 
+(epoch: 22, iters: 474) mean_loss: 0.357254 lr: 0.000001
+val_mode:validation on epoch>> 22, mean tloss>> 0.292816 
+(epoch: 23, iters: 474) mean_loss: 0.360522 lr: 0.000001
+val_mode:validation on epoch>> 23, mean tloss>> 0.294579 
+(epoch: 24, iters: 474) mean_loss: 0.356836 lr: 0.000001
+val_mode:validation on epoch>> 24, mean tloss>> 0.295004 
+(epoch: 25, iters: 474) mean_loss: 0.353208 lr: 0.000001
+val_mode:validation on epoch>> 25, mean tloss>> 0.296116 
+(epoch: 26, iters: 474) mean_loss: 0.365961 lr: 0.000000
+val_mode:validation on epoch>> 26, mean tloss>> 0.293550 
+(epoch: 27, iters: 474) mean_loss: 0.362120 lr: 0.000000
+val_mode:validation on epoch>> 27, mean tloss>> 0.291571 
+(epoch: 28, iters: 474) mean_loss: 0.359667 lr: 0.000000
+val_mode:validation on epoch>> 28, mean tloss>> 0.290453 
+(epoch: 29, iters: 474) mean_loss: 0.353445 lr: 0.000000
+val_mode:validation on epoch>> 29, mean tloss>> 0.293855 
+(epoch: 30, iters: 474) mean_loss: 0.358960 lr: 0.000000
+val_mode:validation on epoch>> 30, mean tloss>> 0.293730 
+(epoch: 31, iters: 474) mean_loss: 0.358493 lr: 0.000000
+val_mode:validation on epoch>> 31, mean tloss>> 0.292874 
+(epoch: 32, iters: 474) mean_loss: 0.363867 lr: 0.000000
+val_mode:validation on epoch>> 32, mean tloss>> 0.294016 
+(epoch: 33, iters: 474) mean_loss: 0.356134 lr: 0.000000
+val_mode:validation on epoch>> 33, mean tloss>> 0.291576 
+(epoch: 34, iters: 474) mean_loss: 0.355383 lr: 0.000000
+val_mode:validation on epoch>> 34, mean tloss>> 0.294375 
+(epoch: 35, iters: 474) mean_loss: 0.355252 lr: 0.000000
+val_mode:validation on epoch>> 35, mean tloss>> 0.293124 
+(epoch: 36, iters: 474) mean_loss: 0.359867 lr: 0.000000
+val_mode:validation on epoch>> 36, mean tloss>> 0.291072 
+(epoch: 37, iters: 474) mean_loss: 0.368226 lr: 0.000000
+val_mode:validation on epoch>> 37, mean tloss>> 0.293691 
+(epoch: 38, iters: 474) mean_loss: 0.366375 lr: 0.000000
+val_mode:validation on epoch>> 38, mean tloss>> 0.296163 
+(epoch: 39, iters: 474) mean_loss: 0.367514 lr: 0.000000
+val_mode:validation on epoch>> 39, mean tloss>> 0.291697 
+(epoch: 40, iters: 474) mean_loss: 0.366947 lr: 0.000000
+val_mode:validation on epoch>> 40, mean tloss>> 0.294735 
+(epoch: 41, iters: 474) mean_loss: 0.368609 lr: 0.000000
+val_mode:validation on epoch>> 41, mean tloss>> 0.292438 
+(epoch: 42, iters: 474) mean_loss: 0.369988 lr: 0.000000
+val_mode:validation on epoch>> 42, mean tloss>> 0.299681 
+(epoch: 43, iters: 474) mean_loss: 0.368835 lr: 0.000000
+val_mode:validation on epoch>> 43, mean tloss>> 0.294998 
+(epoch: 44, iters: 474) mean_loss: 0.364214 lr: 0.000000
+val_mode:validation on epoch>> 44, mean tloss>> 0.293414 
+(epoch: 45, iters: 474) mean_loss: 0.365315 lr: 0.000000
+val_mode:validation on epoch>> 45, mean tloss>> 0.294286 
+(epoch: 46, iters: 474) mean_loss: 0.367135 lr: 0.000000
+val_mode:validation on epoch>> 46, mean tloss>> 0.293659 
+(epoch: 47, iters: 474) mean_loss: 0.367107 lr: 0.000000
+val_mode:validation on epoch>> 47, mean tloss>> 0.291423 
+(epoch: 48, iters: 474) mean_loss: 0.368139 lr: 0.000000
+val_mode:validation on epoch>> 48, mean tloss>> 0.294120 
+(epoch: 49, iters: 474) mean_loss: 0.364016 lr: 0.000000
+val_mode:validation on epoch>> 49, mean tloss>> 0.292786 
+(epoch: 50, iters: 474) mean_loss: 0.365222 lr: 0.000000
+val_mode:validation on epoch>> 50, mean tloss>> 0.290014 
+(epoch: 51, iters: 474) mean_loss: 0.369782 lr: 0.000000
+val_mode:validation on epoch>> 51, mean tloss>> 0.291076 
+(epoch: 52, iters: 474) mean_loss: 0.365558 lr: 0.000000
+val_mode:validation on epoch>> 52, mean tloss>> 0.291280 
+(epoch: 53, iters: 474) mean_loss: 0.365027 lr: 0.000000
+val_mode:validation on epoch>> 53, mean tloss>> 0.291908 
+(epoch: 54, iters: 474) mean_loss: 0.360762 lr: 0.000000
+val_mode:validation on epoch>> 54, mean tloss>> 0.295013 
+(epoch: 55, iters: 474) mean_loss: 0.362757 lr: 0.000000
+val_mode:validation on epoch>> 55, mean tloss>> 0.290563 
+(epoch: 56, iters: 474) mean_loss: 0.364896 lr: 0.000000
+val_mode:validation on epoch>> 56, mean tloss>> 0.293302 
+(epoch: 57, iters: 474) mean_loss: 0.366098 lr: 0.000000
+val_mode:validation on epoch>> 57, mean tloss>> 0.291448 
+(epoch: 58, iters: 474) mean_loss: 0.361999 lr: 0.000000
+val_mode:validation on epoch>> 58, mean tloss>> 0.296217 
+(epoch: 59, iters: 474) mean_loss: 0.367295 lr: 0.000000
+val_mode:validation on epoch>> 59, mean tloss>> 0.295300 
+(epoch: 60, iters: 474) mean_loss: 0.370418 lr: 0.000000
+val_mode:validation on epoch>> 60, mean tloss>> 0.294346 
+(epoch: 61, iters: 474) mean_loss: 0.361459 lr: 0.000000
+val_mode:validation on epoch>> 61, mean tloss>> 0.297971 
+(epoch: 62, iters: 474) mean_loss: 0.363549 lr: 0.000000
+val_mode:validation on epoch>> 62, mean tloss>> 0.292414 
+(epoch: 63, iters: 474) mean_loss: 0.366657 lr: 0.000000
+val_mode:validation on epoch>> 63, mean tloss>> 0.295338 
+(epoch: 64, iters: 474) mean_loss: 0.365627 lr: 0.000000
+val_mode:validation on epoch>> 64, mean tloss>> 0.293856 
+(epoch: 65, iters: 474) mean_loss: 0.368161 lr: 0.000000
+val_mode:validation on epoch>> 65, mean tloss>> 0.291749 
+(epoch: 66, iters: 474) mean_loss: 0.371756 lr: 0.000000
+val_mode:validation on epoch>> 66, mean tloss>> 0.294914 
+(epoch: 67, iters: 474) mean_loss: 0.369424 lr: 0.000000
+val_mode:validation on epoch>> 67, mean tloss>> 0.290463 
+(epoch: 68, iters: 474) mean_loss: 0.365705 lr: 0.000000
+val_mode:validation on epoch>> 68, mean tloss>> 0.294024 
+(epoch: 69, iters: 474) mean_loss: 0.370561 lr: 0.000000
+val_mode:validation on epoch>> 69, mean tloss>> 0.293029 
+(epoch: 70, iters: 474) mean_loss: 0.367989 lr: 0.000000
+val_mode:validation on epoch>> 70, mean tloss>> 0.292270 
+(epoch: 71, iters: 474) mean_loss: 0.367396 lr: 0.000000
+val_mode:validation on epoch>> 71, mean tloss>> 0.293237 
+(epoch: 72, iters: 474) mean_loss: 0.366299 lr: 0.000000
+val_mode:validation on epoch>> 72, mean tloss>> 0.297027 
+(epoch: 73, iters: 474) mean_loss: 0.371895 lr: 0.000000
+val_mode:validation on epoch>> 73, mean tloss>> 0.293362 
+(epoch: 74, iters: 474) mean_loss: 0.369534 lr: 0.000000
+val_mode:validation on epoch>> 74, mean tloss>> 0.292398 
+(epoch: 75, iters: 474) mean_loss: 0.367082 lr: 0.000000
+val_mode:validation on epoch>> 75, mean tloss>> 0.293259 
+(epoch: 76, iters: 474) mean_loss: 0.368147 lr: 0.000000
+val_mode:validation on epoch>> 76, mean tloss>> 0.294855 
+(epoch: 77, iters: 474) mean_loss: 0.368857 lr: 0.000000
+val_mode:validation on epoch>> 77, mean tloss>> 0.292207 
+(epoch: 78, iters: 474) mean_loss: 0.370232 lr: 0.000000
+val_mode:validation on epoch>> 78, mean tloss>> 0.295105 
+(epoch: 79, iters: 474) mean_loss: 0.370689 lr: 0.000000
+val_mode:validation on epoch>> 79, mean tloss>> 0.292736 
+(epoch: 80, iters: 474) mean_loss: 0.368179 lr: 0.000000
+val_mode:validation on epoch>> 80, mean tloss>> 0.293063 
+(epoch: 81, iters: 474) mean_loss: 0.375135 lr: 0.000000
+val_mode:validation on epoch>> 81, mean tloss>> 0.290495 
+(epoch: 82, iters: 474) mean_loss: 0.363153 lr: 0.000000
+val_mode:validation on epoch>> 82, mean tloss>> 0.294765 
+(epoch: 83, iters: 474) mean_loss: 0.372398 lr: 0.000000
+val_mode:validation on epoch>> 83, mean tloss>> 0.294344 
+(epoch: 84, iters: 474) mean_loss: 0.364778 lr: 0.000000
+val_mode:validation on epoch>> 84, mean tloss>> 0.296802 
+(epoch: 85, iters: 474) mean_loss: 0.365907 lr: 0.000000
+val_mode:validation on epoch>> 85, mean tloss>> 0.294350 
+(epoch: 86, iters: 474) mean_loss: 0.371620 lr: 0.000000
+val_mode:validation on epoch>> 86, mean tloss>> 0.295151 
+(epoch: 87, iters: 474) mean_loss: 0.372811 lr: 0.000000
+val_mode:validation on epoch>> 87, mean tloss>> 0.296199 
+(epoch: 88, iters: 474) mean_loss: 0.368173 lr: 0.000000
+val_mode:validation on epoch>> 88, mean tloss>> 0.293972 
+(epoch: 89, iters: 474) mean_loss: 0.370345 lr: 0.000000
+val_mode:validation on epoch>> 89, mean tloss>> 0.294787 
+(epoch: 90, iters: 474) mean_loss: 0.373790 lr: 0.000000
+val_mode:validation on epoch>> 90, mean tloss>> 0.290374 
+(epoch: 91, iters: 474) mean_loss: 0.366190 lr: 0.000000
+val_mode:validation on epoch>> 91, mean tloss>> 0.295801 
+(epoch: 92, iters: 474) mean_loss: 0.364820 lr: 0.000000
+val_mode:validation on epoch>> 92, mean tloss>> 0.293454 
+(epoch: 93, iters: 474) mean_loss: 0.367539 lr: 0.000000
+val_mode:validation on epoch>> 93, mean tloss>> 0.292328 
+(epoch: 94, iters: 474) mean_loss: 0.369021 lr: 0.000000
+val_mode:validation on epoch>> 94, mean tloss>> 0.293487 
+(epoch: 95, iters: 474) mean_loss: 0.375649 lr: 0.000000
+val_mode:validation on epoch>> 95, mean tloss>> 0.291912 
+(epoch: 96, iters: 474) mean_loss: 0.364957 lr: 0.000000
+val_mode:validation on epoch>> 96, mean tloss>> 0.293538 
+(epoch: 97, iters: 474) mean_loss: 0.369652 lr: 0.000000
+val_mode:validation on epoch>> 97, mean tloss>> 0.289902 
+(epoch: 98, iters: 474) mean_loss: 0.365293 lr: 0.000000
+val_mode:validation on epoch>> 98, mean tloss>> 0.294858 
+(epoch: 99, iters: 474) mean_loss: 0.366260 lr: 0.000000
+val_mode:validation on epoch>> 99, mean tloss>> 0.296232 
+(epoch: 100, iters: 474) mean_loss: 0.366960 lr: 0.000000
+val_mode:validation on epoch>> 100, mean tloss>> 0.293126 
+(epoch: 101, iters: 474) mean_loss: 0.366155 lr: 0.000000
+val_mode:validation on epoch>> 101, mean tloss>> 0.292857 
+(epoch: 102, iters: 474) mean_loss: 0.367474 lr: 0.000000
+val_mode:validation on epoch>> 102, mean tloss>> 0.294254 
+(epoch: 103, iters: 474) mean_loss: 0.367442 lr: 0.000000
+val_mode:validation on epoch>> 103, mean tloss>> 0.292334 
+(epoch: 104, iters: 474) mean_loss: 0.370576 lr: 0.000000
+val_mode:validation on epoch>> 104, mean tloss>> 0.291590 
+(epoch: 105, iters: 474) mean_loss: 0.363459 lr: 0.000000
+val_mode:validation on epoch>> 105, mean tloss>> 0.290785 
+(epoch: 106, iters: 474) mean_loss: 0.368781 lr: 0.000000
+val_mode:validation on epoch>> 106, mean tloss>> 0.293157 
+(epoch: 107, iters: 474) mean_loss: 0.372774 lr: 0.000000
+val_mode:validation on epoch>> 107, mean tloss>> 0.290582 
+(epoch: 108, iters: 474) mean_loss: 0.368382 lr: 0.000000
+val_mode:validation on epoch>> 108, mean tloss>> 0.293783 
+(epoch: 109, iters: 474) mean_loss: 0.371474 lr: 0.000000
+val_mode:validation on epoch>> 109, mean tloss>> 0.292468 
+(epoch: 110, iters: 474) mean_loss: 0.369482 lr: 0.000000
+val_mode:validation on epoch>> 110, mean tloss>> 0.294282 
+(epoch: 111, iters: 474) mean_loss: 0.365272 lr: 0.000000
+val_mode:validation on epoch>> 111, mean tloss>> 0.292361 
+(epoch: 112, iters: 474) mean_loss: 0.364410 lr: 0.000000
+val_mode:validation on epoch>> 112, mean tloss>> 0.294706 
+(epoch: 113, iters: 474) mean_loss: 0.369648 lr: 0.000000
+val_mode:validation on epoch>> 113, mean tloss>> 0.291847 
+(epoch: 114, iters: 474) mean_loss: 0.361524 lr: 0.000000
+val_mode:validation on epoch>> 114, mean tloss>> 0.294114 
+(epoch: 115, iters: 474) mean_loss: 0.362362 lr: 0.000000
+val_mode:validation on epoch>> 115, mean tloss>> 0.292830 
+(epoch: 116, iters: 474) mean_loss: 0.370997 lr: 0.000000
+val_mode:validation on epoch>> 116, mean tloss>> 0.291931 
+(epoch: 117, iters: 474) mean_loss: 0.369164 lr: 0.000000
+val_mode:validation on epoch>> 117, mean tloss>> 0.293101 
+(epoch: 118, iters: 474) mean_loss: 0.363120 lr: 0.000000
+val_mode:validation on epoch>> 118, mean tloss>> 0.291370 
+(epoch: 119, iters: 474) mean_loss: 0.369112 lr: 0.000000
+val_mode:validation on epoch>> 119, mean tloss>> 0.291441 
+(epoch: 120, iters: 474) mean_loss: 0.362157 lr: 0.000000
+val_mode:validation on epoch>> 120, mean tloss>> 0.293894 
+(epoch: 121, iters: 474) mean_loss: 0.360905 lr: 0.000000
+val_mode:validation on epoch>> 121, mean tloss>> 0.292624 
+(epoch: 122, iters: 474) mean_loss: 0.369435 lr: 0.000000
+val_mode:validation on epoch>> 122, mean tloss>> 0.291671 
+(epoch: 123, iters: 474) mean_loss: 0.372923 lr: 0.000000
+val_mode:validation on epoch>> 123, mean tloss>> 0.295654 
+(epoch: 124, iters: 474) mean_loss: 0.367778 lr: 0.000000
+val_mode:validation on epoch>> 124, mean tloss>> 0.293941 
+(epoch: 125, iters: 474) mean_loss: 0.375035 lr: 0.000000
+val_mode:validation on epoch>> 125, mean tloss>> 0.291150 
+(epoch: 126, iters: 474) mean_loss: 0.368687 lr: 0.000000
+val_mode:validation on epoch>> 126, mean tloss>> 0.292440 
+(epoch: 127, iters: 474) mean_loss: 0.369670 lr: 0.000000
+val_mode:validation on epoch>> 127, mean tloss>> 0.291792 
+(epoch: 128, iters: 474) mean_loss: 0.371189 lr: 0.000000
+val_mode:validation on epoch>> 128, mean tloss>> 0.293631 
+(epoch: 129, iters: 474) mean_loss: 0.368380 lr: 0.000000
+val_mode:validation on epoch>> 129, mean tloss>> 0.293534 
+(epoch: 130, iters: 474) mean_loss: 0.371527 lr: 0.000000
+val_mode:validation on epoch>> 130, mean tloss>> 0.291765 
+(epoch: 131, iters: 474) mean_loss: 0.368637 lr: 0.000000
+val_mode:validation on epoch>> 131, mean tloss>> 0.293283 
+(epoch: 132, iters: 474) mean_loss: 0.366300 lr: 0.000000
+val_mode:validation on epoch>> 132, mean tloss>> 0.294274 
+(epoch: 133, iters: 474) mean_loss: 0.373776 lr: 0.000000
+val_mode:validation on epoch>> 133, mean tloss>> 0.293152 
+(epoch: 134, iters: 474) mean_loss: 0.366663 lr: 0.000000
+val_mode:validation on epoch>> 134, mean tloss>> 0.292452 
+(epoch: 135, iters: 474) mean_loss: 0.367412 lr: 0.000000
+val_mode:validation on epoch>> 135, mean tloss>> 0.294205 
+(epoch: 136, iters: 474) mean_loss: 0.372597 lr: 0.000000
+val_mode:validation on epoch>> 136, mean tloss>> 0.290039 
+(epoch: 137, iters: 474) mean_loss: 0.365186 lr: 0.000000
+val_mode:validation on epoch>> 137, mean tloss>> 0.291717 
+(epoch: 138, iters: 474) mean_loss: 0.370142 lr: 0.000000
+val_mode:validation on epoch>> 138, mean tloss>> 0.294208 
+(epoch: 139, iters: 474) mean_loss: 0.367011 lr: 0.000000
+val_mode:validation on epoch>> 139, mean tloss>> 0.293651 
+(epoch: 140, iters: 474) mean_loss: 0.369009 lr: 0.000000
+val_mode:validation on epoch>> 140, mean tloss>> 0.294214 
+(epoch: 141, iters: 474) mean_loss: 0.368052 lr: 0.000000
+val_mode:validation on epoch>> 141, mean tloss>> 0.291900 
+(epoch: 142, iters: 474) mean_loss: 0.366879 lr: 0.000000
+val_mode:validation on epoch>> 142, mean tloss>> 0.291149 
+(epoch: 143, iters: 474) mean_loss: 0.368935 lr: 0.000000
+val_mode:validation on epoch>> 143, mean tloss>> 0.292977 
+(epoch: 144, iters: 474) mean_loss: 0.365528 lr: 0.000000
+val_mode:validation on epoch>> 144, mean tloss>> 0.293415 
+(epoch: 145, iters: 474) mean_loss: 0.367522 lr: 0.000000
+val_mode:validation on epoch>> 145, mean tloss>> 0.292708 
+(epoch: 146, iters: 474) mean_loss: 0.366894 lr: 0.000000
+val_mode:validation on epoch>> 146, mean tloss>> 0.294503 
+(epoch: 147, iters: 474) mean_loss: 0.366164 lr: 0.000000
+val_mode:validation on epoch>> 147, mean tloss>> 0.294083 
+(epoch: 148, iters: 474) mean_loss: 0.366608 lr: 0.000000
+val_mode:validation on epoch>> 148, mean tloss>> 0.292406 
+(epoch: 149, iters: 474) mean_loss: 0.362042 lr: 0.000000
+val_mode:validation on epoch>> 149, mean tloss>> 0.291923 
+(epoch: 150, iters: 474) mean_loss: 0.367741 lr: 0.000000
+val_mode:validation on epoch>> 150, mean tloss>> 0.294249 

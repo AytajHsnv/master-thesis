@@ -73,7 +73,7 @@ def cal_prf_metrics(pred_list, gt_list, thresh_step=0.01):
 
     # Plot the metrics
     fig, axs = plt.subplots(4, 1, figsize=(10, 12))
-
+    fig.suptitle('DeeplabV3+ with ResNet101 Backbone')
     axs[0].plot(thresh_values, p_acc_values, marker='o')
     axs[0].set_ylabel('Precision')
     axs[0].grid(True)
@@ -156,7 +156,7 @@ test_loader  = DataLoader(test_dataset, batch_size = 1, shuffle= False)
 print(f'test_dataset:{len(test_dataset)}')
 
 #Net = TransMUNet(n_classes = number_classes)
-Net = deepLab.deeplabv3plus_mobilenet(num_classes=number_classes, output_stride=8)
+Net = deepLab.deeplabv3plus_resnet101(num_classes=number_classes, output_stride=8)
 Net = Net.to(device)
 Net.load_state_dict(torch.load(config['saved_model'], map_location='cpu')['model_weights'])
 

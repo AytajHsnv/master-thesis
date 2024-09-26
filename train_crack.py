@@ -74,8 +74,8 @@ val_loader    = DataLoader(valid_dataset, batch_size = int(config['batch_size_va
 # train_loader  = DataLoader(train_dataset, batch_size = 4, shuffle= True,  drop_last=True)
 # print(train_loader)
 # val_loader    = DataLoader(valid_dataset, batch_size = 1, shuffle= False, drop_last=True)
-model_name = 'deeplabv3plus_mobilenetv2_crack500' 
-Net = deepLab.deeplabv3plus_mobilenet(num_classes=number_classes, output_stride=8)
+model_name = 'deeplabv3plus_resnet101_crack500' 
+Net = deepLab.deeplabv3plus_resnet101(num_classes=number_classes, output_stride=8)
 #Net = TransMUNet(n_classes = number_classes)
 flops, params = get_model_complexity_info(Net, (3, 256, 256), as_strings=True, print_per_layer_stat=False)
 print('flops: ', flops, 'params: ', params)
@@ -97,7 +97,7 @@ if int(config['pretrained']):
     Net.load_state_dict(torch.load(config['saved_model'], map_location='cpu')['model_weights'])
     best_val_loss = torch.load(config['saved_model'], map_location='cpu')['val_loss']
 optimizer = optim.AdamW(Net.parameters(), lr= float(config['lr']))
-scheduler = optim.lr_scheduler.ReduceLROnPlateau(optimizer, 'min', factor = 0.5, patience = config['patience'])
+scheduler = optim.lr_scheduler.ReduceLROnPlateau(optimizer, 'min', factor = 0.1, patience = config['patience'])
 criteria  = DiceBCELoss()
 
 
