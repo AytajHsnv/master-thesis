@@ -73,7 +73,7 @@ def cal_prf_metrics(pred_list, gt_list, thresh_step=0.01):
 
     # Plot the metrics
     fig, axs = plt.subplots(4, 1, figsize=(10, 12))
-    fig.suptitle('DeeplabV3+ with ResNet101 Backbone')
+    fig.suptitle('TransMUnet metrics', fontsize=16)
     axs[0].plot(thresh_values, p_acc_values, marker='o')
     axs[0].set_ylabel('Precision')
     axs[0].grid(True)
@@ -144,23 +144,39 @@ number_classes = int(config['number_classes'])
 device = 'cuda' if torch.cuda.is_available() else 'cpu'
 print(device)
 
+# data_path = config['path_to_testdata']
+# DIR_IMG  = os.path.join(data_path)
+# DIR_MASK = os.path.join(data_path)
+# img_names  = [path.name for path in Path(DIR_IMG).glob('*.jpg')]
+# mask_names = [path.name for path in Path(DIR_MASK).glob('*.png')]
+# img_names= natsorted(img_names)
+# mask_names=natsorted(mask_names)
+
+distance = [250, 300, 400, 500, 600, 700, 800, 900,1000]
+angle = [45, 75, 90]
 data_path = config['path_to_testdata']
-DIR_IMG  = os.path.join(data_path, "images")
-DIR_MASK = os.path.join(data_path)
-img_names  = [path.name for path in Path(DIR_IMG).glob('*.jpg')]
-mask_names = [path.name for path in Path(DIR_MASK).glob('*.png')]
-img_names= natsorted(img_names)
-mask_names=natsorted(mask_names)
+DIR_IMG = [os.path.join(data_path, f'd_{d}') for d in distance] 
+print(DIR_IMG)
+img_names = natsorted([path.name for img_dir in DIR_IMG for path in Path(img_dir).glob('*.jpg')])
+print(img_names)
+DIR_MASK = [os.path.join(data_path, f'd_{d}') for d in distance]
+mask_names = natsorted([path.name for mask_dir in DIR_MASK for path in Path(mask_dir).glob('*.png')])
+print(mask_names)
+
 test_dataset = Crack_loader(img_dir=DIR_IMG, img_fnames=img_names, mask_dir=DIR_MASK, mask_fnames=mask_names)
 test_loader  = DataLoader(test_dataset, batch_size = 1, shuffle= False)
+
+
 print(f'test_dataset:{len(test_dataset)}')
 
-#Net = TransMUNet(n_classes = number_classes)
-Net = deepLab.deeplabv3plus_resnet50(num_classes=number_classes, output_stride=8)
+Net = TransMUNet(n_classes = number_classes)
+#Net = deepLab.deeplabv3plus_mobilenet(num_classes=number_classes, output_stride=8)
 Net = Net.to(device)
 Net.load_state_dict(torch.load(config['saved_model'], map_location='cpu')['model_weights'])
 
-single_gt = cv2.imread(str(Path(DIR_MASK, 'image_500_90_resized.png')), cv2.IMREAD_GRAYSCALE)
+
+# gt_list = [single_gt for _ in mask_names]
+# gt_list.extend([single_gt] * len(angle))
 pred_list = []
 gt_list = []
 save_samples = True # if save_samples=False, no samples will be saved.
@@ -202,11 +218,11 @@ with torch.no_grad():
         times += (end - start)
         # print('print:', msk.numpy()[0,0])
         if itter < 238 and save_samples:
-            #save_sample(img_path, msk.numpy()[0, 0], mskp, name=str(itter+1))
-            save_sample(img_path, single_gt, mskp, name=str(itter+1))
+            save_sample(img_path, msk.numpy()[0, 0], mskp, name=str(itter+1))
+            #save_sample(img_path, single_gt, mskp, name=str(itter+1))
 
-        #gt_list.append(msk.numpy()[0, 0])
-        gt_list.append(single_gt)
+        gt_list.append(msk.numpy()[0, 0])
+        #gt_list.append(single_gt)
         pred_list.append(mskp)
     print('Running time of each images: %ss' % (times/len(pred_list)))
 

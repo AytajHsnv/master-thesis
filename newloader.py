@@ -71,14 +71,31 @@ class Crack_loader(Dataset):
     def __getitem__(self, i):
         # read a image given a random integer index
         fname = self.img_fnames[i]
-        fpath = os.path.join(self.img_dir, fname)
-        img = cv2.imread(fpath) 
-        img = cv2.cvtColor(img, cv2.COLOR_BGR2RGB)                                    # H,W,3 np.uint8
-        mname = self.mask_fnames
-        if len(self.mask_fnames) == 1:
-            mpath = os.path.join(self.mask_dir, mname[0])
-        else:
-             mpath = os.path.join(self.mask_dir, mname)
+         # Ensure img_dir is a list, even if it's a single string
+        img_dirs = self.img_dir if isinstance(self.img_dir, list) else [self.img_dir]
+        for img_dir in img_dirs:
+            potential_fpath = os.path.join(img_dir, fname)
+            if os.path.exists(potential_fpath):
+                fpath = potential_fpath
+                break
+        if fpath is None:
+            raise FileNotFoundError(f"Image {fname} not found in any provided directories.")
+        print(f"Number of images: {len(self.img_fnames)}")
+        print(f"Number of masks: {len(self.mask_fnames)}")
+        img = cv2.imread(fpath)
+        img = cv2.cvtColor(img, cv2.COLOR_BGR2RGB)  # Convert to RGB
+
+        # Mask loading
+        mname = self.mask_fnames[i]
+        mask_dirs = self.mask_dir if isinstance(self.mask_dir, list) else [self.mask_dir]
+        mpath = None
+        for mask_dir in mask_dirs:
+            potential_mpath = os.path.join(mask_dir, mname)
+            if os.path.exists(potential_mpath):
+                mpath = potential_mpath
+                break
+        if mpath is None:
+            raise FileNotFoundError(f"Mask {mname} not found in any provided directories.")
         mask = cv2.imread(mpath, cv2.COLOR_BGR2GRAY)                                 # H,W, np.uint8
         mask[mask == 1] = 255
         if mask.ndim==3:  
@@ -91,7 +108,7 @@ class Crack_loader(Dataset):
             # image augmentation     
             transformed = self.aug(image=img, mask=mask)
             img  = transformed['image']                                               # (256,256,3) np.uint8
-            mask = transformed['mask']                                                # (256,256) np.uint8            
+            mask[0] = transformed['mask']                                                # (256,256) np.uint8            
             
             # binarize segmentation
             _, mask = cv2.threshold(mask, 127, 1, cv2.THRESH_BINARY)
