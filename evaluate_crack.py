@@ -135,7 +135,7 @@ def cal_prf_metrics(pred_list, gt_list, distance=[], angle=[], thresh_step=0.01,
             print(f"No IoU values found for distance {dist}")
 
         axs2.set_xlabel('Angle')
-        axs2.set_ylabel(f'IoU (Distance {dist})')
+        axs2.set_ylabel(f'IoU')
         axs2.legend()
         axs2.grid(True)
         
@@ -176,7 +176,8 @@ def save_sample(img_path, msk, msk_pred, name=''):
     img = cv2.cvtColor(img, cv2.COLOR_BGR2RGB)
     msk = msk.astype(int)
     mskp = msk_pred
-    _, axs = plt.subplots(1, 3, figsize=(15,5))
+    fig2, axs = plt.subplots(1, 3, figsize=(15,5))
+    fig, ax2 = plt.subplots(1, 1, figsize=(5,5))
     axs = axs.ravel()
 
     axs[0].axis('off')
@@ -187,7 +188,10 @@ def save_sample(img_path, msk, msk_pred, name=''):
 
     axs[2].axis('off')
     axs[2].imshow(mskp*255, cmap= 'gray')
-    plt.savefig(config['save_result'] + name + '.png')
+    ax2.axis('off')
+    ax2.imshow(mskp*255, cmap= 'gray')
+    fig2.savefig(config['save_result'] + name + '.png')
+    fig.savefig(config['save_result'] + name + '_pred.png')
 
 config         = yaml.load(open('./config_crack.yml'), Loader=yaml.FullLoader)
 number_classes = int(config['number_classes'])
@@ -268,7 +272,7 @@ with torch.no_grad():
         times += (end - start)
         # print('print:', msk.numpy()[0,0])
         if itter < 238 and save_samples:
-            save_sample(img_path, msk.numpy()[0, 0], mskp, name=str(itter+1))
+            save_sample(img_path, msk.numpy()[0, 0], mskp, name=img_names[itter])
             #save_sample(img_path, single_gt, mskp, name=str(itter+1))
 
         gt_list.append(msk.numpy()[0, 0])
