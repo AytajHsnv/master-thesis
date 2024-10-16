@@ -19,9 +19,12 @@ parser.add_argument('--output', type=str, default='./results.prf')
 parser.add_argument('--thresh_step', type=float, default=0.01)
 args = parser.parse_args()
 
-def cal_prf_metrics(pred_list, gt_list, thresh_step=0.01):
+def cal_prf_metrics(pred_list, gt_list, distance=[], angle=[], thresh_step=0.01, img_names=None):
     final_accuracy_all = []
-
+     # Initialize a dictionary to store IoU for each angle and distance
+    iou_per_distance_angle = {dist_value: {angle_value: [] for angle_value in angle} for dist_value in distance}
+    IoU_values = []
+    selected_distance = distance[0]
     for thresh in np.arange(0.0, 1.0, thresh_step):
         # print(thresh)
         statistics = []
@@ -43,7 +46,9 @@ def cal_prf_metrics(pred_list, gt_list, thresh_step=0.01):
             IoU = tp/(tp+fn+fp)
             statis.append([p, r, f1, IoU])
             
+          
         
+                   
         save_result_for_each_img(statis)
         # get tp, fp, fn
         tp = np.sum([v[0] for v in statistics])
@@ -62,14 +67,30 @@ def cal_prf_metrics(pred_list, gt_list, thresh_step=0.01):
         # calculation IoU
         IoU = tp/(tp+fn+fp)
         final_accuracy_all.append([thresh, p_acc, r_acc, f1_acc, IoU])
-
+        
+      
     # Convert results to a NumPy array for easier plotting
+   
     final_accuracy_all = np.array(final_accuracy_all)
     thresh_values = final_accuracy_all[:, 0]
     p_acc_values = final_accuracy_all[:, 1]
     r_acc_values = final_accuracy_all[:, 2]
     f1_acc_values = final_accuracy_all[:, 3]
-    IoU_values = final_accuracy_all[:, 4]
+    IoU_values = final_accuracy_all[:, 4] 
+    # Here you can log IoU based on angle and distance if available
+    for i, img_name in enumerate(img_names):
+        # Extract distance and angle from image name
+        dist_index = next((dist for dist in distance if f'_{dist}_' in img_name), None)
+        ang_index = next((ang for ang in angle if f'_{ang}_' in img_name), None)
+
+        if dist_index and ang_index:
+        # append iou for each each image to the corresponding distance and angle
+            iou_per_distance_angle[dist_index][ang_index].append(statis[i][3])
+        else:
+            print(f"No matching distance/angle found for image {img_name}.")    
+     
+    
+    
 
     # Plot the metrics
     fig, axs = plt.subplots(4, 1, figsize=(10, 12))
@@ -91,10 +112,39 @@ def cal_prf_metrics(pred_list, gt_list, thresh_step=0.01):
     axs[3].set_ylabel('IoU')
     axs[3].grid(True)
 
+    # Plot IoU for each angle and distance
+    fig2, axs2 = plt.subplots(figsize=(10, 6))
+    fig2.suptitle('IoU for each angle and distance', fontsize=16)
+    
+    for dist in distance:
+        plot_angles = []
+        iou_values = []
+        for ang in angle:
+            if len(iou_per_distance_angle[dist][ang]) > 0:
+                plot_angles.append(ang)
+                iou_values.append(iou_per_distance_angle[dist][ang][0])  # Assuming one IoU value per angle
+
+        # Plot IoU values for this distance
+        if iou_values:
+            print(iou_values)
+            plot_angles = np.asarray(plot_angles, dtype='float')
+            axs2.plot(plot_angles, iou_values, marker='o', label=f'Distance {dist}')
+            axs2.set_xticks(plot_angles)
+            # axs2.set_yticks(iou_values)
+        else:
+            print(f"No IoU values found for distance {dist}")
+
+        axs2.set_xlabel('Angle')
+        axs2.set_ylabel(f'IoU (Distance {dist})')
+        axs2.legend()
+        axs2.grid(True)
+        
+
     # Save the figure
-    current_datetime = datetime.now().strftime("%Y-%m-%d")
+    current_datetime = datetime.now().strftime("%Y-%m-%d-%H")
     plt.show()   
     fig.savefig(f"{current_datetime}_metrics.png")
+    fig2.savefig(f"{current_datetime}_IoU.png")
 
     return final_accuracy_all
 
@@ -114,7 +164,7 @@ def save_results(input_list, output_path):
             line = '\t'.join(['%.4f'%v for v in ll])+'\n'
             fout.write(line)
 
-def save_result_for_each_img(img_statistics):
+def save_result_for_each_img(img_statistics):	
     with codecs.open("each_image_stat.txt", 'w', encoding='utf-8') as fout:
         fout.write("\t\t\tPrecision\tRecall\tF1\tIoU\n")
         for idx, img in enumerate(img_statistics):
@@ -227,5 +277,5 @@ with torch.no_grad():
     print('Running time of each images: %ss' % (times/len(pred_list)))
 
 final_results = []
-final_results = cal_prf_metrics(pred_list, gt_list, args.thresh_step)
+final_results = cal_prf_metrics(pred_list, gt_list,  distance, angle, args.thresh_step, img_names)
 save_results(final_results, args.output)
