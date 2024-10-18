@@ -89,8 +89,8 @@ def cal_prf_metrics(pred_list, gt_list, distance=[], angle=[], thresh_step=0.01,
         else:
             print(f"No matching distance/angle found for image {img_name}.")    
      
-    
-    
+    plot_IoU_per_distance_angle(iou_per_distance_angle, distance, angle)
+        
 
     # Plot the metrics
     fig, axs = plt.subplots(4, 1, figsize=(10, 12))
@@ -112,42 +112,46 @@ def cal_prf_metrics(pred_list, gt_list, distance=[], angle=[], thresh_step=0.01,
     axs[3].set_ylabel('IoU')
     axs[3].grid(True)
 
-    # Plot IoU for each angle and distance
-    fig2, axs2 = plt.subplots(figsize=(10, 6))
-    fig2.suptitle('IoU for each angle and distance', fontsize=16)
     
-    for dist in distance:
-        plot_angles = []
-        iou_values = []
-        for ang in angle:
-            if len(iou_per_distance_angle[dist][ang]) > 0:
-                plot_angles.append(ang)
-                iou_values.append(iou_per_distance_angle[dist][ang][0])  # Assuming one IoU value per angle
-
-        # Plot IoU values for this distance
-        if iou_values:
-            print(iou_values)
-            plot_angles = np.asarray(plot_angles, dtype='float')
-            axs2.plot(plot_angles, iou_values, marker='o', label=f'Distance {dist}')
-            axs2.set_xticks(plot_angles)
-            # axs2.set_yticks(iou_values)
-        else:
-            print(f"No IoU values found for distance {dist}")
-
-        axs2.set_xlabel('Angle')
-        axs2.set_ylabel(f'IoU')
-        axs2.legend()
-        axs2.grid(True)
-        
 
     # Save the figure
     current_datetime = datetime.now().strftime("%Y-%m-%d-%H")
     plt.show()   
     fig.savefig(f"{current_datetime}_metrics.png")
-    fig2.savefig(f"{current_datetime}_IoU.png")
+    
 
     return final_accuracy_all
 
+def plot_IoU_per_distance_angle(iou_per_distance_angle, distance, angle):
+    fig, axs = plt.subplots(figsize=(15, 6))
+    fig.suptitle('IoU for each angle and distance', fontsize=16)
+    
+    for dist in distance:
+        plot_angles = []
+        iou_values = []
+        for ang in angle:
+            print(ang)
+            if len(iou_per_distance_angle[dist][ang]) > 0:
+                plot_angles.append(ang)
+                iou_values.append(iou_per_distance_angle[dist][ang][0])  # Assuming one IoU value per angle
+        # Plot IoU values for this distance
+        if iou_values:
+            print(iou_values)
+            plot_angles = np.asarray(plot_angles, dtype='float')
+            axs.plot(plot_angles, iou_values, marker='o', label=f'Distance {dist}')
+            axs.set_xticks(plot_angles)
+            # axs2.set_yticks(iou_values)
+        else:
+            print(f"No IoU values found for distance {dist}")
+
+        axs.set_xlabel('Angle')
+        axs.set_ylabel(f'IoU')
+        axs.legend()
+        axs.grid(True)
+        
+    plt.show()
+    current_time = datetime.now().strftime("%Y-%m-%d-%H")
+    fig.savefig(f"{current_time}_IoU.png")
 def get_statistics(pred, gt):
     """
     return tp, fp, fn
@@ -206,8 +210,8 @@ print(device)
 # img_names= natsorted(img_names)
 # mask_names=natsorted(mask_names)
 
-distance = [250, 300, 400, 500, 600, 700, 800, 900,1000]
-angle = [45, 75, 90]
+distance = [250, 300, 400, 500, 600, 700, 800, 900,1000, 1200]
+angle = [10, 20, 45, 75, 90]
 data_path = config['path_to_testdata']
 DIR_IMG = [os.path.join(data_path, f'd_{d}') for d in distance] 
 print(DIR_IMG)
