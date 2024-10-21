@@ -18,7 +18,7 @@ parser = argparse.ArgumentParser()
 parser.add_argument('--output', type=str, default='./results.prf')
 parser.add_argument('--thresh_step', type=float, default=0.01)
 args = parser.parse_args()
-model = 'DeepLabV3+ Mobilenet DeepCrack'
+model = 'DeepLabV3+ Mobilenet Crack500'
 
 def cal_prf_metrics(pred_list, gt_list, distance=[], angle=[], thresh_step=0.01, img_names=None):
     final_accuracy_all = []
@@ -204,8 +204,8 @@ device = 'cuda' if torch.cuda.is_available() else 'cpu'
 print(device)
 
 data_path = config['path_to_testdata']
-DIR_IMG  = os.path.join(data_path, "images")
-DIR_MASK = os.path.join(data_path, "masks")
+DIR_IMG  = os.path.join(data_path)
+DIR_MASK = os.path.join(data_path)
 img_names  = [path.name for path in Path(DIR_IMG).glob('*.jpg')]
 mask_names = [path.name for path in Path(DIR_MASK).glob('*.png')]
 img_names= natsorted(img_names)
