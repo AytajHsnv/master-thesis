@@ -18,7 +18,7 @@ parser = argparse.ArgumentParser()
 parser.add_argument('--output', type=str, default='./results.prf')
 parser.add_argument('--thresh_step', type=float, default=0.01)
 args = parser.parse_args()
-model = 'DeepLabV3+ Mobilenet Crack500'
+model = 'DeepLabV3+ ResNet50 DeepCrack'
 
 def cal_prf_metrics(pred_list, gt_list, distance=[], angle=[], thresh_step=0.01, img_names=None):
     final_accuracy_all = []
@@ -49,7 +49,7 @@ def cal_prf_metrics(pred_list, gt_list, distance=[], angle=[], thresh_step=0.01,
           
         
                    
-        save_result_for_each_img(statis)
+        
         # get tp, fp, fn
         tp = np.sum([v[0] for v in statistics])
         fp = np.sum([v[1] for v in statistics])
@@ -70,7 +70,7 @@ def cal_prf_metrics(pred_list, gt_list, distance=[], angle=[], thresh_step=0.01,
         
       
     # Convert results to a NumPy array for easier plotting
-   
+    save_result_for_each_img(statis)
     final_accuracy_all = np.array(final_accuracy_all)
     thresh_values = final_accuracy_all[:, 0]
     p_acc_values = final_accuracy_all[:, 1]
@@ -202,8 +202,8 @@ device = 'cuda' if torch.cuda.is_available() else 'cpu'
 print(device)
 
 # data_path = config['path_to_testdata']
-# DIR_IMG  = os.path.join(data_path)
-# DIR_MASK = os.path.join(data_path)
+# DIR_IMG  = os.path.join(data_path, "images")
+# DIR_MASK = os.path.join(data_path, "masks")
 # img_names  = [path.name for path in Path(DIR_IMG).glob('*.jpg')]
 # mask_names = [path.name for path in Path(DIR_MASK).glob('*.png')]
 # img_names= natsorted(img_names)
@@ -227,7 +227,7 @@ test_loader  = DataLoader(test_dataset, batch_size = 1, shuffle= False)
 print(f'test_dataset:{len(test_dataset)}')
 
 #Net = TransMUNet(n_classes = number_classes)
-Net = deepLab.deeplabv3plus_mobilenet(num_classes=number_classes, output_stride=8)
+Net = deepLab.deeplabv3plus_resnet50(num_classes=number_classes, output_stride=8)
 Net = Net.to(device)
 Net.load_state_dict(torch.load(config['saved_model'], map_location='cpu')['model_weights'])
 
