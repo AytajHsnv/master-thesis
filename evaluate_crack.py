@@ -18,7 +18,7 @@ parser = argparse.ArgumentParser()
 parser.add_argument('--output', type=str, default='./results.prf')
 parser.add_argument('--thresh_step', type=float, default=0.01)
 args = parser.parse_args()
-model = 'TransMUNet_DeepCrack based'
+model = 'DeepLabV3+ Mobilenet based'
 
 def cal_prf_metrics(pred_list, gt_list, distance=[], angle=[], thresh_step=0.01, img_names=None):
     final_accuracy_all = []
@@ -228,8 +228,8 @@ test_loader  = DataLoader(test_dataset, batch_size = 1, shuffle= False)
 
 print(f'test_dataset:{len(test_dataset)}')
 
-Net = TransMUNet(n_classes = number_classes)
-#Net = deepLab.deeplabv3plus_resnet101(num_classes=number_classes, output_stride=8)
+#Net = TransMUNet(n_classes = number_classes)
+Net = deepLab.deeplabv3plus_mobilenet(num_classes=number_classes, output_stride=8)
 Net = Net.to(device)
 Net.load_state_dict(torch.load(config['saved_model'], map_location='cpu')['model_weights'])
 
