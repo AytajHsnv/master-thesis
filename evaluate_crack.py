@@ -18,14 +18,13 @@ parser = argparse.ArgumentParser()
 parser.add_argument('--output', type=str, default='./results.prf')
 parser.add_argument('--thresh_step', type=float, default=0.01)
 args = parser.parse_args()
-model = 'deeplabv3plus_resnet101'
+model = 'TransMUNet_CRACK500 based'
 
 def cal_prf_metrics(pred_list, gt_list, distance=[], angle=[], thresh_step=0.01, img_names=None):
     final_accuracy_all = []
      # Initialize a dictionary to store IoU for each angle and distance
     iou_per_distance_angle = {dist_value: {angle_value: [] for angle_value in angle} for dist_value in distance}
     IoU_values = []
-    selected_distance = distance[0]
     for thresh in np.arange(0.0, 1.0, thresh_step):
         # print(thresh)
         statistics = []
@@ -81,16 +80,17 @@ def cal_prf_metrics(pred_list, gt_list, distance=[], angle=[], thresh_step=0.01,
     # Here you can log IoU based on angle and distance if available
     for i, img_name in enumerate(img_names):
         # Extract distance and angle from image name
-        dist_index = next((dist for dist in distance if f'_{dist}_' in img_name), None)
-        ang_index = next((ang for ang in angle if f'_{ang}_' in img_name), None)
+        if distance != [] and angle != []:
+            dist_index = next((dist for dist in distance if f'_{dist}_' in img_name), None)
+            ang_index = next((ang for ang in angle if f'_{ang}_' in img_name), None)
 
-        if dist_index and ang_index:
-        # append iou for each each image to the corresponding distance and angle
-            iou_per_distance_angle[dist_index][ang_index].append(statis[i][3])
-        else:
-            print(f"No matching distance/angle found for image {img_name}.")    
-     
-    plot_IoU_per_distance_angle(iou_per_distance_angle, distance, angle)
+            if dist_index and ang_index:
+            # append iou for each each image to the corresponding distance and angle
+                iou_per_distance_angle[dist_index][ang_index].append(statis[i][3])
+            else:
+                print(f"No matching distance/angle found for image {img_name}.")    
+            if distance and angle: 
+                plot_IoU_per_distance_angle(iou_per_distance_angle, distance, angle)
         
 
     # Plot the metrics
@@ -125,7 +125,7 @@ def cal_prf_metrics(pred_list, gt_list, distance=[], angle=[], thresh_step=0.01,
 
 def plot_IoU_per_distance_angle(iou_per_distance_angle, distance, angle):
     fig, axs = plt.subplots(figsize=(15, 6))
-    fig.suptitle('IoU for each angle and distance', fontsize=16)
+    fig.suptitle(f'{model} IoU for each angle and distance', fontsize=16)
     
     for dist in distance:
         plot_angles = []
@@ -228,8 +228,8 @@ test_loader  = DataLoader(test_dataset, batch_size = 1, shuffle= False)
 
 print(f'test_dataset:{len(test_dataset)}')
 
-#Net = TransMUNet(n_classes = number_classes)
-Net = deepLab.deeplabv3plus_resnet101(num_classes=number_classes, output_stride=8)
+Net = TransMUNet(n_classes = number_classes)
+#Net = deepLab.deeplabv3plus_resnet101(num_classes=number_classes, output_stride=8)
 Net = Net.to(device)
 Net.load_state_dict(torch.load(config['saved_model'], map_location='cpu')['model_weights'])
 
@@ -286,5 +286,10 @@ with torch.no_grad():
     print('Running time of each images: %ss' % (times/len(pred_list)))
 
 final_results = []
-final_results = cal_prf_metrics(pred_list, gt_list,  distance, angle, args.thresh_step, img_names)
+print(config['path_to_testdata'])
+if config['path_to_testdata'] == "/data/Crack500/test" or config['path_to_testdata'] == "/data/DeepCrack/test":
+    final_results = cal_prf_metrics(pred_list, gt_list, [], [], args.thresh_step, img_names=img_names)
+else:
+    final_results = cal_prf_metrics(pred_list, gt_list, distance, angle, args.thresh_step, img_names=img_names)
+
 save_results(final_results, args.output)
