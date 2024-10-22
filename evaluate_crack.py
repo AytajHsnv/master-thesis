@@ -18,7 +18,7 @@ parser = argparse.ArgumentParser()
 parser.add_argument('--output', type=str, default='./results.prf')
 parser.add_argument('--thresh_step', type=float, default=0.01)
 args = parser.parse_args()
-model = 'DeepLabV3+ ResNet101_Crack500 based'
+model = 'DeepLabV3+ MobileNet_Crack500 based'
 
 def cal_prf_metrics(pred_list, gt_list, distance=[], angle=[], thresh_step=0.01, img_names=None):
     final_accuracy_all = []
@@ -143,6 +143,7 @@ def plot_IoU_per_distance_angle(iou_per_distance_angle, distance, angle):
         else:
             print(f"No IoU values found for distance {dist}")
 
+        axs.set_ylim(0, 0.6)
         axs.set_xlabel('Angle')
         axs.set_ylabel(f'IoU')
         axs.legend()
@@ -212,11 +213,11 @@ print(device)
 distance = [250, 300, 400, 500, 600, 700, 800, 900,1000, 1200]
 angle = [10, 20, 45, 75, 90]
 data_path = config['path_to_testdata']
-DIR_IMG = [os.path.join(data_path, f'd_{d}') for d in distance] 
+DIR_IMG = [os.path.join(data_path, f'd_{d}/gamma') for d in distance] 
 print(DIR_IMG)
 img_names = natsorted([path.name for img_dir in DIR_IMG for path in Path(img_dir).glob('*.jpg')])
 print(img_names)
-DIR_MASK = [os.path.join(data_path, f'd_{d}') for d in distance]
+DIR_MASK = [os.path.join(data_path, f'd_{d}/gamma') for d in distance]
 mask_names = natsorted([path.name for mask_dir in DIR_MASK for path in Path(mask_dir).glob('*.png')])
 print(mask_names)
 
@@ -227,7 +228,7 @@ test_loader  = DataLoader(test_dataset, batch_size = 1, shuffle= False)
 print(f'test_dataset:{len(test_dataset)}')
 
 #Net = TransMUNet(n_classes = number_classes)
-Net = deepLab.deeplabv3plus_resnet101(num_classes=number_classes, output_stride=8)
+Net = deepLab.deeplabv3plus_mobilenet(num_classes=number_classes, output_stride=8)
 Net = Net.to(device)
 Net.load_state_dict(torch.load(config['saved_model'], map_location='cpu')['model_weights'])
 

@@ -22660,3 +22660,7 @@ val_mode:validation on epoch>> 98, mean tloss>> 0.298636
 val_mode:validation on epoch>> 99, mean tloss>> 0.300112 
 (epoch: 100, iters: 474) mean_loss: 0.371428 lr: 0.000000
 val_mode:validation on epoch>> 100, mean tloss>> 0.296335 
+================ Training loss (Tue Oct 22 14:34:58 2024) ================
+flops:7.94 GMac, params:5.23 M
+================ Training loss (Tue Oct 22 14:36:58 2024) ================
+flops:7.94 GMac, params:5.23 M
