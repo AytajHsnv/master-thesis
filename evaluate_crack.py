@@ -18,12 +18,14 @@ parser = argparse.ArgumentParser()
 parser.add_argument('--output', type=str, default='./results.prf')
 parser.add_argument('--thresh_step', type=float, default=0.01)
 args = parser.parse_args()
-model = 'TransMUnet_Crack500 based(gamma)'
-
+model = 'TransMUnet_Crack500 based d=800'
+folder = ['gain', 'gamma', '']
 def cal_prf_metrics(pred_list, gt_list, distance=[], angle=[], thresh_step=0.01, img_names=None):
     final_accuracy_all = []
+    
      # Initialize a dictionary to store IoU for each angle and distance
     iou_per_distance_angle = {dist_value: {angle_value: [] for angle_value in angle} for dist_value in distance}
+    iou_per_folder_angle = {folder_value: {angle_value: [] for angle_value in angle} for folder_value in folder} 
     IoU_values = []
     for thresh in np.arange(0.0, 1.0, thresh_step):
         # print(thresh)
@@ -77,13 +79,22 @@ def cal_prf_metrics(pred_list, gt_list, distance=[], angle=[], thresh_step=0.01,
     r_acc_values = final_accuracy_all[:, 2]
     f1_acc_values = final_accuracy_all[:, 3]
     IoU_values = final_accuracy_all[:, 4] 
+    
     # Here you can log IoU based on angle and distance if available
     for i, img_name in enumerate(img_names):
         # Extract distance and angle from image name
         if distance != [] and angle != []:
             dist_index = next((dist for dist in distance if f'_{dist}_' in img_name), None)
             ang_index = next((ang for ang in angle if f'_{ang}_' in img_name), None)
+            if 'gain' in img_name:
+                folder_index = 'gain'
+            elif 'gamma' in img_name:
+               folder_index = 'gamma'
+            else:
+                folder_index = ''  # Default for the empty folder
 
+            iou_per_folder_angle[folder_index][ang_index].append(statis[i][3])
+                # Ensure the folder exists in the dictionary
             if dist_index and ang_index:
             # append iou for each each image to the corresponding distance and angle
                 iou_per_distance_angle[dist_index][ang_index].append(statis[i][3])
@@ -91,7 +102,7 @@ def cal_prf_metrics(pred_list, gt_list, distance=[], angle=[], thresh_step=0.01,
                 print(f"No matching distance/angle found for image {img_name}.")    
             if distance and angle: 
                 plot_IoU_per_distance_angle(iou_per_distance_angle, distance, angle)
-        
+            plot_IoU_all_folders(iou_per_folder_angle, angle)    
 
     # Plot the metrics
     fig, axs = plt.subplots(4, 1, figsize=(10, 12))
@@ -122,6 +133,30 @@ def cal_prf_metrics(pred_list, gt_list, distance=[], angle=[], thresh_step=0.01,
     
 
     return final_accuracy_all
+
+def plot_IoU_all_folders(iou_per_folder_angle, angle):
+    fig, axs = plt.subplots(figsize=(15, 6))
+    fig.suptitle(f'{model} IoU for Each Folder', fontsize=16)
+    for folder_name in folder:
+        plot_angles = []
+        iou_values = []
+        for ang in angle:
+            if len(iou_per_folder_angle[folder_name][ang]) > 0:
+                plot_angles.append(ang)
+                iou_values.append(iou_per_folder_angle[folder_name][ang][0])  # Assuming one IoU value per angle
+        if iou_values:
+                plot_angles = np.asarray(plot_angles, dtype='float')
+                axs.plot(plot_angles, iou_values, marker='o', label=f'Distance 800cm {folder_name}')
+                axs.set_xticks(plot_angles)
+    
+    axs.set_xlabel('Angle')
+    axs.set_ylabel('IoU')
+    axs.legend()
+    axs.grid(True)
+    
+    plt.show()
+    current_time = datetime.now().strftime("%Y-%m-%d-%H")
+    fig.savefig(f"{model}_IoU_All_Folders_{current_time}.png")
 
 def plot_IoU_per_distance_angle(iou_per_distance_angle, distance, angle):
     fig, axs = plt.subplots(figsize=(15, 6))
@@ -210,16 +245,19 @@ print(device)
 # img_names= natsorted(img_names)
 # mask_names=natsorted(mask_names)
 
-distance = [250, 300, 400, 500, 600, 700, 800, 900,1000, 1200]
+distance = [800]
+
 angle = [10, 20, 45, 75, 90]
 data_path = config['path_to_testdata']
-DIR_IMG = [os.path.join(data_path, f'd_{d}/gamma') for d in distance] 
+DIR_IMG = [os.path.join(data_path, f'd_{d}/{folder_name}') for d in distance for folder_name in folder] 
 print(DIR_IMG)
 img_names = natsorted([path.name for img_dir in DIR_IMG for path in Path(img_dir).glob('*.jpg')])
 print(img_names)
-DIR_MASK = [os.path.join(data_path, f'd_{d}/gamma') for d in distance]
+DIR_MASK = [os.path.join(data_path, f'd_{d}/{folder_name}') for d in distance for folder_name in folder]
 mask_names = natsorted([path.name for mask_dir in DIR_MASK for path in Path(mask_dir).glob('*.png')])
 print(mask_names)
+
+# gain, gamma and d IoU values in one graph for 800
 
 test_dataset = Crack_loader(img_dir=DIR_IMG, img_fnames=img_names, mask_dir=DIR_MASK, mask_fnames=mask_names)
 test_loader  = DataLoader(test_dataset, batch_size = 1, shuffle= False)
