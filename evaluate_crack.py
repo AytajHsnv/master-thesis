@@ -18,7 +18,7 @@ parser = argparse.ArgumentParser()
 parser.add_argument('--output', type=str, default='./results.prf')
 parser.add_argument('--thresh_step', type=float, default=0.01)
 args = parser.parse_args()
-model = 'TransMUnet_Crack500 based d=800'
+model = 'TransMUnet_Combined'
 folder = ['gain', 'gamma', '']
 def cal_prf_metrics(pred_list, gt_list, distance=[], angle=[], thresh_step=0.01, img_names=None):
     final_accuracy_all = []
@@ -93,16 +93,17 @@ def cal_prf_metrics(pred_list, gt_list, distance=[], angle=[], thresh_step=0.01,
             else:
                 folder_index = ''  # Default for the empty folder
 
-            iou_per_folder_angle[folder_index][ang_index].append(statis[i][3])
+            
                 # Ensure the folder exists in the dictionary
             if dist_index and ang_index:
             # append iou for each each image to the corresponding distance and angle
+                iou_per_folder_angle[folder_index][ang_index].append(statis[i][3])
                 iou_per_distance_angle[dist_index][ang_index].append(statis[i][3])
             else:
                 print(f"No matching distance/angle found for image {img_name}.")    
             if distance and angle: 
                 plot_IoU_per_distance_angle(iou_per_distance_angle, distance, angle)
-            plot_IoU_all_folders(iou_per_folder_angle, angle)    
+                plot_IoU_all_folders(iou_per_folder_angle, angle)    
 
     # Plot the metrics
     fig, axs = plt.subplots(4, 1, figsize=(10, 12))
@@ -237,25 +238,25 @@ number_classes = int(config['number_classes'])
 device = 'cuda' if torch.cuda.is_available() else 'cpu'
 print(device)
 
-# data_path = config['path_to_testdata']
-# DIR_IMG  = os.path.join(data_path)
-# DIR_MASK = os.path.join(data_path)
-# img_names  = [path.name for path in Path(DIR_IMG).glob('*.jpg')]
-# mask_names = [path.name for path in Path(DIR_MASK).glob('*.png')]
-# img_names= natsorted(img_names)
-# mask_names=natsorted(mask_names)
+data_path = config['path_to_testdata']
+DIR_IMG  = os.path.join(data_path)
+DIR_MASK = os.path.join(data_path)
+img_names  = [path.name for path in Path(DIR_IMG).glob('*.jpg')]
+mask_names = [path.name for path in Path(DIR_MASK).glob('*.png')]
+img_names= natsorted(img_names)
+mask_names=natsorted(mask_names)
 
 distance = [800]
 
 angle = [10, 20, 45, 75, 90]
-data_path = config['path_to_testdata']
-DIR_IMG = [os.path.join(data_path, f'd_{d}/{folder_name}') for d in distance for folder_name in folder] 
-print(DIR_IMG)
-img_names = natsorted([path.name for img_dir in DIR_IMG for path in Path(img_dir).glob('*.jpg')])
-print(img_names)
-DIR_MASK = [os.path.join(data_path, f'd_{d}/{folder_name}') for d in distance for folder_name in folder]
-mask_names = natsorted([path.name for mask_dir in DIR_MASK for path in Path(mask_dir).glob('*.png')])
-print(mask_names)
+# data_path = config['path_to_testdata']
+# DIR_IMG = [os.path.join(data_path, f'd_{d}/{folder_name}') for d in distance for folder_name in folder] 
+# print(DIR_IMG)
+# img_names = natsorted([path.name for img_dir in DIR_IMG for path in Path(img_dir).glob('*.jpg')])
+# print(img_names)
+# DIR_MASK = [os.path.join(data_path, f'd_{d}/{folder_name}') for d in distance for folder_name in folder]
+# mask_names = natsorted([path.name for mask_dir in DIR_MASK for path in Path(mask_dir).glob('*.png')])
+# print(mask_names)
 
 # gain, gamma and d IoU values in one graph for 800
 
@@ -324,7 +325,7 @@ with torch.no_grad():
 
 final_results = []
 print(config['path_to_testdata'])
-if config['path_to_testdata'] == "/data/Crack500/test" or config['path_to_testdata'] == "/data/DeepCrack/test":
+if config['path_to_testdata'] == "/data/Crack500/test" or config['path_to_testdata'] == "/data/DeepCrack/test" or config['path_to_testdata'] == "/data/combined/test/":
     final_results = cal_prf_metrics(pred_list, gt_list, [], [], args.thresh_step, img_names=img_names)
 else:
     final_results = cal_prf_metrics(pred_list, gt_list, distance, angle, args.thresh_step, img_names=img_names)

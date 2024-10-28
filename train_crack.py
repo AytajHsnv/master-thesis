@@ -74,9 +74,9 @@ val_loader    = DataLoader(valid_dataset, batch_size = int(config['batch_size_va
 # train_loader  = DataLoader(train_dataset, batch_size = 4, shuffle= True,  drop_last=True)
 # print(train_loader)
 # val_loader    = DataLoader(valid_dataset, batch_size = 1, shuffle= False, drop_last=True)
-model_name = 'deeplabv3plus_mobilenet_crack500' 
-Net = deepLab.deeplabv3plus_mobilenet(num_classes=number_classes, output_stride=8)
-#Net = TransMUNet(n_classes = number_classes)
+model_name = 'TransMUnet_crack500' 
+#Net = deepLab.deeplabv3plus_mobilenet(num_classes=number_classes, output_stride=8)
+Net = TransMUNet(n_classes = number_classes)
 flops, params = get_model_complexity_info(Net, (3, 256, 256), as_strings=True, print_per_layer_stat=False)
 print('flops: ', flops, 'params: ', params)
 message = 'flops:%s, params:%s' % (flops, params)
@@ -183,7 +183,7 @@ for ep in range(int(config['epochs'])):
         visualizer.print_end(best, best_val_loss)
         state = copy.deepcopy({'model_weights': Net.state_dict(), 'val_loss': best_val_loss})
         torch.save(state, config['saved_model_final'])
-with open('training_time_4batch_mobilenet_crack500.txt', 'w') as file:
+with open(f'{model_name}_training_time.txt', 'w') as file:
      file.write(f'{datetime.now().strftime("%Y-%m-%d-%H")} training time: {time.time()-t0}\n')
      
 print('Training phase finished')  

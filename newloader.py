@@ -80,8 +80,6 @@ class Crack_loader(Dataset):
                 break
         if fpath is None:
             raise FileNotFoundError(f"Image {fname} not found in any provided directories.")
-        print(f"Number of images: {len(self.img_fnames)}")
-        print(f"Number of masks: {len(self.mask_fnames)}")
         img = cv2.imread(fpath)
         img = cv2.cvtColor(img, cv2.COLOR_BGR2RGB)  # Convert to RGB
 
@@ -108,7 +106,7 @@ class Crack_loader(Dataset):
             # image augmentation     
             transformed = self.aug(image=img, mask=mask)
             img  = transformed['image']                                               # (256,256,3) np.uint8
-            mask[0] = transformed['mask']                                                # (256,256) np.uint8            
+            mask = transformed['mask']                                                # (256,256) np.uint8            
             
             # binarize segmentation
             _, mask = cv2.threshold(mask, 127, 1, cv2.THRESH_BINARY)
