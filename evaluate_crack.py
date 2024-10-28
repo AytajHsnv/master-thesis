@@ -18,7 +18,7 @@ parser = argparse.ArgumentParser()
 parser.add_argument('--output', type=str, default='./results.prf')
 parser.add_argument('--thresh_step', type=float, default=0.01)
 args = parser.parse_args()
-model = 'TransMUnet_Combined'
+model = 'TransMUnet_Combined Labphotos'
 folder = ['gain', 'gamma', '']
 def cal_prf_metrics(pred_list, gt_list, distance=[], angle=[], thresh_step=0.01, img_names=None):
     final_accuracy_all = []
@@ -238,25 +238,25 @@ number_classes = int(config['number_classes'])
 device = 'cuda' if torch.cuda.is_available() else 'cpu'
 print(device)
 
-data_path = config['path_to_testdata']
-DIR_IMG  = os.path.join(data_path)
-DIR_MASK = os.path.join(data_path)
-img_names  = [path.name for path in Path(DIR_IMG).glob('*.jpg')]
-mask_names = [path.name for path in Path(DIR_MASK).glob('*.png')]
-img_names= natsorted(img_names)
-mask_names=natsorted(mask_names)
+# data_path = config['path_to_testdata']
+# DIR_IMG  = os.path.join(data_path)
+# DIR_MASK = os.path.join(data_path)
+# img_names  = [path.name for path in Path(DIR_IMG).glob('*.jpg')]
+# mask_names = [path.name for path in Path(DIR_MASK).glob('*.png')]
+# img_names= natsorted(img_names)
+# mask_names=natsorted(mask_names)
 
-distance = [800]
+distance = [250, 300, 400, 500, 600, 700, 800, 900, 1000, 1200]
 
 angle = [10, 20, 45, 75, 90]
-# data_path = config['path_to_testdata']
-# DIR_IMG = [os.path.join(data_path, f'd_{d}/{folder_name}') for d in distance for folder_name in folder] 
-# print(DIR_IMG)
-# img_names = natsorted([path.name for img_dir in DIR_IMG for path in Path(img_dir).glob('*.jpg')])
-# print(img_names)
-# DIR_MASK = [os.path.join(data_path, f'd_{d}/{folder_name}') for d in distance for folder_name in folder]
-# mask_names = natsorted([path.name for mask_dir in DIR_MASK for path in Path(mask_dir).glob('*.png')])
-# print(mask_names)
+data_path = config['path_to_testdata']
+DIR_IMG = [os.path.join(data_path, f'd_{d}/gamma') for d in distance] 
+print(DIR_IMG)
+img_names = natsorted([path.name for img_dir in DIR_IMG for path in Path(img_dir).glob('*.jpg')])
+print(img_names)
+DIR_MASK = [os.path.join(data_path, f'd_{d}/gamma') for d in distance]
+mask_names = natsorted([path.name for mask_dir in DIR_MASK for path in Path(mask_dir).glob('*.png')])
+print(mask_names)
 
 # gain, gamma and d IoU values in one graph for 800
 
