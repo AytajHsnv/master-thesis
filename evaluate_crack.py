@@ -34,19 +34,8 @@ def cal_prf_metrics(pred_list, gt_list, distance=[], angle=[], thresh_step=0.01,
         for pred, gt in zip(pred_list, gt_list):
             gt_img   = (gt).astype('uint8')
             pred_img = (pred > thresh).astype('uint8')
-            # calculate each image
             statistics.append(get_statistics(pred_img, gt_img))
-            # metrics for each image
-            tp, fp, fn = get_statistics(pred_img, gt_img)
-            p = 1.0 if tp==0 and fp==0 else tp/(tp+fp)
-            r = tp/(tp+fn)
-            if p+r==0:
-                f1=0
-            else:
-                f1 = 2*p*r/(p+r)
-            # calculation IoU
-            IoU = tp/(tp+fn+fp)
-            statis.append([p, r, f1, IoU])
+    
             
           
         
@@ -71,14 +60,34 @@ def cal_prf_metrics(pred_list, gt_list, distance=[], angle=[], thresh_step=0.01,
         final_accuracy_all.append([thresh, p_acc, r_acc, f1_acc, IoU])
         
       
+ 
+    final_accuracy_all = np.array(final_accuracy_all)
+    max_iou_threshold = final_accuracy_all[np.argmax(final_accuracy_all[:, 4]), 0]
+    for pred, gt in zip(pred_list, gt_list):
+            gt_img   = (gt).astype('uint8')
+            pred_img = (pred > max_iou_threshold).astype('uint8')
+
+            # metrics for each image
+            tp, fp, fn = get_statistics(pred_img, gt_img)
+            p = 1.0 if tp==0 and fp==0 else tp/(tp+fp)
+            r = tp/(tp+fn)
+            if p+r==0:
+                f1=0
+            else:
+                f1 = 2*p*r/(p+r)
+            # calculation IoU
+            IoU = tp/(tp+fn+fp)
+            statis.append([p, r, f1, IoU])
+
     # Convert results to a NumPy array for easier plotting
     save_result_for_each_img(statis)
-    final_accuracy_all = np.array(final_accuracy_all)
-    thresh_values = final_accuracy_all[:, 0]
-    p_acc_values = final_accuracy_all[:, 1]
-    r_acc_values = final_accuracy_all[:, 2]
-    f1_acc_values = final_accuracy_all[:, 3]
-    IoU_values = final_accuracy_all[:, 4] 
+    # Convert 'statis' to a NumPy array before slicing
+    statis = np.array(statis)
+
+    p_acc_values = statis[:, 0]
+    r_acc_values = statis[:, 1]
+    f1_acc_values = statis[:, 2]
+    IoU_values = statis[:, 3] 
     
     # Here you can log IoU based on angle and distance if available
     for i, img_name in enumerate(img_names):
@@ -108,20 +117,20 @@ def cal_prf_metrics(pred_list, gt_list, distance=[], angle=[], thresh_step=0.01,
     # Plot the metrics
     fig, axs = plt.subplots(4, 1, figsize=(10, 12))
     fig.suptitle(f'{model} metrics', fontsize=16)
-    axs[0].plot(thresh_values, p_acc_values, marker='o')
+    axs[0].plot(p_acc_values, color='y')
     axs[0].set_ylabel('Precision')
     axs[0].grid(True)
 
-    axs[1].plot(thresh_values, r_acc_values, marker='o', color='r')
+    axs[1].plot(r_acc_values,  color='r')
     axs[1].set_ylabel('Recall')
     axs[1].grid(True)
 
-    axs[2].plot(thresh_values, f1_acc_values, marker='o', color='g')
+    axs[2].plot(f1_acc_values,  color='g')
     axs[2].set_ylabel('F1 Score')
     axs[2].grid(True)
 
-    axs[3].plot(thresh_values, IoU_values, marker='o', color='b')
-    axs[3].set_xlabel('Threshold')
+    axs[3].plot(IoU_values, color='b')
+    axs[3].set_xlabel('Images')
     axs[3].set_ylabel('IoU')
     axs[3].grid(True)
 
@@ -179,7 +188,7 @@ def plot_IoU_per_distance_angle(iou_per_distance_angle, distance, angle):
         else:
             print(f"No IoU values found for distance {dist}")
 
-        axs.set_ylim(0, 0.6)
+        axs.set_ylim(0, 1)
         axs.set_xlabel('Angle')
         axs.set_ylabel(f'IoU')
         axs.legend()
@@ -198,11 +207,19 @@ def get_statistics(pred, gt):
     return [tp, fp, fn]
 
 def save_results(input_list, output_path):
+     # Convert input_list to a NumPy array for easy slicing
+    input_array = np.array(input_list)
+    
+    # Find the best IoU and corresponding index
+    best_iou = np.max(input_array[:, 4])
+    best_iou_idx = np.argmax(input_array[:, 4])
+    
     with codecs.open(output_path, 'w', encoding='utf-8') as fout:
         fout.write("Threshold\tPrecision\tRecall\tF1\tIoU\n")
         for ll in input_list:
             line = '\t'.join(['%.4f'%v for v in ll])+'\n'
             fout.write(line)
+        fout.write(f"Best IoU: {best_iou:.4f} at threshold {input_list[best_iou_idx, 0]:.2f}\n")
 
 def save_result_for_each_img(img_statistics):	
     with codecs.open("each_image_stat.txt", 'w', encoding='utf-8') as fout:
@@ -238,25 +255,25 @@ number_classes = int(config['number_classes'])
 device = 'cuda' if torch.cuda.is_available() else 'cpu'
 print(device)
 
-# data_path = config['path_to_testdata']
-# DIR_IMG  = os.path.join(data_path)
-# DIR_MASK = os.path.join(data_path)
-# img_names  = [path.name for path in Path(DIR_IMG).glob('*.jpg')]
-# mask_names = [path.name for path in Path(DIR_MASK).glob('*.png')]
-# img_names= natsorted(img_names)
-# mask_names=natsorted(mask_names)
-
-distance = [250, 300, 400, 500, 600, 700, 800, 900, 1000, 1200]
-
-angle = [10, 20, 45, 75, 90]
 data_path = config['path_to_testdata']
-DIR_IMG = [os.path.join(data_path, f'd_{d}/gamma') for d in distance] 
-print(DIR_IMG)
-img_names = natsorted([path.name for img_dir in DIR_IMG for path in Path(img_dir).glob('*.jpg')])
-print(img_names)
-DIR_MASK = [os.path.join(data_path, f'd_{d}/gamma') for d in distance]
-mask_names = natsorted([path.name for mask_dir in DIR_MASK for path in Path(mask_dir).glob('*.png')])
-print(mask_names)
+DIR_IMG  = os.path.join(data_path)
+DIR_MASK = os.path.join(data_path)
+img_names  = [path.name for path in Path(DIR_IMG).glob('*.jpg')]
+mask_names = [path.name for path in Path(DIR_MASK).glob('*.png')]
+img_names= natsorted(img_names)
+mask_names=natsorted(mask_names)
+
+# distance = [250, 300, 400, 500, 600, 700, 800, 900, 1000, 1200]
+
+# angle = [10, 20, 45, 75, 90]
+# data_path = config['path_to_testdata']
+# DIR_IMG = [os.path.join(data_path, f'd_{d}/gamma') for d in distance] 
+# print(DIR_IMG)
+# img_names = natsorted([path.name for img_dir in DIR_IMG for path in Path(img_dir).glob('*.jpg')])
+# print(img_names)
+# DIR_MASK = [os.path.join(data_path, f'd_{d}/gamma') for d in distance]
+# mask_names = natsorted([path.name for mask_dir in DIR_MASK for path in Path(mask_dir).glob('*.png')])
+# print(mask_names)
 
 # gain, gamma and d IoU values in one graph for 800
 
@@ -267,7 +284,7 @@ test_loader  = DataLoader(test_dataset, batch_size = 1, shuffle= False)
 print(f'test_dataset:{len(test_dataset)}')
 
 Net = TransMUNet(n_classes = number_classes)
-#Net = deepLab.deeplabv3plus_resnet101(num_classes=number_classes, output_stride=8)
+#Net = deepLab.deeplabv3plus_mobilenet(num_classes=number_classes, output_stride=8)
 Net = Net.to(device)
 Net.load_state_dict(torch.load(config['saved_model'], map_location='cpu')['model_weights'])
 
@@ -325,7 +342,7 @@ with torch.no_grad():
 
 final_results = []
 print(config['path_to_testdata'])
-if config['path_to_testdata'] == "/data/Crack500/test" or config['path_to_testdata'] == "/data/DeepCrack/test" or config['path_to_testdata'] == "/data/combined/test/":
+if config['path_to_testdata'] == "/data/Crack500/test" or config['path_to_testdata'] == "/data/DeepCrack/test" or config['path_to_testdata'] == "/data/combined/test":
     final_results = cal_prf_metrics(pred_list, gt_list, [], [], args.thresh_step, img_names=img_names)
 else:
     final_results = cal_prf_metrics(pred_list, gt_list, distance, angle, args.thresh_step, img_names=img_names)
