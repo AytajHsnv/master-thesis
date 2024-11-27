@@ -18,7 +18,7 @@ parser = argparse.ArgumentParser()
 parser.add_argument('--output', type=str, default='./results.prf')
 parser.add_argument('--thresh_step', type=float, default=0.01)
 args = parser.parse_args()
-model = 'DeepLabV3+_ResNet101_DeepCrack Labphotos'
+model = 'DeepLabV3+_MobileNet_DeepCrack Labphotos'
 folder = ['gain', 'gamma', '']
 def cal_prf_metrics(pred_list, gt_list, distance=[], angle=[], thresh_step=0.01, img_names=None):
     final_accuracy_all = []
@@ -28,7 +28,6 @@ def cal_prf_metrics(pred_list, gt_list, distance=[], angle=[], thresh_step=0.01,
     iou_per_folder_angle = {folder_value: {angle_value: [] for angle_value in angle} for folder_value in folder} 
     IoU_values = []
     for thresh in np.arange(0.0, 1.0, thresh_step):
-        # print(thresh)
         statistics = []
         statis = []
         for pred, gt in zip(pred_list, gt_list):
@@ -63,6 +62,7 @@ def cal_prf_metrics(pred_list, gt_list, distance=[], angle=[], thresh_step=0.01,
  
     final_accuracy_all = np.array(final_accuracy_all)
     max_iou_threshold = final_accuracy_all[np.argmax(final_accuracy_all[:, 4]), 0]
+    print(f"Best IoU: {np.max(final_accuracy_all[:, 4]):.4f} at threshold {max_iou_threshold:.2f}")
     for pred, gt in zip(pred_list, gt_list):
             gt_img   = (gt).astype('uint8')
             pred_img = (pred > max_iou_threshold).astype('uint8')
@@ -268,13 +268,9 @@ distance = [250, 300, 400, 500, 600, 700, 800, 900, 1000, 1200]
 angle = [10, 20, 45, 75, 90]
 data_path = config['path_to_testdata']
 DIR_IMG = [os.path.join(data_path, f'd_{d}') for d in distance] 
-print(DIR_IMG)
 img_names = natsorted([path.name for img_dir in DIR_IMG for path in Path(img_dir).glob('*.jpg')])
-print(img_names)
 DIR_MASK = [os.path.join(data_path, f'd_{d}') for d in distance]
 mask_names = natsorted([path.name for mask_dir in DIR_MASK for path in Path(mask_dir).glob('*.png')])
-print(mask_names)
-
 # gain, gamma and d IoU values in one graph for 800
 
 test_dataset = Crack_loader(img_dir=DIR_IMG, img_fnames=img_names, mask_dir=DIR_MASK, mask_fnames=mask_names)
@@ -284,7 +280,7 @@ test_loader  = DataLoader(test_dataset, batch_size = 1, shuffle= False)
 print(f'test_dataset:{len(test_dataset)}')
 
 #Net = TransMUNet(n_classes = number_classes)
-Net = deepLab.deeplabv3plus_resnet101(num_classes=number_classes, output_stride=8)
+Net = deepLab.deeplabv3plus_mobilenet(num_classes=number_classes, output_stride=8)
 Net = Net.to(device)
 Net.load_state_dict(torch.load(config['saved_model'], map_location='cpu')['model_weights'])
 
