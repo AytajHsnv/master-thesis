@@ -18,7 +18,7 @@ parser = argparse.ArgumentParser()
 parser.add_argument('--output', type=str, default='./results.prf')
 parser.add_argument('--thresh_step', type=float, default=0.01)
 args = parser.parse_args()
-model = 'DeepLabV3+_ResNet50_Crack500 Labphotos_Gamma'
+model = 'DeepLabV3+_ResNet50_DeepCrack Labphotos_Gamma'
 folder = ['gain', 'gamma', '']
 def cal_prf_metrics(pred_list, gt_list, distance=[], angle=[], thresh_step=0.01, img_names=None):
     final_accuracy_all = []
@@ -171,7 +171,7 @@ def plot_IoU_all_folders(iou_per_folder_angle, angle):
 def plot_IoU_per_distance_angle(iou_per_distance_angle, distance, angle):
     fig, axs = plt.subplots(figsize=(15, 6))
     fig.suptitle(f'{model} IoU for each angle and distance', fontsize=16)
-    
+    #histogram for each distance and each angle
     for dist in distance:
         plot_angles = []
         iou_values = []
@@ -183,6 +183,7 @@ def plot_IoU_per_distance_angle(iou_per_distance_angle, distance, angle):
         if iou_values:
             plot_angles = np.asarray(plot_angles, dtype='float')
             axs.plot(plot_angles, iou_values, marker='o', label=f'Distance {dist}')
+            plt.bar(plot_angles, iou_values, label=f'Distance {dist}')
             axs.set_xticks(plot_angles)
             # axs2.set_yticks(iou_values)
         else:
