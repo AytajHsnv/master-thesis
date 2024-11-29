@@ -12,6 +12,7 @@ from torch.utils.data import DataLoader
 from model.TransMUNet import TransMUNet
 from utils.utils import get_img_patches, merge_pred_patches
 from natsort import natsorted
+import pandas as pd
 
 
 parser = argparse.ArgumentParser()
@@ -172,32 +173,57 @@ def plot_IoU_per_distance_angle(iou_per_distance_angle, distance, angle):
     fig, axs = plt.subplots(figsize=(15, 6))
     fig.suptitle(f'{model} IoU for each angle and distance', fontsize=16)
     #histogram for each distance and each angle
+    # Initialize iou_values_per_angle as a list of empty lists
+    iou_values_per_angle = [[] for _ in range(len(distance))]
     for dist in distance:
+        iou_values_per_angle[distance.index(dist)].append(dist)  # Combine angle with its IoU values
         plot_angles = []
         iou_values = []
         for ang in angle:
             if len(iou_per_distance_angle[dist][ang]) > 0:
                 plot_angles.append(ang)
                 iou_values.append(iou_per_distance_angle[dist][ang][0])  # Assuming one IoU value per angle
+                iou_values_per_angle[distance.index(dist)].append(iou_per_distance_angle[dist][ang][0])        
+            else:
+                iou_values_per_angle[distance.index(dist)].append(0)  
         # Plot IoU values for this distance
         if iou_values:
             plot_angles = np.asarray(plot_angles, dtype='float')
-            axs.plot(plot_angles, iou_values, marker='o', label=f'Distance {dist}')
-            plt.bar(plot_angles, iou_values, label=f'Distance {dist}')
-            axs.set_xticks(plot_angles)
+            axs.plot(plot_angles, iou_values, marker='o', label=f'Distance {dist} mm')
+           
             # axs2.set_yticks(iou_values)
         else:
             print(f"No IoU values found for distance {dist}")
 
         axs.set_ylim(0, 1)
-        axs.set_xlabel('Angle')
+        axs.set_xlabel('Angle in degrees')
         axs.set_ylabel(f'IoU')
         axs.legend()
         axs.grid(True)
-        
+    print(iou_values_per_angle)
+    column_angle = angle.copy()
+    column_angle.insert(0, 'Distance in mm')  # Add the Distance column
+    print(plot_angles)
+    df = pd.DataFrame(iou_values_per_angle, columns=column_angle)
+
+            # Plot the grouped bar chart
+    df.plot(
+        x='Distance in mm',    # Column to use as x-axis
+        kind='bar',      # Bar chart type
+        stacked=False,   # Grouped bars
+        title='IoU Values for Each Angle and Distance',
+        figsize=(10, 6)  # Adjust figure size for readability
+    )
+    plt.xlabel("Distance in mm")
+    plt.ylabel("IoU Value")
+    plt.legend(title="Angles in degrees")  # Add legend with title
+    plt.tight_layout()          # Adjust layout   
     plt.show()
     current_time = datetime.now().strftime("%Y-%m-%d-%H")
     fig.savefig(f"{model}_{current_time}_IoU.png")
+    plt.savefig(f"{model}_{current_time}_histogram.png")
+
+
 def get_statistics(pred, gt):
     """
     return tp, fp, fn
