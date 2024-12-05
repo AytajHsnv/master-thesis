@@ -11,9 +11,9 @@ class _SimpleSegmentationModel(nn.Module):
         super(_SimpleSegmentationModel, self).__init__()
         self.backbone = backbone
         self.classifier = classifier
-        self.boundary = nn.Sequential(DeformConv2d(256, 256, modulation=True),
-                                      nn.BatchNorm2d(256), nn.ReLU(), 
-                                      nn.Conv2d(256, 1, kernel_size=1, stride=1, bias=False))
+        self.boundary = nn.Sequential(DeformConv2d(24, 24, modulation=True),
+                                      nn.BatchNorm2d(24), nn.ReLU(), 
+                                      nn.Conv2d(24, 1, kernel_size=1, stride=1, bias=False))
         
     def forward(self, x, istrain=False):
         stages = dict()
