@@ -4,9 +4,9 @@ epochs:                 100 # Number of epochs to train the model
 number_classes:         1 # Number of classes in the target dataset
 batch_size_tr:          2 # Batch size for train
 batch_size_va:          1 # Batch size for validation 
-saved_model:            './checkpoints/weights_deeplab_resnet101.model'
+saved_model:            './checkpoints/weights_resnet101_crack500.model'
 #saved_model:            './checkpoints/weights_deepcrack.model'
-saved_model_final:      './checkpoints/weights_deeplab_resnet101.model'
+saved_model_final:      './checkpoints/weights_resnet101_crack500.model'
 path_to_tradata:         '/data/combined/train' #path to dataset (./Crack500/train)
 path_to_valdata:         '/data/combined/valid'  #path to dataset (./Crack500/test)
 path_to_testdata:       '/data/LabPhotos'  #path to dataset (./Crack500/val)
