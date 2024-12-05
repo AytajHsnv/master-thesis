@@ -292,7 +292,7 @@ print(device)
 # img_names= natsorted(img_names)
 # mask_names=natsorted(mask_names)
 
-distance = [800]
+distance = [250, 300, 400, 500, 600, 700, 800, 900, 1000, 1200]
 
 angle = [10, 20, 45, 75, 90]
 data_path = config['path_to_testdata']
