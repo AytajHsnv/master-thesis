@@ -62,13 +62,13 @@ It will run training for model and save the best weights for the validation set.
 python evaluate_crack.py --output <path_to_dir>
 ```
 It will represent performance measures and will saves related results in `results` folder. Plots will be added to the same directory as evaluate_crack.py. Test set of of the DeepCrack and Crack500 do not have angles so, in order to use test set of these dataset, following part should be commented out. 
-# data_path = config['path_to_testdata']
-# DIR_IMG  = os.path.join(data_path)
-# DIR_MASK = os.path.join(data_path)
-# img_names  = [path.name for path in Path(DIR_IMG).glob('*.jpg')]
-# mask_names = [path.name for path in Path(DIR_MASK).glob('*.png')]
-# img_names= natsorted(img_names)
-# mask_names=natsorted(mask_names)
+data_path = config['path_to_testdata']
+DIR_IMG  = os.path.join(data_path)
+DIR_MASK = os.path.join(data_path)
+img_names  = [path.name for path in Path(DIR_IMG).glob('*.jpg')]
+mask_names = [path.name for path in Path(DIR_MASK).glob('*.png')]
+img_names= natsorted(img_names)
+mask_names=natsorted(mask_names)
 
 
 ## Acknowledgment
