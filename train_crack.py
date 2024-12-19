@@ -43,11 +43,11 @@ available_models = sorted(name for name in deepLab.__dict__ if name.islower() an
                               deepLab.__dict__[name])
                               )
 print('available models: ', available_models)
-DIR_IMG_tra  = os.path.join(data_tra_path)
-DIR_MASK_tra  = os.path.join(data_tra_path)
+DIR_IMG_tra  = os.path.join(data_tra_path, 'images')
+DIR_MASK_tra  = os.path.join(data_tra_path, 'masks')
 
-DIR_IMG_val  = os.path.join(data_val_path)
-DIR_MASK_val = os.path.join(data_val_path)
+DIR_IMG_val  = os.path.join(data_val_path, 'images')
+DIR_MASK_val = os.path.join(data_val_path, 'masks')
 
 img_names_tra  = [path.name for path in Path(DIR_IMG_tra).glob('*.jpg')]
 img_names_tra = natsorted(img_names_tra)
@@ -74,9 +74,9 @@ val_loader    = DataLoader(valid_dataset, batch_size = int(config['batch_size_va
 # train_loader  = DataLoader(train_dataset, batch_size = 4, shuffle= True,  drop_last=True)
 # print(train_loader)
 # val_loader    = DataLoader(valid_dataset, batch_size = 1, shuffle= False, drop_last=True)
-model_name = 'DeepLabV3Plus_resnet50_combined' 
-Net = deepLab.deeplabv3plus_resnet50(num_classes=number_classes, output_stride=8)
-#Net = TransMUNet(n_classes = number_classes)
+model_name = 'TransMUNet_DeepCrack' 
+#Net = deepLab.deeplabv3plus_resnet50(num_classes=number_classes, output_stride=8)
+Net = TransMUNet(n_classes = number_classes)
 flops, params = get_model_complexity_info(Net, (3, 256, 256), as_strings=True, print_per_layer_stat=False)
 print('flops: ', flops, 'params: ', params)
 message = 'flops:%s, params:%s' % (flops, params)

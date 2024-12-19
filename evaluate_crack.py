@@ -13,13 +13,16 @@ from model.TransMUNet import TransMUNet
 from utils.utils import get_img_patches, merge_pred_patches
 from natsort import natsorted
 import pandas as pd
+from graph_for_mIoU import plot_graph_mIoU
+from plot_for_IoU import plot_IoU_per_distance_angle
+from plot_for_metrics import plot_metrics
 
 
 parser = argparse.ArgumentParser()
 parser.add_argument('--output', type=str, default='./results.prf')
 parser.add_argument('--thresh_step', type=float, default=0.01)
 args = parser.parse_args()
-model = 'TransMUNet_DeepCrack Wet Condition with Gamma Correction'
+model ='DeepLabV3+ ResNet101 trained with Crack500-LabPhotos'
 folder = ['gain', 'gamma', '']
 def cal_prf_metrics(pred_list, gt_list, distance=[], angle=[], thresh_step=0.01, img_names=None):
     final_accuracy_all = []
@@ -27,6 +30,7 @@ def cal_prf_metrics(pred_list, gt_list, distance=[], angle=[], thresh_step=0.01,
      # Initialize a dictionary to store IoU for each angle and distance
     iou_per_distance_angle = {dist_value: {angle_value: [] for angle_value in angle} for dist_value in distance}
     iou_per_folder_angle = {folder_value: {angle_value: [] for angle_value in angle} for folder_value in folder} 
+    iou_per_angle = {ang: [] for ang in angle}
     IoU_values = []
     for thresh in np.arange(0.0, 1.0, thresh_step):
         statistics = []
@@ -36,11 +40,6 @@ def cal_prf_metrics(pred_list, gt_list, distance=[], angle=[], thresh_step=0.01,
             pred_img = (pred > thresh).astype('uint8')
             statistics.append(get_statistics(pred_img, gt_img))
     
-            
-          
-        
-                   
-        
         # get tp, fp, fn
         tp = np.sum([v[0] for v in statistics])
         fp = np.sum([v[1] for v in statistics])
@@ -64,7 +63,8 @@ def cal_prf_metrics(pred_list, gt_list, distance=[], angle=[], thresh_step=0.01,
     final_accuracy_all = np.array(final_accuracy_all)
     max_iou_threshold = final_accuracy_all[np.argmax(final_accuracy_all[:, 4]), 0]
     print(f"Best IoU: {np.max(final_accuracy_all[:, 4]):.4f} at threshold {max_iou_threshold:.2f}")
-    for pred, gt in zip(pred_list, gt_list):
+
+    for pred, gt, img_name in zip(pred_list, gt_list, img_names):
             gt_img   = (gt).astype('uint8')
             pred_img = (pred > max_iou_threshold).astype('uint8')
 
@@ -78,7 +78,22 @@ def cal_prf_metrics(pred_list, gt_list, distance=[], angle=[], thresh_step=0.01,
                 f1 = 2*p*r/(p+r)
             # calculation IoU
             IoU = tp/(tp+fn+fp)
+            # Determine the angle of this image from its name and store IoU
+            ang_index = next((ang for ang in angle if f'_{ang}_' in img_name), None)
+            if ang_index:
+                iou_per_angle[ang_index].append(IoU)
             statis.append([p, r, f1, IoU])
+
+    # Compute the average IoU for each angle
+    avg_iou_per_angle = {ang: np.mean(iou_values) for ang, iou_values in iou_per_angle.items() if iou_values}
+
+    plot_graph_mIoU(avg_iou_per_angle, model)
+    # Find the best angle
+    best_angle = max(avg_iou_per_angle, key=avg_iou_per_angle.get)
+    best_angle_iou = avg_iou_per_angle[best_angle]
+    print("Average IoU for each angle:", avg_iou_per_angle)
+    
+    print(f"Best Angle: {best_angle} degrees with Average IoU: {best_angle_iou:.4f}")
 
     # Convert results to a NumPy array for easier plotting
     save_result_for_each_img(statis)
@@ -112,118 +127,12 @@ def cal_prf_metrics(pred_list, gt_list, distance=[], angle=[], thresh_step=0.01,
             else:
                 print(f"No matching distance/angle found for image {img_name}.")    
             if distance and angle: 
-                plot_IoU_per_distance_angle(iou_per_distance_angle, distance, angle)
-                plot_IoU_all_folders(iou_per_folder_angle, angle)    
+                plot_IoU_per_distance_angle(iou_per_distance_angle, distance, angle, model) 
 
-    # Plot the metrics
-    fig, axs = plt.subplots(4, 1, figsize=(10, 12))
-    fig.suptitle(f'{model} metrics', fontsize=16)
-    axs[0].plot(p_acc_values, color='y')
-    axs[0].set_ylabel('Precision')
-    axs[0].grid(True)
-
-    axs[1].plot(r_acc_values,  color='r')
-    axs[1].set_ylabel('Recall')
-    axs[1].grid(True)
-
-    axs[2].plot(f1_acc_values,  color='g')
-    axs[2].set_ylabel('F1 Score')
-    axs[2].grid(True)
-
-    axs[3].plot(IoU_values, color='b')
-    axs[3].set_xlabel('Images')
-    axs[3].set_ylabel('IoU')
-    axs[3].grid(True)
-
-    
-
-    # Save the figure
-    current_datetime = datetime.now().strftime("%Y-%m-%d-%H")
-    plt.show()   
-    fig.savefig(f"{current_datetime}_metrics.png")
-    
+   
+    plot_metrics(p_acc_values, r_acc_values, f1_acc_values, IoU_values, model)
 
     return final_accuracy_all
-
-def plot_IoU_all_folders(iou_per_folder_angle, angle):
-    fig, axs = plt.subplots(figsize=(15, 6))
-    fig.suptitle(f'{model} IoU for Each Folder', fontsize=16)
-    for folder_name in folder:
-        plot_angles = []
-        iou_values = []
-        for ang in angle:
-            if len(iou_per_folder_angle[folder_name][ang]) > 0:
-                plot_angles.append(ang)
-                iou_values.append(iou_per_folder_angle[folder_name][ang][0])  # Assuming one IoU value per angle
-        if iou_values:
-                plot_angles = np.asarray(plot_angles, dtype='float')
-                axs.set_xticks(plot_angles)
-                axs.plot(plot_angles, iou_values, marker='o', label=f'Distance 800cm {folder_name}')
-                
-    
-    axs.set_xlabel('Angle')
-    axs.set_ylabel('IoU')
-    axs.legend()
-    axs.grid(True)
-    
-    plt.show()
-    current_time = datetime.now().strftime("%Y-%m-%d-%H")
-    fig.savefig(f"{model}_IoU_All_Folders_{current_time}.png")
-
-def plot_IoU_per_distance_angle(iou_per_distance_angle, distance, angle):
-    fig, axs = plt.subplots(figsize=(15, 6))
-    fig.suptitle(f'{model} IoU for each angle and distance', fontsize=16)
-    #histogram for each distance and each angle
-    # Initialize iou_values_per_angle as a list of empty lists
-    iou_values_per_angle = [[] for _ in range(len(distance))]
-    for dist in distance:
-        iou_values_per_angle[distance.index(dist)].append(dist)  # Combine angle with its IoU values
-        plot_angles = []
-        iou_values = []
-        for ang in angle:
-            if len(iou_per_distance_angle[dist][ang]) > 0:
-                plot_angles.append(ang)
-                iou_values.append(iou_per_distance_angle[dist][ang][0])  # Assuming one IoU value per angle
-                iou_values_per_angle[distance.index(dist)].append(iou_per_distance_angle[dist][ang][0])        
-            else:
-                iou_values_per_angle[distance.index(dist)].append(0)  
-        # Plot IoU values for this distance
-        if iou_values:
-            plot_angles = np.asarray(plot_angles, dtype='float')
-            axs.set_xticks(plot_angles)
-            axs.plot(plot_angles, iou_values, marker='o', label=f'Distance {dist} mm')
-           
-            # axs2.set_yticks(iou_values)
-        else:
-            print(f"No IoU values found for distance {dist}")
-
-        axs.set_ylim(0, 1)
-        axs.set_xlabel('Angle in degrees')
-        axs.set_ylabel(f'IoU')
-        axs.legend()
-        axs.grid(True)
-    print(iou_values_per_angle)
-    column_angle = angle.copy()
-    column_angle.insert(0, 'Distance in mm')  # Add the Distance column
-    print(plot_angles)
-    df = pd.DataFrame(iou_values_per_angle, columns=column_angle)
-
-            # Plot the grouped bar chart
-    df.plot(
-        x='Distance in mm',    # Column to use as x-axis
-        kind='bar',      # Bar chart type
-        stacked=False,   # Grouped bars
-        title='IoU Values for Each Angle and Distance',
-        figsize=(10, 6)  # Adjust figure size for readability
-    )
-    plt.xlabel("Distance in mm")
-    plt.ylabel("IoU Value")
-    plt.legend(title="Angles in degrees")  # Add legend with title
-    plt.tight_layout()          # Adjust layout   
-    plt.show()
-    current_time = datetime.now().strftime("%Y-%m-%d-%H")
-    fig.savefig(f"{model}_{current_time}_IoU.png")
-    plt.savefig(f"{model}_{current_time}_histogram.png")
 
 
 def get_statistics(pred, gt):
@@ -284,21 +193,24 @@ number_classes = int(config['number_classes'])
 device = 'cuda' if torch.cuda.is_available() else 'cpu'
 print(device)
 
+# for test set of the publicly available datasets, this part should be uncommented
 # data_path = config['path_to_testdata']
 # DIR_IMG  = os.path.join(data_path)
 # DIR_MASK = os.path.join(data_path)
 # img_names  = [path.name for path in Path(DIR_IMG).glob('*.jpg')]
 # mask_names = [path.name for path in Path(DIR_MASK).glob('*.png')]
 # img_names= natsorted(img_names)
-# mask_names=natsorted(mask_names)
+# mask_names=natsorted(mask_names) 
 
+
+# for the test set of the private dataset, this part should be uncommented
 distance = [250, 300, 400, 500, 600, 700, 800, 900, 1000, 1200]
 
 angle = [10, 20, 45, 75, 90]
 data_path = config['path_to_testdata']
-DIR_IMG = [os.path.join(data_path, f'd_{d}/wet/gamma') for d in distance] 
+DIR_IMG = [os.path.join(data_path, f'd_{d}') for d in distance] 
 img_names = natsorted([path.name for img_dir in DIR_IMG for path in Path(img_dir).glob('*.jpg')])
-DIR_MASK = [os.path.join(data_path, f'd_{d}/wet') for d in distance]
+DIR_MASK = [os.path.join(data_path, f'd_{d}') for d in distance]
 mask_names = natsorted([path.name for mask_dir in DIR_MASK for path in Path(mask_dir).glob('*.png')])
 # gain, gamma and d IoU values in one graph for 800
 
@@ -308,8 +220,8 @@ test_loader  = DataLoader(test_dataset, batch_size = 1, shuffle= False)
 
 print(f'test_dataset:{len(test_dataset)}')
 
-Net = TransMUNet(n_classes = number_classes)
-#Net = deepLab.deeplabv3plus_mobilenet(num_classes=number_classes, output_stride=8)
+#Net = TransMUNet(n_classes = number_classes)
+Net = deepLab.deeplabv3plus_resnet101(num_classes=number_classes, output_stride=8)
 Net = Net.to(device)
 Net.load_state_dict(torch.load(config['saved_model'], map_location='cpu')['model_weights'])
 
@@ -352,7 +264,6 @@ with torch.no_grad():
                     [0, 0, 1, 0, 0],
                 ], dtype=np.uint8)
         mskp = cv2.morphologyEx(mskp, cv2.MORPH_CLOSE, kernel,iterations=1).astype(float)
-        print('pred:', mskp.shape)
         end = time.time()
         times += (end - start)
         # print('print:', msk.numpy()[0,0])

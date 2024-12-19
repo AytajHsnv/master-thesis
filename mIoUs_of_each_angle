@@ -1,0 +1,17 @@
+Best Angle: 90 degrees with Average IoU: 0.5545 - TransMunet gamma Average IoU for each angle: {10: 0.3853548102728997, 20: 0.49698885823395306, 45: 0.5159649640518867, 75: 0.5508493652267635, 90: 0.5544623822625908}
+Best Angle: 75 degrees with Average IoU: 0.4958 - TransMUNet wet gamma
+
+Best Angle: 75 degrees with Average IoU: 0.5330 - rsnet50 gamma wet Average IoU for each angle: {10: 0.22527531176341548, 20: 0.36510459588841926, 45: 0.5160924610316122, 75: 0.533045105163885, 90: 0.49561581893084006}
+Best Angle: 45 degrees with Average IoU: 0.2039 - wet resnet50 Average IoU for each angle: {10: 0.08002349803943726, 20: 0.15280569991182474, 45: 0.20389507909222107, 75: 0.17551534942699645, 90: 0.13745526546173376}
+Best Angle: 75 degrees with Average IoU: 0.2799 - dry resnet50
+Best Angle: 90 degrees with Average IoU: 0.4969 - resnet50 dry gamma
+
+Best Angle: 45 degrees with Average IoU: 0.2997-  Resnet101 {10: 0.12238326715587962, 20: 0.15730182252016922, 45: 0.2996768170723619, 75: 0.2920457525693224, 90: 0.2196666771073509}
+Best Angle: 45 degrees with Average IoU: 0.1695 - wet resnet101
+Best Angle: 90 degrees with Average IoU: 0.3980 - dry gamma resnet101
+Best Angle: 45 degrees with Average IoU: 0.4518 - resnet101 wet gamma
+
+Best Angle: 75 degrees with Average IoU: 0.3286 - mobilenet dry
+Best Angle: 90 degrees with Average IoU: 0.3519 - mobile dry gamma
+Best Angle: 75 degrees with Average IoU: 0.4473 - wet gamma mobilenet
+Best Angle: 45 degrees with Average IoU: 0.2114 - mobilenet wet
